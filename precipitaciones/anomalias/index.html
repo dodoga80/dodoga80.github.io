@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Anomalías de precipitación Llanos de La Rioja</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2c38 0%, #1a4d63 50%, #0f3a47 100%);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(87, 184, 214, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(243, 156, 75, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: clamp(1.2rem, 5vw, 2.5rem);
+            font-weight: 700;
+            margin: 0 0 5px 0;
+            color: #0b2d3b;
+            text-align: center;
+            background: linear-gradient(135deg, #0f2c38 0%, #1d5c74 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            line-height: 1.3;
+            word-break: break-word;
+            hyphens: auto;
+            padding: 0 5px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #5a7a8a;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .modos-panel {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: nowrap;
+        }
+
+        .modo-btn {
+            background: white;
+            border: 2px solid #d0dfe9;
+            border-radius: 12px;
+            padding: 10px 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1d5c74;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            flex: 1;
+            max-width: 200px;
+            text-align: center;
+            min-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .modo-btn.activo {
+            background: linear-gradient(135deg, #1d5c74 0%, #0f3a47 100%);
+            border-color: #0f3a47;
+            color: white;
+            box-shadow: 0 8px 24px rgba(29, 92, 116, 0.3);
+        }
+
+        .filtros-panel {
+            background: linear-gradient(135deg, #f8fbff 0%, #f0f7fc 100%);
+            border-radius: 16px;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 0 25px 0;
+            box-shadow: 0 4px 12px rgba(29, 92, 116, 0.1);
+            border: 1px solid #d0dfe9;
+        }
+
+        select {
+            background: white;
+            border: 2px solid #1d5c74;
+            border-radius: 10px;
+            padding: 10px 35px 10px 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0d3140;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%231d5c74' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .dashboard-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin: 15px 0 25px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .grafico-caja {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+            border-radius: 20px;
+            padding: 15px 15px 25px 15px;
+            box-shadow: 0 10px 30px rgba(29, 92, 116, 0.1);
+            border: 1px solid #d0dfe9;
+            width: 100%;
+        }
+
+        .grafico-titulo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0b2d3b;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .reloj-caja {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(29, 92, 116, 0.1);
+            border: 1px solid #d0dfe9;
+            position: relative;
+        }
+
+        .reloj-titulo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0b2d3b;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* BARRA BIDIRECCIONAL HORIZONTAL */
+        .velocimetro-contenedor {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            height: 60px;
+            margin: 15px auto;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border-radius: 0;
+            overflow: visible;
+            background: transparent;
+        }
+
+        /* Lado negativo (izquierda) - naranja */
+        .barra-negativo {
+            flex: 1;
+            height: 30px;
+            background: linear-gradient(90deg, #f39c4b 0%, #f39c4b 100%);
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Centro visual - línea divisoria */
+        .velocimetro-mascara {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 3px;
+            height: 32px;
+            background: white;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+
+        /* Lado positivo (derecha) - azul */
+        .barra-positivo {
+            flex: 1;
+            height: 30px;
+            background: linear-gradient(90deg, #57b8d6 0%, #57b8d6 100%);
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Indicador de anomalía */
+        .aguja-medio {
+            position: absolute;
+            width: 4px;
+            height: 50px;
+            background: #000;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            border-radius: 0;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+            transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .categoria-externa {
+            font-size: 1rem;
+            font-weight: 650;
+            color: #1d5c74;
+            background: linear-gradient(135deg, #e7f0f7 0%, #d9e9f3 100%);
+            padding: 8px 25px;
+            border-radius: 30px;
+            text-align: center;
+            border: 2px solid #a5d5ed;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* GRÁFICO DE BARRAS */
+        .grafico-contenedor {
+            display: flex;
+            align-items: stretch;
+            height: 260px;
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        .eje-y {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-right: 5px;
+            text-align: right;
+            font-weight: 600;
+            color: #000000;
+            font-size: clamp(0.6rem, 2vw, 0.75rem);
+            min-width: 35px;
+            height: 100%;
+            line-height: 1.1;
+        }
+
+        .eje-y span {
+            position: relative;
+            color: #000000;
+            white-space: nowrap;
+            transform: translateY(50%);
+        }
+        .eje-y span:first-child { transform: translateY(0); }
+        .eje-y span:last-child { transform: translateY(-30%); }
+
+        .barras-area {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            background: linear-gradient(180deg, #f8fbff 0%, #f0f7fc 100%);
+            border-left: 2px solid #1d5c74;
+            border-right: 2px solid #1d5c74;
+            border-top: 1px solid #e0ecf5;
+            border-bottom: 1px solid #e0ecf5;
+            height: 100%;
+            border-radius: 0;
+            padding: 0 2px;
+        }
+
+        .eje-central {
+            position: absolute;
+            width: calc(100% - 4px);
+            height: 2px;
+            background: #1d5c74;
+            top: 50%;
+            left: 2px;
+            z-index: 10;
+            transform: translateY(-50%);
+            box-shadow: 0 1px 3px rgba(29, 92, 116, 0.2);
+        }
+
+        .barra-wrapper {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+            max-width: 60px;
+            min-width: 30px;
+        }
+
+        .barra {
+            position: absolute;
+            width: 70%;
+            border-radius: 0;
+            transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 8px;
+            max-width: 40px;
+        }
+
+        .barra.positiva {
+            background: linear-gradient(180deg, #57b8d6 0%, #2a98b8 100%);
+            bottom: 50%;
+            top: auto;
+        }
+
+        .barra.negativa {
+            background: linear-gradient(180deg, #f39c4b 0%, #e87a2a 100%);
+            top: 50%;
+            bottom: auto;
+        }
+
+        .departamento-label {
+            position: absolute;
+            bottom: -22px;
+            font-weight: 700;
+            color: #1d5c74;
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            background: linear-gradient(135deg, #e7f0f7 0%, #d9e9f3 100%);
+            padding: 3px 6px;
+            border-radius: 6px;
+            width: auto;
+            min-width: 32px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(29, 92, 116, 0.1);
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            border: 1px solid #a5d5ed;
+            line-height: 1.2;
+            transition: all 0.2s ease;
+            pointer-events: all;
+            z-index: 20;
+        }
+
+        /* Tooltip personalizado */
+        .tooltip-valor {
+            position: fixed;
+            background: #1d5c74;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 3px solid white;
+            z-index: 9999;
+            pointer-events: none;
+            white-space: nowrap;
+            transform: translate(-50%, -100%);
+            margin-top: -15px;
+            transition: opacity 0.2s ease;
+            opacity: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .tooltip-valor.visible {
+            opacity: 1;
+        }
+
+        .tooltip-valor::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #1d5c74;
+        }
+
+        /* ESTADÍSTICAS SIEMPRE EN COLUMNA */
+
+        /* OPTIMIZACIÓN MÓVIL */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: clamp(1.2rem, 6vw, 2rem);
+                white-space: normal;
+            }
+            
+            .grafico-contenedor {
+                height: 180px;
+            }
+            
+            .departamento-label {
+                bottom: -18px;
+                font-size: 0.6rem;
+                padding: 3px 4px;
+                min-width: 26px;
+            }
+            
+            .velocimetro-contenedor {
+                max-width: 320px;
+                height: 50px;
+            }
+            
+            .velocimetro-mascara {
+                height: 28px;
+            }
+            
+            .aguja-medio {
+                height: 45px;
+            }
+            
+            .tooltip-valor {
+                padding: 10px 20px;
+                font-size: 1rem;
+                border-width: 2px;
+            }
+            
+            .modo-btn {
+                min-width: 0;
+                font-size: 0.75rem;
+                padding: 10px 5px;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 5px; }
+            .card { padding: 12px; border-radius: 16px; }
+            .filtros-panel { padding: 8px 12px; margin-bottom: 15px; }
+            select { font-size: 0.8rem; padding: 8px 30px 8px 12px; }
+            
+            .eje-y { font-size: 0.6rem; min-width: 28px; }
+            .barra-wrapper { min-width: 25px; }
+            .barra { width: 75%; }
+
+            .estadistica-fila { padding: 6px 10px; }
+            .estadistica-fila .label { font-size: 0.85rem; }
+            .estadistica-fila .valor { font-size: 0.85rem; padding: 2px 8px; min-width: 90px; }
+            
+            .modo-btn {
+                font-size: 0.7rem;
+                padding: 8px 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Anomalías de precipitación</h1>
+    <p class="subtitulo">Llanos de La Rioja - Argentina</p>
+
+    <div class="modos-panel">
+        <button id="btnAnual" class="modo-btn activo">Anual (Ene - Dic)</button>
+        <button id="btnEstacional" class="modo-btn">Estacional (Nov - Mar)</button>
+    </div>
+
+    <div class="filtros-panel">
+        <select id="periodoSelect"></select>
+    </div>
+
+    <div class="dashboard-row">
+        <div class="grafico-caja">
+            <div class="grafico-titulo">📊 Anomalía departamental (%)</div>
+            <div class="grafico-contenedor">
+                <div class="eje-y" id="ejeY"></div>
+                <div class="barras-area" id="barrasArea">
+                    <div class="eje-central"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reloj-caja">
+            <div class="reloj-titulo">⭕ Anomalía regional (%)</div>
+
+            <div class="velocimetro-contenedor">
+                <div class="barra-negativo"></div>
+                <div class="velocimetro-mascara"></div>
+                <div class="barra-positivo"></div>
+                <div class="aguja-medio" id="agujaMedio"></div>
+            </div>
+            
+            <div class="categoria-externa" id="categoriaDisplay">Superávit moderado</div>
+        </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 30px; margin-bottom: 0; font-size: 0.9rem; color: #666;">dodogaray@gmail.com</p>
+</div>
+
+<!-- Tooltip flotante -->
+<div id="tooltip" class="tooltip-valor"></div>
+
+<script>
+(function() {
+    // --- Datos ---
+    const datosAnuales = {
+        periodos: [ { id: 'ene25-dic25', label: 'Ene 2025 - Dic 2025', regional: 24.12 }, { id: 'ene24-dic24', label: 'Ene 2024 - Dic 2024', regional: -15.83 }, { id: 'ene23-dic23', label: 'Ene 2023 - Dic 2023', regional: -14.84 }, { id: 'ene22-dic22', label: 'Ene 2022 - Dic 2022', regional: -9.44 }, { id: 'ene21-dic21', label: 'Ene 2021 - Dic 2021', regional: 0.94 } ],
+        datos: { 'ene25-dic25': [ { codigo: 'CAP', anom_pct: 18.55 }, { codigo: 'IND', anom_pct: 1.90 }, { codigo: 'AVP', anom_pct: 29.21 }, { codigo: 'CHA', anom_pct: 32.54 }, { codigo: 'BEL', anom_pct: 55.98 }, { codigo: 'JFQ', anom_pct: 25.12 }, { codigo: 'OCA', anom_pct: 24.96 }, { codigo: 'RVP', anom_pct: 11.18 }, { codigo: 'GSM', anom_pct: 17.61 } ], 'ene24-dic24': [ { codigo: 'CAP', anom_pct: -7.57 }, { codigo: 'IND', anom_pct: -13.34 }, { codigo: 'AVP', anom_pct: -13.15 }, { codigo: 'CHA', anom_pct: -15.19 }, { codigo: 'BEL', anom_pct: -14.15 }, { codigo: 'JFQ', anom_pct: -22.00 }, { codigo: 'OCA', anom_pct: -21.44 }, { codigo: 'RVP', anom_pct: -19.96 }, { codigo: 'GSM', anom_pct: -15.68 } ], 'ene23-dic23': [ { codigo: 'CAP', anom_pct: -12.68 }, { codigo: 'IND', anom_pct: -31.82 }, { codigo: 'AVP', anom_pct: -15.47 }, { codigo: 'CHA', anom_pct: -18.82 }, { codigo: 'BEL', anom_pct: -2.52 }, { codigo: 'JFQ', anom_pct: -15.21 }, { codigo: 'OCA', anom_pct: -1.28 }, { codigo: 'RVP', anom_pct: -18.10 }, { codigo: 'GSM', anom_pct: -17.67 } ], 'ene22-dic22': [ { codigo: 'CAP', anom_pct: 20.00 }, { codigo: 'IND', anom_pct: -22.00 }, { codigo: 'AVP', anom_pct: 6.00 }, { codigo: 'CHA', anom_pct: 0.00 }, { codigo: 'BEL', anom_pct: -4.00 }, { codigo: 'JFQ', anom_pct: -21.00 }, { codigo: 'OCA', anom_pct: -31.00 }, { codigo: 'RVP', anom_pct: 1.00 }, { codigo: 'GSM', anom_pct: -34.00 } ], 'ene21-dic21': [ { codigo: 'CAP', anom_pct: 12.35 }, { codigo: 'IND', anom_pct: 11.91 }, { codigo: 'AVP', anom_pct: 5.65 }, { codigo: 'CHA', anom_pct: 3.48 }, { codigo: 'BEL', anom_pct: -16.00 }, { codigo: 'JFQ', anom_pct: -13.23 }, { codigo: 'OCA', anom_pct: -18.39 }, { codigo: 'RVP', anom_pct: 17.69 }, { codigo: 'GSM', anom_pct: 5.02 } ] }
+    };
+    const datosEstacionales = {
+        periodos: [ { id: 'nov25-mar26', label: 'Nov 2025 - Mar 2026', regional: 1.09 }, { id: 'nov24-mar25', label: 'Nov 2024 - Mar 2025', regional: 5.05 }, { id: 'nov23-mar24', label: 'Nov 2023 - Mar 2024', regional: -34.85 }, { id: 'nov22-mar23', label: 'Nov 2022 - Mar 2023', regional: 6.83 }, { id: 'nov21-mar22', label: 'Nov 2021 - Mar 2022', regional: -12.14 } ],
+        datos: { 'nov25-mar26': [ { codigo: 'CAP', anom_pct: -1.35 }, { codigo: 'IND', anom_pct: -15.20 }, { codigo: 'AVP', anom_pct: -22.38 }, { codigo: 'CHA', anom_pct: 2.90 }, { codigo: 'BEL', anom_pct: 4.68 }, { codigo: 'JFQ', anom_pct: 10.54 }, { codigo: 'OCA', anom_pct: -5.77 }, { codigo: 'RVP', anom_pct: 21.36 }, { codigo: 'GSM', anom_pct: 15.00 } ], 'nov24-mar25': [ { codigo: 'CAP', anom_pct: -5.89 }, { codigo: 'IND', anom_pct: -11.47 }, { codigo: 'AVP', anom_pct: 14.11 }, { codigo: 'CHA', anom_pct: 23.78 }, { codigo: 'BEL', anom_pct: 44.41 }, { codigo: 'JFQ', anom_pct: -0.26 }, { codigo: 'OCA', anom_pct: 12.18 }, { codigo: 'RVP', anom_pct: -16.16 }, { codigo: 'GSM', anom_pct: -15.21 } ], 'nov23-mar24': [ { codigo: 'CAP', anom_pct: -33.20 }, { codigo: 'IND', anom_pct: -34.78 }, { codigo: 'AVP', anom_pct: -37.28 }, { codigo: 'CHA', anom_pct: -26.88 }, { codigo: 'BEL', anom_pct: -38.35 }, { codigo: 'JFQ', anom_pct: -35.01 }, { codigo: 'OCA', anom_pct: -49.38 }, { codigo: 'RVP', anom_pct: -33.25 }, { codigo: 'GSM', anom_pct: -25.56 } ], 'nov22-mar23': [ { codigo: 'CAP', anom_pct: -6.76 }, { codigo: 'IND', anom_pct: -26.10 }, { codigo: 'AVP', anom_pct: 2.34 }, { codigo: 'CHA', anom_pct: -8.92 }, { codigo: 'BEL', anom_pct: 1.97 }, { codigo: 'JFQ', anom_pct: 12.53 }, { codigo: 'OCA', anom_pct: 37.28 }, { codigo: 'RVP', anom_pct: 32.65 }, { codigo: 'GSM', anom_pct: 16.49 } ], 'nov21-mar22': [ { codigo: 'CAP', anom_pct: 38.71 }, { codigo: 'IND', anom_pct: -18.77 }, { codigo: 'AVP', anom_pct: 10.97 }, { codigo: 'CHA', anom_pct: 10.97 }, { codigo: 'BEL', anom_pct: 10.85 }, { codigo: 'JFQ', anom_pct: -51.12 }, { codigo: 'OCA', anom_pct: -40.94 }, { codigo: 'RVP', anom_pct: -25.76 }, { codigo: 'GSM', anom_pct: -44.15 } ] }
+    };
+
+    // --- Funciones de utilidad ---
+    function clasificarAnomalia(pct) {
+        if (pct <= -80) return 'Déficit extremo'; if (pct <= -50) return 'Déficit crítico'; if (pct <= -30) return 'Déficit muy alto'; if (pct <= -20) return 'Déficit alto'; if (pct <= -10) return 'Déficit moderado'; if (pct <= -2.51) return 'Déficit leve'; if (pct <= 2.5) return 'Normal'; if (pct <= 10) return 'Superávit leve'; if (pct <= 30) return 'Superávit moderado'; if (pct <= 60) return 'Superávit alto'; if (pct <= 90) return 'Superávit muy alto'; return 'Superávit extraordinario';
+    }
+    
+    function calcularIntervaloEjeY(maxEscala) {
+        if (maxEscala <= 40) return 10;
+        if (maxEscala <= 80) return 20;
+        return 25;
+    }
+    
+    function generarEjeY(maxEscala) {
+        const intervalo = calcularIntervaloEjeY(maxEscala);
+        const valores = [];
+        for (let i = maxEscala; i > 0; i -= intervalo) valores.push(i + '%');
+        valores.push('0%');
+        for (let i = intervalo; i <= maxEscala; i += intervalo) valores.push('-' + i + '%');
+        return valores;
+    }
+    
+    function calcularMaxEscala(datosPeriodo) {
+        const maxAnom = Math.max(...datosPeriodo.map(d => Math.abs(d.anom_pct)));
+        const intervalo = calcularIntervaloEjeY(maxAnom);
+        return Math.ceil(maxAnom / intervalo) * intervalo;
+    }
+    
+    function formatearEntero(valor) {
+        const entero = Math.round(valor);
+        return entero > 0 ? '+' + entero : entero.toString();
+    }
+    
+    function calcularEstadisticas(datosPeriodo) {
+        const ordenado = [...datosPeriodo].sort((a, b) => b.anom_pct - a.anom_pct);
+        const maximo = ordenado[0];
+        const minimo = ordenado[ordenado.length - 1];
+        const rango = Math.round(maximo.anom_pct - minimo.anom_pct);
+        const suma = datosPeriodo.reduce((acc, d) => acc + d.anom_pct, 0);
+        const promedio = suma / datosPeriodo.length;
+        const sumaCuadrados = datosPeriodo.reduce((acc, d) => acc + Math.pow(d.anom_pct - promedio, 2), 0);
+        const desviacion = Math.round(Math.sqrt(sumaCuadrados / datosPeriodo.length));
+        const positivos = datosPeriodo.filter(d => d.anom_pct > 0).length;
+        const negativos = datosPeriodo.filter(d => d.anom_pct < 0).length;
+        
+        return {
+            maximo: `${formatearEntero(maximo.anom_pct)}% (${maximo.codigo})`,
+            minimo: `${formatearEntero(minimo.anom_pct)}% (${minimo.codigo})`,
+            rango: rango.toString(),
+            promedio: formatearEntero(promedio) + '%',
+            desviacion: '±' + desviacion,
+            positivos,
+            negativos
+        };
+    }
+
+    // --- Elementos DOM ---
+    const btnAnual = document.getElementById('btnAnual');
+    const btnEstacional = document.getElementById('btnEstacional');
+    const periodoSelect = document.getElementById('periodoSelect');
+    const graficoContenedor = document.querySelector('.grafico-contenedor');
+    const barrasArea = document.getElementById('barrasArea');
+    const ejeY = document.getElementById('ejeY');
+    const agujaMedio = document.getElementById('agujaMedio');
+    const categoriaDisplay = document.getElementById('categoriaDisplay');
+    const tooltip = document.getElementById('tooltip');
+
+    let modoActual = 'anual';
+    let datosActuales = [];
+    let regionalActual = 0;
+
+    function actualizarSelectorPeriodos() {
+        const fuente = modoActual === 'anual' ? datosAnuales : datosEstacionales;
+        const valorActual = periodoSelect.value;
+        periodoSelect.innerHTML = '';
+        fuente.periodos.forEach(p => {
+            const option = document.createElement('option');
+            option.value = p.id;
+            option.textContent = p.label;
+            periodoSelect.appendChild(option);
+        });
+        if (valorActual && fuente.periodos.some(p => p.id === valorActual)) periodoSelect.value = valorActual;
+    }
+
+    // Función removida - estadísticas ya no se muestran
+
+    // Función para mostrar tooltip
+    function mostrarTooltip(event, texto) {
+        tooltip.textContent = texto;
+        tooltip.classList.add('visible');
+        
+        const clientX = event.type.startsWith('touch') ? event.touches[0].clientX : event.clientX;
+        const clientY = event.type.startsWith('touch') ? event.touches[0].clientY : event.clientY;
+        
+        tooltip.style.left = clientX + 'px';
+        tooltip.style.top = clientY + 'px';
+    }
+
+    function ocultarTooltip() {
+        tooltip.classList.remove('visible');
+    }
+
+    function actualizarGraficoYReloj() {
+        const fuente = modoActual === 'anual' ? datosAnuales : datosEstacionales;
+        if (!periodoSelect.value && fuente.periodos.length > 0) periodoSelect.value = fuente.periodos[0].id;
+
+        const periodoActual = fuente.periodos.find(p => p.id === periodoSelect.value);
+        if (!periodoActual) return;
+
+        const datosPeriodo = fuente.datos[periodoActual.id];
+        datosActuales = datosPeriodo;
+        regionalActual = periodoActual.regional;
+
+        // Calcular escala automática
+        const maxEscala = calcularMaxEscala(datosPeriodo);
+        const valoresEje = generarEjeY(maxEscala);
+        ejeY.innerHTML = valoresEje.map(v => `<span>${v}</span>`).join('');
+
+        // Limpiar y crear barras
+        barrasArea.innerHTML = '<div class="eje-central"></div>';
+
+        const alturaTotalGrafico = graficoContenedor.offsetHeight;
+        const alturaMediaBarra = alturaTotalGrafico / 2;
+
+        datosPeriodo.forEach((item) => {
+            const anom = item.anom_pct;
+            const absAnom = Math.abs(anom);
+            const proporcion = absAnom / maxEscala;
+            const alturaBarra = Math.round(proporcion * alturaMediaBarra);
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'barra-wrapper';
+
+            const barra = document.createElement('div');
+            barra.className = `barra ${anom >= 0 ? 'positiva' : 'negativa'}`;
+            barra.style.height = alturaBarra + 'px';
+
+            const label = document.createElement('div');
+            label.className = 'departamento-label';
+            label.innerText = item.codigo;
+
+            // Eventos para tooltip
+            const showTooltipEvent = (e) => {
+                mostrarTooltip(e, `${item.codigo}: ${formatearEntero(anom)}%`);
+            };
+
+            wrapper.addEventListener('mouseenter', showTooltipEvent);
+            wrapper.addEventListener('mousemove', (e) => {
+                mostrarTooltip(e, `${item.codigo}: ${formatearEntero(anom)}%`);
+            });
+            wrapper.addEventListener('mouseleave', ocultarTooltip);
+            
+            wrapper.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                mostrarTooltip(e, `${item.codigo}: ${formatearEntero(anom)}%`);
+            });
+            wrapper.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                mostrarTooltip(e, `${item.codigo}: ${formatearEntero(anom)}%`);
+            });
+            wrapper.addEventListener('touchend', ocultarTooltip);
+
+            wrapper.appendChild(barra);
+            wrapper.appendChild(label);
+            barrasArea.appendChild(wrapper);
+        });
+
+        // Actualizar categoría y posición horizontal
+        categoriaDisplay.innerText = clasificarAnomalia(regionalActual);
+        
+        // Calcular posición en la barra (0-100%)
+        // -100 = izquierda (0%), 0 = centro (50%), +100 = derecha (100%)
+        const posicionPorcentaje = ((regionalActual + 100) / 200) * 100;
+        agujaMedio.style.left = posicionPorcentaje + '%';
+    }
+
+    // --- Event listeners SOLO para la aguja del velocímetro ---
+    function mostrarTooltipAguja(e) {
+        mostrarTooltip(e, `Regional: ${formatearEntero(regionalActual)}%`);
+    }
+
+    agujaMedio.addEventListener('mouseenter', mostrarTooltipAguja);
+    agujaMedio.addEventListener('mousemove', mostrarTooltipAguja);
+    agujaMedio.addEventListener('mouseleave', ocultarTooltip);
+    
+    agujaMedio.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        mostrarTooltip(e, `Regional: ${formatearEntero(regionalActual)}%`);
+    });
+    agujaMedio.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        mostrarTooltip(e, `Regional: ${formatearEntero(regionalActual)}%`);
+    });
+    agujaMedio.addEventListener('touchend', ocultarTooltip);
+
+    // --- Event listeners generales ---
+    btnAnual.addEventListener('click', () => {
+        if (modoActual === 'anual') return;
+        modoActual = 'anual';
+        btnAnual.classList.add('activo');
+        btnEstacional.classList.remove('activo');
+        actualizarSelectorPeriodos();
+        actualizarGraficoYReloj();
+    });
+
+    btnEstacional.addEventListener('click', () => {
+        if (modoActual === 'estacional') return;
+        modoActual = 'estacional';
+        btnEstacional.classList.add('activo');
+        btnAnual.classList.remove('activo');
+        actualizarSelectorPeriodos();
+        actualizarGraficoYReloj();
+    });
+
+    periodoSelect.addEventListener('change', actualizarGraficoYReloj);
+    window.addEventListener('resize', actualizarGraficoYReloj);
+
+    // Inicializar
+    actualizarSelectorPeriodos();
+    actualizarGraficoYReloj();
+})();
+</script>
+</body>
+</html>
