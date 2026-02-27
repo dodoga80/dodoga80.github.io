@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Información Pluviométrica | Domingo Garay</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background-color: #1f3a56;
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.descripcion {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card a {
+    text-decoration: none;
+    color: #1f3a56;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Sistema de Información Pluviométrica</h1>
+</header>
+
+<section>
+
+<div class="descripcion">
+Herramientas de monitoreo y análisis hídrico para la región Llanos de La Rioja.
+</div>
+
+<div class="card-container">
+
+    <div class="card">
+        <a href="anomalias/">Visor interactivo de anomalías</a>
+        <p>Comparación de precipitaciones actuales respecto a valores históricos.</p>
+    </div>
+
+    <div class="card">
+        <a href="informes/">Informes de situación hídrica</a>
+        <p>Reportes técnicos periódicos para apoyo a la toma de decisiones.</p>
+    </div>
+
+    <div class="card">
+        <a href="red/">Red pluviométrica regional</a>
+        <p>Sistema colaborativo de registro de precipitaciones.</p>
+    </div>
+
+</div>
+
+</section>
+
+</body>
+</html>
