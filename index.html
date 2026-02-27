@@ -1,882 +1,419 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Anomalías de precipitación Llanos de La Rioja</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domingo Dolores GARAY</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            background: linear-gradient(135deg, #0f2c38 0%, #1a4d63 50%, #0f3a47 100%);
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            position: relative;
-            overflow-x: hidden;
-        }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #edeae3;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: clamp(16px, 5vw, 40px);
+    gap: clamp(16px, 4vw, 32px);
+  }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at 20% 50%, rgba(87, 184, 214, 0.1) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 80%, rgba(243, 156, 75, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
+  .main-container {
+    width: 100%;
+    max-width: clamp(340px, 90vw, 1100px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 4vw, 32px);
+  }
 
-        .card {
-            max-width: 1400px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 1;
-            animation: slideUp 0.6s ease-out;
-        }
+  /* TARJETA PRINCIPAL - Nombre y Títulos */
+  .profile-card {
+    background: #4a6741;
+    padding: clamp(24px, 6vw, 40px);
+    border-radius: clamp(4px, 1vw, 8px);
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    opacity: 0;
+    animation: slideIn 0.6s ease-out forwards;
+  }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  .profile-card h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.4rem, 6vw, 2.4rem);
+    line-height: 1.2;
+    margin-bottom: clamp(12px, 2vw, 20px);
+    font-weight: 600;
+  }
 
-        h1 {
-            font-size: clamp(1.2rem, 5vw, 2.5rem);
-            font-weight: 700;
-            margin: 0 0 5px 0;
-            color: #0b2d3b;
-            text-align: center;
-            background: linear-gradient(135deg, #0f2c38 0%, #1d5c74 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-            line-height: 1.3;
-            word-break: break-word;
-            hyphens: auto;
-            padding: 0 5px;
-        }
+  .roles {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6px, 1.5vw, 12px);
+  }
 
-        .subtitulo {
-            text-align: center;
-            color: #5a7a8a;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
+  .role {
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    font-weight: 300;
+    line-height: 1.5;
+    opacity: 0.95;
+    letter-spacing: 0.3px;
+  }
 
-        .modos-panel {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: nowrap;
-        }
+  /* SECCIÓN DE CONTENIDO */
+  .content-section {
+    background: white;
+    padding: clamp(20px, 5vw, 36px);
+    border-radius: clamp(4px, 1vw, 8px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    opacity: 0;
+    animation: slideIn 0.6s ease-out 0.15s forwards;
+  }
 
-        .modo-btn {
-            background: white;
-            border: 2px solid #d0dfe9;
-            border-radius: 12px;
-            padding: 10px 5px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #1d5c74;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            flex: 1;
-            max-width: 200px;
-            text-align: center;
-            min-width: 120px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+  .section-title {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    font-weight: 600;
+    color: #2e4228;
+    margin-bottom: clamp(16px, 3vw, 24px);
+    padding-bottom: clamp(12px, 2vw, 16px);
+    border-bottom: 2px solid #4a6741;
+  }
 
-        .modo-btn.activo {
-            background: linear-gradient(135deg, #1d5c74 0%, #0f3a47 100%);
-            border-color: #0f3a47;
-            color: white;
-            box-shadow: 0 8px 24px rgba(29, 92, 116, 0.3);
-        }
+  /* LISTA DE CAPACIDADES */
+  .capabilities-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 3vw, 20px);
+  }
 
-        .filtros-panel {
-            background: linear-gradient(135deg, #f8fbff 0%, #f0f7fc 100%);
-            border-radius: 16px;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 0 25px 0;
-            box-shadow: 0 4px 12px rgba(29, 92, 116, 0.1);
-            border: 1px solid #d0dfe9;
-        }
+  .capability-item {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 1vw, 8px);
+  }
 
-        select {
-            background: white;
-            border: 2px solid #1d5c74;
-            border-radius: 10px;
-            padding: 10px 35px 10px 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #0d3140;
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%231d5c74' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
-        }
+  .capability-title {
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    font-weight: 600;
+    color: #2e4228;
+    line-height: 1.4;
+  }
 
-        .dashboard-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-            margin: 15px 0 25px;
-        }
+  .capability-desc {
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    color: #666;
+    line-height: 1.6;
+    text-align: justify;
+  }
 
-        @media (max-width: 900px) {
-            .dashboard-row {
-                grid-template-columns: 1fr;
-            }
-        }
+  /* SECCIÓN DE REPOSITORIOS */
+  .repositories-container {
+    background: white;
+    padding: clamp(20px, 5vw, 36px);
+    border-radius: clamp(4px, 1vw, 8px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    opacity: 0;
+    animation: slideIn 0.6s ease-out 0.3s forwards;
+  }
 
-        .grafico-caja {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-            border-radius: 20px;
-            padding: 15px 15px 25px 15px;
-            box-shadow: 0 10px 30px rgba(29, 92, 116, 0.1);
-            border: 1px solid #d0dfe9;
-            width: 100%;
-        }
+  .btn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(100px, 20vw, 160px), 1fr));
+    gap: clamp(12px, 2.5vw, 18px);
+  }
 
-        .grafico-titulo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #0b2d3b;
-            margin-bottom: 12px;
-            text-align: center;
-        }
+  .btn-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1.5vw, 12px);
+    padding: clamp(12px, 2vw, 18px);
+    background: #f9f7f3;
+    border: 2px solid #e0dbd0;
+    border-radius: clamp(4px, 1vw, 8px);
+    text-decoration: none;
+    color: #2e4228;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
 
-        .reloj-caja {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-            border-radius: 20px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(29, 92, 116, 0.1);
-            border: 1px solid #d0dfe9;
-            position: relative;
-        }
+  .btn-item:hover {
+    background: #4a6741;
+    color: white;
+    border-color: #4a6741;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(74, 103, 65, 0.2);
+  }
 
-        .reloj-titulo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #0b2d3b;
-            margin-bottom: 10px;
-            text-align: center;
-        }
+  .btn-icon {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    display: block;
+  }
 
-        /* VELOCÍMETRO - DEFINITIVO */
-        .velocimetro-contenedor {
-            position: relative;
-            width: 220px;
-            height: 120px;
-            margin: 5px 0 15px;
-            overflow: hidden;
-            border-radius: 110px 110px 0 0;
-            background: linear-gradient(90deg, #f39c4b 0%, #f39c4b 50%, #57b8d6 50%, #57b8d6 100%);
-            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.1);
-        }
+  .btn-label {
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.3;
+  }
 
-        /* Borde redondeado interior - SIN CONTORNO EXTERIOR */
-        .velocimetro-mascara {
-            position: absolute;
-            width: 180px;
-            height: 90px;
-            background: white;
-            bottom: 0;
-            left: 20px;
-            border-radius: 90px 90px 0 0;
-            z-index: 5;
-        }
+  /* EMAIL FOOTER */
+  .email-footer {
+    background: #f0ece4;
+    padding: clamp(12px, 2vw, 18px);
+    border-radius: clamp(4px, 1vw, 8px);
+    text-align: center;
+    opacity: 0;
+    animation: slideIn 0.6s ease-out 0.45s forwards;
+  }
 
-        .aguja-medio {
-            position: absolute;
-            width: 4px;
-            height: 85px;
-            background: #d63e3e;
-            left: 50%;
-            bottom: 5px;
-            transform-origin: 50% 100%;
-            transform: translateX(-50%) rotate(0deg);
-            border-radius: 2px;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: 15;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            cursor: pointer;
-        }
+  .email-footer a {
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    color: #4a6741;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    transition: opacity 0.3s;
+  }
 
-        .aguja-medio::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: #d63e3e;
-            border-radius: 50%;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            cursor: pointer;
-        }
+  .email-footer a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+  }
 
-        .categoria-externa {
-            font-size: 1rem;
-            font-weight: 650;
-            color: #1d5c74;
-            background: linear-gradient(135deg, #e7f0f7 0%, #d9e9f3 100%);
-            padding: 8px 25px;
-            border-radius: 30px;
-            text-align: center;
-            border: 2px solid #a5d5ed;
-            margin-top: 5px;
-            display: inline-block;
-        }
+  .email-in-card {
+    margin-top: auto;
+    background: transparent;
+    padding: clamp(12px, 2vw, 18px) 0;
+  }
 
-        /* GRÁFICO DE BARRAS */
-        .grafico-contenedor {
-            display: flex;
-            align-items: stretch;
-            height: 260px;
-            margin-top: 5px;
-            width: 100%;
-        }
+  .email-in-card a {
+    color: #f4d03f;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
 
-        .eje-y {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding-right: 5px;
-            text-align: right;
-            font-weight: 600;
-            color: #000000;
-            font-size: clamp(0.6rem, 2vw, 0.75rem);
-            min-width: 35px;
-            height: 100%;
-            line-height: 1.1;
-        }
+  .email-in-card a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+  }
 
-        .eje-y span {
-            position: relative;
-            color: #000000;
-            white-space: nowrap;
-            transform: translateY(50%);
-        }
-        .eje-y span:first-child { transform: translateY(0); }
-        .eje-y span:last-child { transform: translateY(-30%); }
+  /* ANIMACIONES */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-        .barras-area {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            flex: 1;
-            position: relative;
-            background: linear-gradient(180deg, #f8fbff 0%, #f0f7fc 100%);
-            border-left: 2px solid #1d5c74;
-            border-right: 2px solid #1d5c74;
-            border-top: 1px solid #e0ecf5;
-            border-bottom: 1px solid #e0ecf5;
-            height: 100%;
-            border-radius: 0;
-            padding: 0 2px;
-        }
+  /* MEDIA QUERY - CELULAR HORIZONTAL */
+  @media (max-height: 500px) and (orientation: landscape) {
+    body {
+      padding: clamp(8px, 2vw, 16px);
+      gap: clamp(8px, 2vw, 12px);
+    }
 
-        .eje-central {
-            position: absolute;
-            width: calc(100% - 4px);
-            height: 2px;
-            background: #1d5c74;
-            top: 50%;
-            left: 2px;
-            z-index: 10;
-            transform: translateY(-50%);
-            box-shadow: 0 1px 3px rgba(29, 92, 116, 0.2);
-        }
+    .main-container {
+      gap: clamp(8px, 2vw, 12px);
+    }
 
-        .barra-wrapper {
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            flex: 1;
-            max-width: 60px;
-            min-width: 30px;
-        }
+    .profile-card {
+      padding: clamp(12px, 2vw, 16px);
+    }
 
-        .barra {
-            position: absolute;
-            width: 70%;
-            border-radius: 0;
-            transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            left: 50%;
-            transform: translateX(-50%);
-            min-width: 8px;
-            max-width: 40px;
-        }
+    .profile-card h1 {
+      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+      margin-bottom: clamp(4px, 1vw, 8px);
+    }
 
-        .barra.positiva {
-            background: linear-gradient(180deg, #57b8d6 0%, #2a98b8 100%);
-            bottom: 50%;
-            top: auto;
-        }
+    .role {
+      font-size: clamp(0.5rem, 1vw, 0.6rem);
+    }
 
-        .barra.negativa {
-            background: linear-gradient(180deg, #f39c4b 0%, #e87a2a 100%);
-            top: 50%;
-            bottom: auto;
-        }
+    .content-section,
+    .repositories-container {
+      padding: clamp(12px, 2vw, 16px);
+    }
 
-        .departamento-label {
-            position: absolute;
-            bottom: -22px;
-            font-weight: 700;
-            color: #1d5c74;
-            font-size: clamp(0.6rem, 2vw, 0.8rem);
-            background: linear-gradient(135deg, #e7f0f7 0%, #d9e9f3 100%);
-            padding: 3px 6px;
-            border-radius: 6px;
-            width: auto;
-            min-width: 32px;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(29, 92, 116, 0.1);
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            border: 1px solid #a5d5ed;
-            line-height: 1.2;
-            transition: all 0.2s ease;
-            pointer-events: all;
-            z-index: 20;
-        }
+    .section-title {
+      font-size: clamp(0.85rem, 1.8vw, 1rem);
+      margin-bottom: clamp(8px, 1.5vw, 12px);
+      padding-bottom: clamp(6px, 1vw, 8px);
+    }
 
-        /* Tooltip personalizado */
-        .tooltip-valor {
-            position: fixed;
-            background: #1d5c74;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            border: 3px solid white;
-            z-index: 9999;
-            pointer-events: none;
-            white-space: nowrap;
-            transform: translate(-50%, -100%);
-            margin-top: -15px;
-            transition: opacity 0.2s ease;
-            opacity: 0;
-            letter-spacing: 0.5px;
-        }
+    .capability-item {
+      gap: clamp(2px, 0.8vw, 4px);
+    }
 
-        .tooltip-valor.visible {
-            opacity: 1;
-        }
+    .capability-title {
+      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+    }
 
-        .tooltip-valor::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #1d5c74;
-        }
+    .capability-desc {
+      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+      line-height: 1.4;
+    }
 
-        /* ESTADÍSTICAS SIEMPRE EN COLUMNA */
-        .estadisticas-container {
-            margin-top: 25px;
-            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 0 10px 30px rgba(29, 92, 116, 0.1);
-            border: 1px solid #d0dfe9;
-        }
+    .btn-grid {
+      gap: clamp(6px, 1vw, 8px);
+      grid-template-columns: repeat(6, 1fr);
+    }
 
-        .estadisticas-titulo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #0b2d3b;
-            margin-bottom: 12px;
-            text-align: center;
-        }
+    .btn-item {
+      padding: clamp(6px, 1vw, 8px);
+      gap: clamp(3px, 0.8vw, 5px);
+    }
 
-        .estadisticas-lista {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+    .btn-icon {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+    }
 
-        .estadistica-fila {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e0ecf5;
-        }
+    .btn-label {
+      font-size: clamp(0.5rem, 1vw, 0.65rem);
+      display: none;
+    }
 
-        .estadistica-fila .label {
-            font-weight: 600;
-            color: #1d5c74;
-            font-size: 0.95rem;
-        }
+    .email-footer {
+      padding: clamp(6px, 1.5vw, 10px);
+    }
 
-        .estadistica-fila .valor {
-            font-weight: 700;
-            color: #0b2d3b;
-            background: #f0f7fc;
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            text-align: center;
-            min-width: 110px;
-        }
+    .email-footer a {
+      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+    }
+  }
 
-        .contacto {
-            margin-top: 20px;
-            text-align: center;
-            color: #1d5c74;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #e7f0f7 0%, #d9e9f3 100%);
-            padding: 10px 20px;
-            border-radius: 30px;
-            border: 2px solid #a5d5ed;
-        }
+  /* MEDIA QUERY - PC PANTALLA COMPLETA */
+  @media (min-width: 1024px) and (min-height: 600px) {
+    body {
+      padding: clamp(40px, 5vw, 60px);
+      gap: clamp(32px, 4vw, 48px);
+    }
 
-        /* OPTIMIZACIÓN MÓVIL */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: clamp(1.2rem, 6vw, 2rem);
-                white-space: normal;
-            }
-            
-            .grafico-contenedor {
-                height: 180px;
-            }
-            
-            .departamento-label {
-                bottom: -18px;
-                font-size: 0.6rem;
-                padding: 3px 4px;
-                min-width: 26px;
-            }
-            
-            .velocimetro-contenedor {
-                width: 180px;
-                height: 98px;
-            }
-            
-            .velocimetro-mascara {
-                width: 146px;
-                height: 73px;
-                left: 17px;
-            }
-            
-            .aguja-medio {
-                height: 70px;
-            }
-            
-            .tooltip-valor {
-                padding: 10px 20px;
-                font-size: 1rem;
-                border-width: 2px;
-            }
-            
-            .modo-btn {
-                min-width: 0;
-                font-size: 0.75rem;
-                padding: 10px 5px;
-                white-space: nowrap;
-            }
-        }
+    .main-container {
+      max-width: 1200px;
+      gap: clamp(28px, 3vw, 40px);
+      display: grid;
+      grid-template-columns: minmax(320px, auto) 1fr;
+      grid-template-rows: 1fr;
+      align-items: stretch;
+      min-height: calc(100vh - clamp(80px, 10vw, 120px));
+    }
 
-        @media (max-width: 480px) {
-            body { padding: 5px; }
-            .card { padding: 12px; border-radius: 16px; }
-            .filtros-panel { padding: 8px 12px; margin-bottom: 15px; }
-            select { font-size: 0.8rem; padding: 8px 30px 8px 12px; }
-            
-            .eje-y { font-size: 0.6rem; min-width: 28px; }
-            .barra-wrapper { min-width: 25px; }
-            .barra { width: 75%; }
+    .profile-card {
+      grid-column: 1;
+      grid-row: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(32px, 3vw, 40px);
+    }
 
-            .estadistica-fila { padding: 6px 10px; }
-            .estadistica-fila .label { font-size: 0.85rem; }
-            .estadistica-fila .valor { font-size: 0.85rem; padding: 2px 8px; min-width: 90px; }
-            
-            .modo-btn {
-                font-size: 0.7rem;
-                padding: 8px 3px;
-            }
-        }
-    </style>
+    .profile-card h1 {
+      font-size: clamp(1.6rem, 2vw, 1.9rem);
+      margin-bottom: clamp(20px, 2vw, 28px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .role {
+      font-size: clamp(0.75rem, 1vw, 0.85rem);
+    }
+
+    .repositories-container {
+      grid-column: 2;
+      grid-row: 1;
+      height: 100%;
+      padding: clamp(32px, 3vw, 40px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-title {
+      font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+      margin-bottom: clamp(20px, 2vw, 28px);
+      padding-bottom: clamp(16px, 1.5vw, 20px);
+    }
+
+    .btn-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(16px, 2vw, 24px);
+      flex: 1;
+      display: grid;
+    }
+
+    .btn-item {
+      padding: clamp(18px, 2vw, 24px);
+      gap: clamp(12px, 1.5vw, 16px);
+    }
+
+    .btn-icon {
+      font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+    }
+
+    .btn-label {
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      display: block;
+    }
+  }
+</style>
 </head>
 <body>
-<div class="card">
-    <h1>Anomalías de Precipitación</h1>
-    <p class="subtitulo">Región de los Llanos - La Rioja - Argentina</p>
 
-    <div class="modos-panel">
-        <button id="btnAnual" class="modo-btn activo">Anual (Ene - Dic)</button>
-        <button id="btnEstacional" class="modo-btn">Estacional (Nov - Mar)</button>
+<div class="main-container">
+  <!-- TARJETA PERFIL -->
+  <div class="profile-card">
+    <h1>Domingo Dolores GARAY</h1>
+    <div class="roles">
+      <span class="role">Lic. en Enseñanza de Ciencias del Ambiente</span>
+      <span class="role">Prof. para Educación en Ciencias Políticas</span>
+      <span class="role">Téc. en Gestión de Incendios Forestales</span>
+      <span class="role">Dipl. en Inteligencia Artificial</span>
     </div>
-
-    <div class="filtros-panel">
-        <select id="periodoSelect"></select>
+    <div class="email-footer email-in-card">
+      <a href="mailto:dodogaray@gmail.com">dodogaray@gmail.com</a>
     </div>
+  </div>
 
-    <div class="dashboard-row">
-        <div class="grafico-caja">
-            <div class="grafico-titulo">📊 Anomalía Departamental [%]</div>
-            <div class="grafico-contenedor">
-                <div class="eje-y" id="ejeY"></div>
-                <div class="barras-area" id="barrasArea">
-                    <div class="eje-central"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="reloj-caja">
-            <div class="reloj-titulo">⭕ Anomalía Regional [%]</div>
-
-            <div class="velocimetro-contenedor">
-                <div class="velocimetro-mascara"></div>
-                <div class="aguja-medio" id="agujaMedio"></div>
-            </div>
-            
-            <div class="categoria-externa" id="categoriaDisplay">Superávit moderado</div>
-        </div>
+  <!-- SECCIÓN REPOSITORIOS -->
+  <div class="repositories-container">
+    <h2 class="section-title">Áreas de trabajo</h2>
+    <div class="btn-grid">
+      <a href="/sig-teledeteccion/" class="btn-item">
+        <span class="btn-icon">💻</span>
+        <span class="btn-label">Teledetección</span>
+      </a>
+      <a href="/precipitaciones/" class="btn-item">
+        <span class="btn-icon">🌧️</span>
+        <span class="btn-label">Precipitaciones</span>
+      </a>
+      <a href="/incendios/" class="btn-item">
+        <span class="btn-icon">🔥</span>
+        <span class="btn-label">Incendios</span>
+      </a>
+      <a href="/ambiente/" class="btn-item">
+        <span class="btn-icon">🌎</span>
+        <span class="btn-label">Ambiente</span>
+      </a>
+      <a href="/docencia/" class="btn-item">
+        <span class="btn-icon">📚</span>
+        <span class="btn-label">Docencia</span>
+      </a>
+      <a href="/otros/" class="btn-item">
+        <span class="btn-icon">📁</span>
+        <span class="btn-label">Otros</span>
+      </a>
     </div>
+  </div>
 
-    <div class="estadisticas-container">
-        <div class="estadisticas-titulo">📉 Resumen Estadístico</div>
-        <div class="estadisticas-lista">
-            <div class="estadistica-fila">
-                <span class="label">Promedio</span>
-                <span class="valor" id="statPromedio">+24%</span>
-            </div>
-            <div class="estadistica-fila">
-                <span class="label">Desviación</span>
-                <span class="valor" id="statDesviacion">±14</span>
-            </div>
-            <div class="estadistica-fila">
-                <span class="label">Máximo</span>
-                <span class="valor" id="statMaximo">+56% (BEL)</span>
-            </div>
-            <div class="estadistica-fila">
-                <span class="label">Mínimo</span>
-                <span class="valor" id="statMinimo">+2% (IND)</span>
-            </div>
-            <div class="estadistica-fila">
-                <span class="label">Rango</span>
-                <span class="valor" id="statRango">54</span>
-            </div>
-            <div class="estadistica-fila">
-                <span class="label">Positivos (+)</span>
-                <span class="valor" id="statPositivos">9</span>
-            </div>
-            <div class="estadistica-fila">
-                <span class="label">Negativos (-)</span>
-                <span class="valor" id="statNegativos">0</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="contacto">
-        © Lic. Domingo Dolores GARAY
-    </div>
-</div>
-
-<!-- Tooltip flotante -->
-<div id="tooltip" class="tooltip-valor"></div>
-
-<script>
-(function() {
-    // --- Datos ---
-    const datosAnuales = {
-        periodos: [ { id: 'ene25-dic25', label: 'Ene 2025 - Dic 2025', regional: 24.12 }, { id: 'ene24-dic24', label: 'Ene 2024 - Dic 2024', regional: -15.83 }, { id: 'ene23-dic23', label: 'Ene 2023 - Dic 2023', regional: -14.84 }, { id: 'ene22-dic22', label: 'Ene 2022 - Dic 2022', regional: -9.44 }, { id: 'ene21-dic21', label: 'Ene 2021 - Dic 2021', regional: 0.94 } ],
-        datos: { 'ene25-dic25': [ { codigo: 'CAP', anom_pct: 18.55 }, { codigo: 'IND', anom_pct: 1.90 }, { codigo: 'AVP', anom_pct: 29.21 }, { codigo: 'CHA', anom_pct: 32.54 }, { codigo: 'BEL', anom_pct: 55.98 }, { codigo: 'JFQ', anom_pct: 25.12 }, { codigo: 'OCA', anom_pct: 24.96 }, { codigo: 'RVP', anom_pct: 11.18 }, { codigo: 'GSM', anom_pct: 17.61 } ], 'ene24-dic24': [ { codigo: 'CAP', anom_pct: -7.57 }, { codigo: 'IND', anom_pct: -13.34 }, { codigo: 'AVP', anom_pct: -13.15 }, { codigo: 'CHA', anom_pct: -15.19 }, { codigo: 'BEL', anom_pct: -14.15 }, { codigo: 'JFQ', anom_pct: -22.00 }, { codigo: 'OCA', anom_pct: -21.44 }, { codigo: 'RVP', anom_pct: -19.96 }, { codigo: 'GSM', anom_pct: -15.68 } ], 'ene23-dic23': [ { codigo: 'CAP', anom_pct: -12.68 }, { codigo: 'IND', anom_pct: -31.82 }, { codigo: 'AVP', anom_pct: -15.47 }, { codigo: 'CHA', anom_pct: -18.82 }, { codigo: 'BEL', anom_pct: -2.52 }, { codigo: 'JFQ', anom_pct: -15.21 }, { codigo: 'OCA', anom_pct: -1.28 }, { codigo: 'RVP', anom_pct: -18.10 }, { codigo: 'GSM', anom_pct: -17.67 } ], 'ene22-dic22': [ { codigo: 'CAP', anom_pct: 20.00 }, { codigo: 'IND', anom_pct: -22.00 }, { codigo: 'AVP', anom_pct: 6.00 }, { codigo: 'CHA', anom_pct: 0.00 }, { codigo: 'BEL', anom_pct: -4.00 }, { codigo: 'JFQ', anom_pct: -21.00 }, { codigo: 'OCA', anom_pct: -31.00 }, { codigo: 'RVP', anom_pct: 1.00 }, { codigo: 'GSM', anom_pct: -34.00 } ], 'ene21-dic21': [ { codigo: 'CAP', anom_pct: 12.35 }, { codigo: 'IND', anom_pct: 11.91 }, { codigo: 'AVP', anom_pct: 5.65 }, { codigo: 'CHA', anom_pct: 3.48 }, { codigo: 'BEL', anom_pct: -16.00 }, { codigo: 'JFQ', anom_pct: -13.23 }, { codigo: 'OCA', anom_pct: -18.39 }, { codigo: 'RVP', anom_pct: 17.69 }, { codigo: 'GSM', anom_pct: 5.02 } ] }
-    };
-    const datosEstacionales = {
-        periodos: [ { id: 'nov25-mar26', label: 'Nov 2025 - Mar 2026', regional: 1.09 }, { id: 'nov24-mar25', label: 'Nov 2024 - Mar 2025', regional: 5.05 }, { id: 'nov23-mar24', label: 'Nov 2023 - Mar 2024', regional: -34.85 }, { id: 'nov22-mar23', label: 'Nov 2022 - Mar 2023', regional: 6.83 }, { id: 'nov21-mar22', label: 'Nov 2021 - Mar 2022', regional: -12.14 } ],
-        datos: { 'nov25-mar26': [ { codigo: 'CAP', anom_pct: -1.35 }, { codigo: 'IND', anom_pct: -15.20 }, { codigo: 'AVP', anom_pct: -22.38 }, { codigo: 'CHA', anom_pct: 2.90 }, { codigo: 'BEL', anom_pct: 4.68 }, { codigo: 'JFQ', anom_pct: 10.54 }, { codigo: 'OCA', anom_pct: -5.77 }, { codigo: 'RVP', anom_pct: 21.36 }, { codigo: 'GSM', anom_pct: 15.00 } ], 'nov24-mar25': [ { codigo: 'CAP', anom_pct: -5.89 }, { codigo: 'IND', anom_pct: -11.47 }, { codigo: 'AVP', anom_pct: 14.11 }, { codigo: 'CHA', anom_pct: 23.78 }, { codigo: 'BEL', anom_pct: 44.41 }, { codigo: 'JFQ', anom_pct: -0.26 }, { codigo: 'OCA', anom_pct: 12.18 }, { codigo: 'RVP', anom_pct: -16.16 }, { codigo: 'GSM', anom_pct: -15.21 } ], 'nov23-mar24': [ { codigo: 'CAP', anom_pct: -33.20 }, { codigo: 'IND', anom_pct: -34.78 }, { codigo: 'AVP', anom_pct: -37.28 }, { codigo: 'CHA', anom_pct: -26.88 }, { codigo: 'BEL', anom_pct: -38.35 }, { codigo: 'JFQ', anom_pct: -35.01 }, { codigo: 'OCA', anom_pct: -49.38 }, { codigo: 'RVP', anom_pct: -33.25 }, { codigo: 'GSM', anom_pct: -25.56 } ], 'nov22-mar23': [ { codigo: 'CAP', anom_pct: -6.76 }, { codigo: 'IND', anom_pct: -26.10 }, { codigo: 'AVP', anom_pct: 2.34 }, { codigo: 'CHA', anom_pct: -8.92 }, { codigo: 'BEL', anom_pct: 1.97 }, { codigo: 'JFQ', anom_pct: 12.53 }, { codigo: 'OCA', anom_pct: 37.28 }, { codigo: 'RVP', anom_pct: 32.65 }, { codigo: 'GSM', anom_pct: 16.49 } ], 'nov21-mar22': [ { codigo: 'CAP', anom_pct: 38.71 }, { codigo: 'IND', anom_pct: -18.77 }, { codigo: 'AVP', anom_pct: 10.97 }, { codigo: 'CHA', anom_pct: 10.97 }, { codigo: 'BEL', anom_pct: 10.85 }, { codigo: 'JFQ', anom_pct: -51.12 }, { codigo: 'OCA', anom_pct: -40.94 }, { codigo: 'RVP', anom_pct: -25.76 }, { codigo: 'GSM', anom_pct: -44.15 } ] }
-    };
-
-    // --- Funciones de utilidad ---
-    function clasificarAnomalia(pct) {
-        if (pct <= -80) return 'Déficit extremo'; if (pct <= -50) return 'Déficit crítico'; if (pct <= -30) return 'Déficit muy alto'; if (pct <= -20) return 'Déficit alto'; if (pct <= -10) return 'Déficit moderado'; if (pct <= -2.51) return 'Déficit leve'; if (pct <= 2.5) return 'Normal'; if (pct <= 10) return 'Superávit leve'; if (pct <= 30) return 'Superávit moderado'; if (pct <= 60) return 'Superávit alto'; if (pct <= 90) return 'Superávit muy alto'; return 'Superávit extraordinario';
-    }
-    
-    function calcularIntervaloEjeY(maxEscala) {
-        if (maxEscala <= 40) return 10;
-        if (maxEscala <= 80) return 20;
-        return 25;
-    }
-    
-    function generarEjeY(maxEscala) {
-        const intervalo = calcularIntervaloEjeY(maxEscala);
-        const valores = [];
-        for (let i = maxEscala; i > 0; i -= intervalo) valores.push(i + '%');
-        valores.push('0%');
-        for (let i = intervalo; i <= maxEscala; i += intervalo) valores.push('-' + i + '%');
-        return valores;
-    }
-    
-    function calcularMaxEscala(datosPeriodo) {
-        const maxAnom = Math.max(...datosPeriodo.map(d => Math.abs(d.anom_pct)));
-        const intervalo = calcularIntervaloEjeY(maxAnom);
-        return Math.ceil(maxAnom / intervalo) * intervalo;
-    }
-    
-    function formatearEntero(valor) {
-        const entero = Math.round(valor);
-        return entero > 0 ? '+' + entero : entero.toString();
-    }
-    
-    function calcularEstadisticas(datosPeriodo) {
-        const ordenado = [...datosPeriodo].sort((a, b) => b.anom_pct - a.anom_pct);
-        const maximo = ordenado[0];
-        const minimo = ordenado[ordenado.length - 1];
-        const rango = Math.round(maximo.anom_pct - minimo.anom_pct);
-        const suma = datosPeriodo.reduce((acc, d) => acc + d.anom_pct, 0);
-        const promedio = suma / datosPeriodo.length;
-        const sumaCuadrados = datosPeriodo.reduce((acc, d) => acc + Math.pow(d.anom_pct - promedio, 2), 0);
-        const desviacion = Math.round(Math.sqrt(sumaCuadrados / datosPeriodo.length));
-        const positivos = datosPeriodo.filter(d => d.anom_pct > 0).length;
-        const negativos = datosPeriodo.filter(d => d.anom_pct < 0).length;
-        
-        return {
-            maximo: `${formatearEntero(maximo.anom_pct)}% (${maximo.codigo})`,
-            minimo: `${formatearEntero(minimo.anom_pct)}% (${minimo.codigo})`,
-            rango: rango.toString(),
-            promedio: formatearEntero(promedio) + '%',
-            desviacion: '±' + desviacion,
-            positivos,
-            negativos
-        };
-    }
-
-    // --- Elementos DOM ---
-    const btnAnual = document.getElementById('btnAnual');
-    const btnEstacional = document.getElementById('btnEstacional');
-    const periodoSelect = document.getElementById('periodoSelect');
-    const graficoContenedor = document.querySelector('.grafico-contenedor');
-    const barrasArea = document.getElementById('barrasArea');
-    const ejeY = document.getElementById('ejeY');
-    const agujaMedio = document.getElementById('agujaMedio');
-    const categoriaDisplay = document.getElementById('categoriaDisplay');
-    const statPromedio = document.getElementById('statPromedio');
-    const statDesviacion = document.getElementById('statDesviacion');
-    const statMaximo = document.getElementById('statMaximo');
-    const statMinimo = document.getElementById('statMinimo');
-    const statRango = document.getElementById('statRango');
-    const statPositivos = document.getElementById('statPositivos');
-    const statNegativos = document.getElementById('statNegativos');
-    const tooltip = document.getElementById('tooltip');
-
-    let modoActual = 'anual';
-    let datosActuales = [];
-    let regionalActual = 0;
-
-    function actualizarSelectorPeriodos() {
-        const fuente = modoActual === 'anual' ? datosAnuales : datosEstacionales;
-        const valorActual = periodoSelect.value;
-        periodoSelect.innerHTML = '';
-        fuente.periodos.forEach(p => {
-            const option = document.createElement('option');
-            option.value = p.id;
-            option.textContent = p.label;
-            periodoSelect.appendChild(option);
-        });
-        if (valorActual && fuente.periodos.some(p => p.id === valorActual)) periodoSelect.value = valorActual;
-    }
-
-    function actualizarEstadisticas(datosPeriodo) {
-        const stats = calcularEstadisticas(datosPeriodo);
-        statPromedio.innerText = stats.promedio;
-        statDesviacion.innerText = stats.desviacion;
-        statMaximo.innerText = stats.maximo;
-        statMinimo.innerText = stats.minimo;
-        statRango.innerText = stats.rango;
-        statPositivos.innerText = stats.positivos;
-        statNegativos.innerText = stats.negativos;
-    }
-
-    // Función para mostrar tooltip
-    function mostrarTooltip(event, texto) {
-        tooltip.textContent = texto;
-        tooltip.classList.add('visible');
-        
-        const clientX = event.type.startsWith('touch') ? event.touches[0].clientX : event.clientX;
-        const clientY = event.type.startsWith('touch') ? event.touches[0].clientY : event.clientY;
-        
-        tooltip.style.left = clientX + 'px';
-        tooltip.style.top = clientY + 'px';
-    }
-
-    function ocultarTooltip() {
-        tooltip.classList.remove('visible');
-    }
-
-    function actualizarGraficoYReloj() {
-        const fuente = modoActual === 'anual' ? datosAnuales : datosEstacionales;
-        if (!periodoSelect.value && fuente.periodos.length > 0) periodoSelect.value = fuente.periodos[0].id;
-
-        const periodoActual = fuente.periodos.find(p => p.id === periodoSelect.value);
-        if (!periodoActual) return;
-
-        const datosPeriodo = fuente.datos[periodoActual.id];
-        datosActuales = datosPeriodo;
-        regionalActual = periodoActual.regional;
-
-        // Calcular escala automática
-        const maxEscala = calcularMaxEscala(datosPeriodo);
-        const valoresEje = generarEjeY(maxEscala);
-        ejeY.innerHTML = valoresEje.map(v => `<span>${v}</span>`).join('');
-
-        // Limpiar y crear barras
-        barrasArea.innerHTML = '<div class="eje-central"></div>';
-
-        const alturaTotalGrafico = graficoContenedor.offsetHeight;
-        const alturaMediaBarra = alturaTotalGrafico / 2;
-
-        datosPeriodo.forEach((item) => {
-            const anom = item.anom_pct;
-            const absAnom = Math.abs(anom);
-            const proporcion = absAnom / maxEscala;
-            const alturaBarra = Math.round(proporcion * alturaMediaBarra);
-
-            const wrapper = document.createElement('div');
-            wrapper.className = 'barra-wrapper';
-
-            const barra = document.createElement('div');
-            barra.className = `barra ${anom >= 0 ? 'positiva' : 'negativa'}`;
-            barra.style.height = alturaBarra + 'px';
-
-            const label = document.createElement('div');
-            label.className = 'departamento-label';
-            label.innerText = item.codigo;
-
-            // Eventos para tooltip
-            const showTooltipEvent = (e) => {
-                mostrarTooltip(e, `${item.codigo}: ${formatearEntero(anom)}%`);
-            };
-
-            wrapper.addEventListener('mouseenter', showTooltipEvent);
-            wrapper.addEventListener('mousemove', (e) => {
-                mostrarTooltip(e, `${item.codigo}: ${formatearEntero(anom)}%`);
-            });
-            wrapper.addEventListener('mouseleave', ocultarTooltip);
-            
-            wrapper.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                mostrarTooltip(e, `${item.codigo}: ${formatearEntero(anom)}%`);
-            });
-            wrapper.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-                mostrarTooltip(e, `${item.codigo}: ${formatearEntero(anom)}%`);
-            });
-            wrapper.addEventListener('touchend', ocultarTooltip);
-
-            wrapper.appendChild(barra);
-            wrapper.appendChild(label);
-            barrasArea.appendChild(wrapper);
-        });
-
-        // Actualizar categoría y ángulo
-        categoriaDisplay.innerText = clasificarAnomalia(regionalActual);
-        const anguloAguja = (regionalActual / 100) * 90;
-        agujaMedio.style.transform = `translateX(-50%) rotate(${anguloAguja}deg)`;
-
-        actualizarEstadisticas(datosPeriodo);
-    }
-
-    // --- Event listeners SOLO para la aguja del velocímetro ---
-    function mostrarTooltipAguja(e) {
-        mostrarTooltip(e, `Regional: ${formatearEntero(regionalActual)}%`);
-    }
-
-    agujaMedio.addEventListener('mouseenter', mostrarTooltipAguja);
-    agujaMedio.addEventListener('mousemove', mostrarTooltipAguja);
-    agujaMedio.addEventListener('mouseleave', ocultarTooltip);
-    
-    agujaMedio.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        mostrarTooltip(e, `Regional: ${formatearEntero(regionalActual)}%`);
-    });
-    agujaMedio.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        mostrarTooltip(e, `Regional: ${formatearEntero(regionalActual)}%`);
-    });
-    agujaMedio.addEventListener('touchend', ocultarTooltip);
-
-    // --- Event listeners generales ---
-    btnAnual.addEventListener('click', () => {
-        if (modoActual === 'anual') return;
-        modoActual = 'anual';
-        btnAnual.classList.add('activo');
-        btnEstacional.classList.remove('activo');
-        actualizarSelectorPeriodos();
-        actualizarGraficoYReloj();
-    });
-
-    btnEstacional.addEventListener('click', () => {
-        if (modoActual === 'estacional') return;
-        modoActual = 'estacional';
-        btnEstacional.classList.add('activo');
-        btnAnual.classList.remove('activo');
-        actualizarSelectorPeriodos();
-        actualizarGraficoYReloj();
-    });
-
-    periodoSelect.addEventListener('change', actualizarGraficoYReloj);
-    window.addEventListener('resize', actualizarGraficoYReloj);
-
-    // Inicializar
-    actualizarSelectorPeriodos();
-    actualizarGraficoYReloj();
-})();
-</script>
 </body>
-
 </html>
