@@ -30,6 +30,7 @@ section {
     padding: 0 20px;
 }
 
+/* Estilo para la descripción (ahora vacío, pero se mantiene por si se quiere reutilizar) */
 .descripcion {
     text-align: center;
     margin-bottom: 40px;
@@ -55,6 +56,14 @@ section {
     color: #1f3a56;
     font-size: 18px;
     font-weight: bold;
+    display: block; /* Para que el emoji quede arriba del enlace */
+    margin-top: 10px;
+}
+
+/* Estilo para los emojis */
+.card-emoji {
+    font-size: 48px; /* Tamaño grande para el emoji */
+    margin-bottom: 10px;
 }
 
 .card p {
@@ -67,28 +76,30 @@ section {
 <body>
 
 <header>
-    <h1>Sistema de Información Pluviométrica</h1>
+    <h1>Precipitaciones</h1>
 </header>
 
 <section>
 
-<div class="descripcion">
-Herramientas de monitoreo y análisis hídrico para la Región Llanos de La Rioja.
-</div>
+<!-- El div de descripción se mantiene vacío -->
+<div class="descripcion"></div>
 
 <div class="card-container">
 
     <div class="card">
+        <div class="card-emoji">📊</div>
         <a href="anomalias/">Visor interactivo de anomalías</a>
         <p>Comparación de precipitaciones actuales respecto a valores históricos.</p>
     </div>
 
     <div class="card">
+        <div class="card-emoji">📄</div>
         <a href="informes/">Informes de situación hídrica</a>
         <p>Reportes técnicos periódicos para apoyo a la toma de decisiones.</p>
     </div>
 
     <div class="card">
+        <div class="card-emoji">🧪</div> <!-- Emoji cambiado a probeta/tubo de ensayo -->
         <a href="red/">Red pluviométrica regional</a>
         <p>Sistema colaborativo de registro de precipitaciones.</p>
     </div>
