@@ -293,18 +293,18 @@
   /* MEDIA QUERY - PC PANTALLA COMPLETA */
   @media (min-width: 1024px) and (min-height: 600px) {
     body {
-      padding: clamp(40px, 5vw, 60px);
-      gap: clamp(32px, 4vw, 48px);
+      padding: clamp(20px, 2vw, 30px);
+      gap: clamp(16px, 2vw, 24px);
     }
 
     .main-container {
       max-width: 1200px;
-      gap: clamp(28px, 3vw, 40px);
+      gap: clamp(16px, 2vw, 24px);
       display: grid;
       grid-template-columns: minmax(320px, auto) 1fr;
-      grid-template-rows: 1fr;
+      grid-template-rows: auto;
       align-items: stretch;
-      min-height: calc(100vh - clamp(80px, 10vw, 120px));
+      min-height: auto;
     }
 
     .profile-card {
@@ -313,13 +313,14 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: clamp(32px, 3vw, 40px);
+      justify-content: flex-start;
+      padding: clamp(24px, 2.5vw, 32px);
+      align-items: center;
     }
 
     .profile-card h1 {
       font-size: clamp(1.6rem, 2vw, 1.9rem);
-      margin-bottom: clamp(20px, 2vw, 28px);
+      margin-bottom: clamp(16px, 1.5vw, 20px);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -332,28 +333,28 @@
     .repositories-container {
       grid-column: 2;
       grid-row: 1;
-      height: 100%;
-      padding: clamp(32px, 3vw, 40px);
+      height: auto;
+      padding: clamp(24px, 2.5vw, 32px);
       display: flex;
       flex-direction: column;
     }
 
     .section-title {
       font-size: clamp(1.2rem, 1.5vw, 1.4rem);
-      margin-bottom: clamp(20px, 2vw, 28px);
-      padding-bottom: clamp(16px, 1.5vw, 20px);
+      margin-bottom: clamp(16px, 1.5vw, 20px);
+      padding-bottom: clamp(12px, 1vw, 16px);
     }
 
     .btn-grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: clamp(16px, 2vw, 24px);
-      flex: 1;
+      gap: clamp(12px, 1.5vw, 18px);
+      flex: 0;
       display: grid;
     }
 
     .btn-item {
-      padding: clamp(18px, 2vw, 24px);
-      gap: clamp(12px, 1.5vw, 16px);
+      padding: clamp(16px, 1.8vw, 22px);
+      gap: clamp(10px, 1.2vw, 14px);
     }
 
     .btn-icon {
@@ -363,6 +364,11 @@
     .btn-label {
       font-size: clamp(0.85rem, 1.1vw, 1rem);
       display: block;
+    }
+
+    .email-footer {
+      padding: clamp(10px, 1.5vw, 14px);
+      margin-top: clamp(8px, 1vw, 12px);
     }
   }
 </style>
@@ -374,20 +380,25 @@
   <div class="profile-card">
     <h1>Domingo Dolores GARAY</h1>
     <div class="roles">
-      <span class="role">Lic. en Enseñanza de Ciencias del Ambiente</span>
-      <span class="role">Prof. para Educación en Ciencias Políticas</span>
-      <span class="role">Téc. en Gestión de Incendios Forestales</span>
-      <span class="role">Dipl. en Inteligencia Artificial</span>
-    </div>
-    <div class="email-footer email-in-card">
-      <a href="mailto:dodogaray@gmail.com">dodogaray@gmail.com</a>
+      <span class="role">Información ambiental para la gestión territorial</span>
     </div>
   </div>
 
   <!-- SECCIÓN REPOSITORIOS -->
   <div class="repositories-container">
-    <h2 class="section-title">Áreas de trabajo</h2>
     <div class="btn-grid">
+      <a href="/perfil/" class="btn-item">
+        <span class="btn-icon">👤</span>
+        <span class="btn-label">Perfil</span>
+      </a>
+      <a href="/servicios/" class="btn-item">
+        <span class="btn-icon">🧰</span>
+        <span class="btn-label">Servicios</span>
+      </a>
+      <a href="/publicaciones/" class="btn-item">
+        <span class="btn-icon">✍️</span>
+        <span class="btn-label">Publicaciones</span>
+      </a>
       <a href="/sig-teledeteccion/" class="btn-item">
         <span class="btn-icon">💻</span>
         <span class="btn-label">Teledetección</span>
@@ -408,12 +419,15 @@
         <span class="btn-icon">📚</span>
         <span class="btn-label">Docencia</span>
       </a>
-      <a href="/otros/" class="btn-item">
-        <span class="btn-icon">📁</span>
-        <span class="btn-label">Otros</span>
-      </a>
     </div>
   </div>
+
+</div>
+
+<!-- EMAIL FOOTER CENTRALIZADO -->
+<div class="email-footer">
+  <a href="mailto:dodogaray@gmail.com">dodogaray@gmail.com</a>
+</div>
 
 </body>
 </html>
