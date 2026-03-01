@@ -72,46 +72,71 @@ section {
     color: #666;
 }
 
-/* === MISMO ESTILO QUE PRECIPITACIONES === */
-
-.mensaje-construccion {
-    text-align: center;
-    padding: 40px 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    border: 2px dashed #1f3a56;
+/* === CONTENEDOR DE SECCIÓN (título + recuadro + botón) === */
+.seccion-container {
     grid-column: 1 / -1;
-    margin-top: 10px;
+    margin-top: 20px;
     display: none;
 }
 
-.mensaje-construccion .emoji-grande {
-    font-size: 64px;
-    margin-bottom: 20px;
+.seccion-container.visible {
+    display: block;
 }
 
-.mensaje-construccion h3 {
+.seccion-container h2 {
     color: #1f3a56;
-    font-size: 24px;
-    margin-bottom: 15px;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #1f3a56;
+    padding-bottom: 12px;
+    font-weight: bold;
 }
 
+/* === RECUADRO DE MENSAJE === */
+.mensaje-recuadro {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+.mensaje-recuadro .emoji-grande {
+    font-size: 80px;
+    margin-bottom: 25px;
+}
+
+.mensaje-recuadro h3 {
+    color: #1f3a56;
+    font-size: 26px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* === BOTÓN VOLVER === */
 .volver-btn {
     display: inline-block;
     background-color: #1f3a56;
     color: white;
     border: none;
-    padding: 8px 20px;
+    padding: 10px 25px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
 
 .volver-btn:hover {
     background-color: #143048;
 }
 
+.volver-btn::before {
+    content: "← ";
+    font-weight: bold;
+}
 </style>
 </head>
 
@@ -125,37 +150,50 @@ section {
 
 <div class="card-container">
 
-    <div class="card" onclick="toggleSeccion('informesContent', this)">
+    <!-- Tarjetas -->
+    <div class="card" onclick="toggleSeccion('informes', this)">
         <div class="card-emoji">📊</div>
         <h3>Informes técnicos</h3>
-        </div>
+    </div>
 
-    <div class="card" onclick="toggleSeccion('revistasContent', this)">
+    <div class="card" onclick="toggleSeccion('revistas', this)">
         <div class="card-emoji">📰</div>
         <h3>Revistas de divulgación</h3>
-        </div>
+    </div>
 
-    <div class="card" onclick="toggleSeccion('congresosContent', this)">
+    <div class="card" onclick="toggleSeccion('congresos', this)">
         <div class="card-emoji">🎤</div>
         <h3>Congresos y ponencias</h3>
+    </div>
+
+    <!-- Contenedor Informes técnicos -->
+    <div id="informes" class="seccion-container">
+        <h2>Informes técnicos</h2>
+        <div class="mensaje-recuadro">
+            <div class="emoji-grande">🚧</div>
+            <h3>Esta sección se encuentra en construcción</h3>
         </div>
-
-    <div id="informesContent" class="mensaje-construccion">
-        <div class="emoji-grande">🚧</div>
-        <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
+        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
     </div>
 
-    <div id="revistasContent" class="mensaje-construccion">
-        <div class="emoji-grande">🚧</div>
-        <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
+    <!-- Contenedor Revistas de divulgación -->
+    <div id="revistas" class="seccion-container">
+        <h2>Revistas de divulgación</h2>
+        <div class="mensaje-recuadro">
+            <div class="emoji-grande">🚧</div>
+            <h3>Esta sección se encuentra en construcción</h3>
+        </div>
+        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
     </div>
 
-    <div id="congresosContent" class="mensaje-construccion">
-        <div class="emoji-grande">🚧</div>
-        <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
+    <!-- Contenedor Congresos y ponencias -->
+    <div id="congresos" class="seccion-container">
+        <h2>Congresos y ponencias</h2>
+        <div class="mensaje-recuadro">
+            <div class="emoji-grande">🚧</div>
+            <h3>Esta sección se encuentra en construcción</h3>
+        </div>
+        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
     </div>
 
 </div>
@@ -163,30 +201,33 @@ section {
 </section>
 
 <script>
-
 function toggleSeccion(id, elemento) {
-
+    // Cerrar todas las secciones
     cerrarTodo();
-
-    document.getElementById(id).style.display = 'block';
+    
+    // Mostrar la sección seleccionada
+    document.getElementById(id).classList.add('visible');
+    
+    // Activar la tarjeta correspondiente
     elemento.classList.add('activo');
-
+    
+    // Desplazar suavemente
     setTimeout(function() {
         document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
 }
 
 function cerrarTodo() {
-
-    document.getElementById('informesContent').style.display = 'none';
-    document.getElementById('revistasContent').style.display = 'none';
-    document.getElementById('congresosContent').style.display = 'none';
-
+    // Ocultar todas las secciones
+    document.getElementById('informes').classList.remove('visible');
+    document.getElementById('revistas').classList.remove('visible');
+    document.getElementById('congresos').classList.remove('visible');
+    
+    // Desactivar todas las tarjetas
     document.querySelectorAll('.card').forEach(function(card) {
         card.classList.remove('activo');
     });
 }
-
 </script>
 
 </body>
