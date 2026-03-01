@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domingo Garay | Servicios Profesionales</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background-color: #1f3a56;
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 42px;
+}
+
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Estilo para la tarjeta activa */
+.card.activo {
+    background-color: #1f3a56;
+    color: white;
+}
+
+.card.activo h3 {
+    color: white;
+}
+
+.card.activo p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.card-emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #1f3a56;
+    font-size: 22px;
+    margin: 10px 0;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.card p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.contenido-seccion {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    display: none;
+    scroll-margin-top: 20px;
+}
+
+.contenido-seccion.activo {
+    display: block;
+}
+
+.contenido-seccion h2 {
+    color: #1f3a56;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1f3a56;
+    padding-bottom: 10px;
+}
+
+.contenido-seccion h3 {
+    color: #1f3a56;
+    font-size: 22px;
+    margin: 20px 0 15px 0;
+}
+
+.servicio-item {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.servicio-item:last-child {
+    border-bottom: none;
+}
+
+.servicio-item h4 {
+    color: #1f3a56;
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.servicio-item h4 .emoji-pequeno {
+    font-size: 22px;
+}
+
+.servicio-item ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.servicio-item li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 20px;
+}
+
+.servicio-item li::before {
+    content: "•";
+    color: #1f3a56;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.volver:hover {
+    background-color: #2a4a6e;
+}
+
+/* Scroll suave para toda la página */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Servicios</h1>
+</header>
+
+<section>
+
+    <!-- Tarjetas de navegación -->
+    <div class="card-container">
+        <!-- Incendios de vegetación -->
+        <div class="card" id="card-incendios" onclick="mostrarSeccion('incendios')">
+            <div class="card-emoji">🔥</div>
+            <h3>Incendios de vegetación</h3>
+            <p>Gestión integral del fuego en sistemas rurales y forestales.</p>
+        </div>
+
+        <!-- SIG y Teledetección -->
+        <div class="card" id="card-sig" onclick="mostrarSeccion('sig')">
+            <div class="card-emoji">🗺️</div>
+            <h3>SIG y Teledetección</h3>
+            <p>Análisis territorial y cartografía aplicada.</p>
+        </div>
+
+        <!-- Hidrología, clima y ambiente -->
+        <div class="card" id="card-hidrologia" onclick="mostrarSeccion('hidrologia')">
+            <div class="card-emoji">🌧️</div>
+            <h3>Hidrología, clima y ambiente</h3>
+            <p>Monitoreo hidroambiental y análisis de precipitaciones.</p>
+        </div>
+    </div>
+
+    <!-- Contenido de Incendios de vegetación -->
+    <div id="incendios" class="contenido-seccion">
+        <h2>🔥 Gestión Integral de Incendios de Vegetación</h2>
+        
+        <div class="servicio-item">
+            <ul>
+                <li>Evaluación de vulnerabilidades y análisis de riesgo</li>
+                <li>Diseño de estrategias de mitigación y prevención</li>
+                <li>Cuantificación de áreas quemadas</li>
+                <li>Investigación y determinación de causas</li>
+                <li>Estimación de severidad y análisis de impactos</li>
+            </ul>
+        </div>
+        
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+    <!-- Contenido de SIG y Teledetección -->
+    <div id="sig" class="contenido-seccion">
+        <h2>🗺️ Análisis Territorial mediante SIG y Teledetección</h2>
+        
+        <div class="servicio-item">
+            <ul>
+                <li>Generación de cartografía aplicada</li>
+                <li>Medición satelital de campos</li>
+                <li>Estimación de superficie productiva</li>
+                <li>Sistematización y análisis de información territorial</li>
+            </ul>
+        </div>
+        
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+    <!-- Contenido de Hidrología, clima y ambiente -->
+    <div id="hidrologia" class="contenido-seccion">
+        <h2>🌧️ Monitoreo Hidroambiental del Territorio</h2>
+        
+        <div class="servicio-item">
+            <ul>
+                <li>Diseño y gestión de redes pluviométricas rurales</li>
+                <li>Análisis de precipitaciones y determinación de anomalías</li>
+                <li>Monitoreo hídrico mensual, estacional y anual</li>
+                <li>Análisis ambiental aplicado a proyectos productivos</li>
+            </ul>
+        </div>
+        
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+</section>
+
+<script>
+function mostrarSeccion(id) {
+    // Ocultar todas las secciones
+    document.getElementById('incendios').classList.remove('activo');
+    document.getElementById('sig').classList.remove('activo');
+    document.getElementById('hidrologia').classList.remove('activo');
+    
+    // Quitar clase activo de todas las tarjetas
+    document.getElementById('card-incendios').classList.remove('activo');
+    document.getElementById('card-sig').classList.remove('activo');
+    document.getElementById('card-hidrologia').classList.remove('activo');
+    
+    // Mostrar la sección seleccionada
+    const seccion = document.getElementById(id);
+    seccion.classList.add('activo');
+    
+    // Activar la tarjeta correspondiente
+    document.getElementById('card-' + id).classList.add('activo');
+    
+    // Desplazar suavemente hasta el inicio de la sección
+    setTimeout(function() {
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+}
+
+function volver() {
+    // Ocultar todas las secciones
+    document.getElementById('incendios').classList.remove('activo');
+    document.getElementById('sig').classList.remove('activo');
+    document.getElementById('hidrologia').classList.remove('activo');
+    
+    // Quitar clase activo de todas las tarjetas
+    document.getElementById('card-incendios').classList.remove('activo');
+    document.getElementById('card-sig').classList.remove('activo');
+    document.getElementById('card-hidrologia').classList.remove('activo');
+    
+    // Desplazar suavemente hasta las tarjetas
+    document.querySelector('.card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>
