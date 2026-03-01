@@ -144,7 +144,7 @@ section {
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .volver-btn:hover {
@@ -179,6 +179,26 @@ section {
     max-width: 400px;
     margin: 0 auto 20px;
 }
+
+/* Estilos para el contenedor de informes (título + recuadro + botón) */
+.informes-container {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    display: none;
+}
+
+.informes-container.visible {
+    display: block;
+}
+
+.informes-container h2 {
+    color: #1f3a56;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
 </style>
 </head>
 <body>
@@ -196,22 +216,31 @@ section {
     <div class="card" onclick="window.location.href='anomalias/'">
         <div class="card-emoji">📊</div>
         <a href="anomalias/">Visor interactivo de anomalías</a>
-        </div>
+        <p>Comparación de precipitaciones actuales respecto a valores históricos.</p>
+    </div>
 
     <div class="card" id="informesCard" onclick="toggleInformesContent()">
         <div class="card-emoji">📄</div>
         <a href="#">Informes de situación hídrica</a>
-        </div>
+        <p>Reportes técnicos periódicos para apoyo a la toma de decisiones.</p>
+    </div>
 
     <div class="card" id="redCard" onclick="toggleRedContent()">
         <div class="card-emoji">🧪</div>
         <a href="#">Red pluviométrica regional</a>
-       </div>
+        <p>Sistema colaborativo de medición y reportes para el registro de lluvias.</p>
+    </div>
 
-    <!-- Mensaje de construcción para Informes de situación hídrica -->
-    <div id="informesContent" class="mensaje-construccion" style="display: none;">
-        <div class="emoji-grande">🚧</div>
-        <h3>Esta sección se encuentra en construcción</h3>
+    <!-- Contenedor para Informes de situación hídrica (título + recuadro + botón) -->
+    <div id="informesContainer" class="informes-container">
+        <h2>Informes de situación hídrica</h2>
+        
+        <!-- Mensaje de construcción -->
+        <div class="mensaje-construccion">
+            <div class="emoji-grande">🚧</div>
+            <h3>Esta sección se encuentra en construcción</h3>
+        </div>
+        
         <button class="volver-btn" onclick="toggleInformesContent()">← Volver</button>
     </div>
 
@@ -242,11 +271,11 @@ section {
 <script>
 function toggleRedContent() {
     var redContent = document.getElementById('redContent');
-    var informesContent = document.getElementById('informesContent');
+    var informesContainer = document.getElementById('informesContainer');
     
     // Cerrar informes si está abierto
-    if (informesContent.style.display === 'block') {
-        informesContent.style.display = 'none';
+    if (informesContainer.classList.contains('visible')) {
+        informesContainer.classList.remove('visible');
     }
     
     // Toggle red content
@@ -263,7 +292,7 @@ function toggleRedContent() {
 }
 
 function toggleInformesContent() {
-    var informesContent = document.getElementById('informesContent');
+    var informesContainer = document.getElementById('informesContainer');
     var redContent = document.getElementById('redContent');
     
     // Cerrar red content si está abierto
@@ -272,13 +301,13 @@ function toggleInformesContent() {
         redContent.style.display = 'none';
     }
     
-    // Toggle informes content
-    if (informesContent.style.display === 'block') {
-        informesContent.style.display = 'none';
+    // Toggle informes container
+    if (informesContainer.classList.contains('visible')) {
+        informesContainer.classList.remove('visible');
     } else {
-        informesContent.style.display = 'block';
+        informesContainer.classList.add('visible');
         setTimeout(function() {
-            informesContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            informesContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 100);
     }
 }
@@ -286,7 +315,7 @@ function toggleInformesContent() {
 // Cerrar si se hace clic fuera
 document.addEventListener('click', function(event) {
     var redContent = document.getElementById('redContent');
-    var informesContent = document.getElementById('informesContent');
+    var informesContainer = document.getElementById('informesContainer');
     var redCard = document.getElementById('redCard');
     var informesCard = document.getElementById('informesCard');
     
@@ -298,11 +327,11 @@ document.addEventListener('click', function(event) {
         redContent.style.display = 'none';
     }
     
-    // Cerrar informes content si se hace clic fuera
-    if (informesContent.style.display === 'block' && 
-        !informesContent.contains(event.target) && 
+    // Cerrar informes container si se hace clic fuera
+    if (informesContainer.classList.contains('visible') && 
+        !informesContainer.contains(event.target) && 
         !informesCard.contains(event.target)) {
-        informesContent.style.display = 'none';
+        informesContainer.classList.remove('visible');
     }
 });
 </script>
