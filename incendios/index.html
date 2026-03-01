@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Domingo Garay | Incendios</title>
+<title>Domingo Garay | Incendios de Vegetación</title>
 
 <style>
 body {
@@ -87,70 +87,71 @@ section {
     transition: color 0.2s;
 }
 
-.contenido-seccion {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+/* === CONTENEDOR DE SECCIÓN (título + recuadro + botón) === */
+.seccion-container {
+    grid-column: 1 / -1;
     margin-top: 20px;
     display: none;
-    scroll-margin-top: 20px;
 }
 
-.contenido-seccion.activo {
+.seccion-container.visible {
     display: block;
 }
 
-.contenido-seccion h2 {
+.seccion-container h2 {
     color: #1f3a56;
-    font-size: 28px;
+    font-size: 1.8em;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border-bottom: 2px solid #1f3a56;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
+    font-weight: bold;
 }
 
-.mensaje-construccion {
+/* === RECUADRO DE MENSAJE === */
+.mensaje-recuadro {
     text-align: center;
-    padding: 40px 20px;
-    background-color: #f9f9f9;
+    padding: 50px 20px;
+    background-color: white;
     border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
     border: 2px dashed #1f3a56;
 }
 
-.mensaje-construccion .emoji-grande {
-    font-size: 64px;
-    margin-bottom: 20px;
+.mensaje-recuadro .emoji-grande {
+    font-size: 80px;
+    margin-bottom: 25px;
 }
 
-.mensaje-construccion h3 {
+.mensaje-recuadro h3 {
     color: #1f3a56;
-    font-size: 24px;
-    margin-bottom: 15px;
+    font-size: 26px;
+    margin: 0;
+    font-weight: bold;
 }
 
-.mensaje-construccion p {
-    font-size: 16px;
-    color: #666;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.volver {
+/* === BOTÓN VOLVER === */
+.volver-btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
     background-color: #1f3a56;
     color: white;
     border: none;
+    padding: 10px 25px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
     transition: background-color 0.2s;
 }
 
-.volver:hover {
-    background-color: #2a4a6e;
+.volver-btn:hover {
+    background-color: #143048;
+}
+
+.volver-btn::before {
+    content: "← ";
+    font-weight: bold;
 }
 
 /* Scroll suave para toda la página */
@@ -163,7 +164,7 @@ html {
 <body>
 
 <header>
-    <h1>Incendios</h1>
+    <h1>Incendios de vegetación</h1>
 </header>
 
 <section>
@@ -171,97 +172,87 @@ html {
     <!-- Tarjetas de navegación -->
     <div class="card-container">
         <!-- Evaluaciones de vulnerabilidad -->
-        <div class="card" id="card-evaluaciones" onclick="mostrarSeccion('evaluaciones')">
+        <div class="card" id="card-evaluaciones" onclick="toggleSeccion('evaluaciones', this)">
             <div class="card-emoji">🔍</div>
-            <h3>Evaluación de vulnerabilidad</h3>
-            </div>
+            <h3>Evaluaciones de vulnerabilidad</h3>
+            <p>Evaluaciones de vulnerabilidad y propuestas de mitigación.</p>
+        </div>
 
         <!-- Prevención y concientización -->
-        <div class="card" id="card-prevencion" onclick="mostrarSeccion('prevencion')">
+        <div class="card" id="card-prevencion" onclick="toggleSeccion('prevencion', this)">
             <div class="card-emoji">📢</div>
             <h3>Prevención y concientización</h3>
-            </div>
+            <p>Acciones de prevención y educación comunitaria.</p>
+        </div>
 
         <!-- Producción cartográfica -->
-        <div class="card" id="card-cartografia" onclick="mostrarSeccion('cartografia')">
+        <div class="card" id="card-cartografia" onclick="toggleSeccion('cartografia', this)">
             <div class="card-emoji">🗺️</div>
             <h3>Producción cartográfica</h3>
-            </div>
-    </div>
+            <p>Mapas de áreas quemadas, severidad y regeneración.</p>
+        </div>
 
-    <!-- Contenido de Evaluaciones de vulnerabilidad -->
-    <div id="evaluaciones" class="contenido-seccion">
-                
-        <div class="mensaje-construccion">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
+        <!-- Contenedor Evaluaciones de vulnerabilidad -->
+        <div id="evaluaciones" class="seccion-container">
+            <h2>Evaluaciones de vulnerabilidad</h2>
+            <div class="mensaje-recuadro">
+                <div class="emoji-grande">🚧</div>
+                <h3>Esta sección se encuentra en construcción</h3>
             </div>
-        
-        <button class="volver" onclick="volver()">← Volver</button>
-    </div>
+            <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+        </div>
 
-    <!-- Contenido de Prevención y concientización -->
-    <div id="prevencion" class="contenido-seccion">
-                
-        <div class="mensaje-construccion">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
+        <!-- Contenedor Prevención y concientización -->
+        <div id="prevencion" class="seccion-container">
+            <h2>Prevención y concientización</h2>
+            <div class="mensaje-recuadro">
+                <div class="emoji-grande">🚧</div>
+                <h3>Esta sección se encuentra en construcción</h3>
             </div>
-        
-        <button class="volver" onclick="volver()">← Volver</button>
-    </div>
+            <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+        </div>
 
-    <!-- Contenido de Producción cartográfica -->
-    <div id="cartografia" class="contenido-seccion">
-               
-        <div class="mensaje-construccion">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
+        <!-- Contenedor Producción cartográfica -->
+        <div id="cartografia" class="seccion-container">
+            <h2>Producción cartográfica</h2>
+            <div class="mensaje-recuadro">
+                <div class="emoji-grande">🚧</div>
+                <h3>Esta sección se encuentra en construcción</h3>
             </div>
-        
-        <button class="volver" onclick="volver()">← Volver</button>
+            <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+        </div>
+
     </div>
 
 </section>
 
 <script>
-function mostrarSeccion(id) {
-    // Ocultar todas las secciones
-    document.getElementById('evaluaciones').classList.remove('activo');
-    document.getElementById('prevencion').classList.remove('activo');
-    document.getElementById('cartografia').classList.remove('activo');
-    
-    // Quitar clase activo de todas las tarjetas
-    document.getElementById('card-evaluaciones').classList.remove('activo');
-    document.getElementById('card-prevencion').classList.remove('activo');
-    document.getElementById('card-cartografia').classList.remove('activo');
+function toggleSeccion(id, elemento) {
+    // Cerrar todas las secciones
+    cerrarTodo();
     
     // Mostrar la sección seleccionada
-    const seccion = document.getElementById(id);
-    seccion.classList.add('activo');
+    document.getElementById(id).classList.add('visible');
     
     // Activar la tarjeta correspondiente
-    document.getElementById('card-' + id).classList.add('activo');
+    elemento.classList.add('activo');
     
-    // Desplazar suavemente hasta el inicio de la sección
+    // Desplazar suavemente
     setTimeout(function() {
-        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
 }
 
-function volver() {
+function cerrarTodo() {
     // Ocultar todas las secciones
-    document.getElementById('evaluaciones').classList.remove('activo');
-    document.getElementById('prevencion').classList.remove('activo');
-    document.getElementById('cartografia').classList.remove('activo');
+    document.getElementById('evaluaciones').classList.remove('visible');
+    document.getElementById('prevencion').classList.remove('visible');
+    document.getElementById('cartografia').classList.remove('visible');
     
-    // Quitar clase activo de todas las tarjetas
-    document.getElementById('card-evaluaciones').classList.remove('activo');
-    document.getElementById('card-prevencion').classList.remove('activo');
-    document.getElementById('card-cartografia').classList.remove('activo');
-    
-    // Desplazar suavemente hasta las tarjetas
-    document.querySelector('.card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Desactivar todas las tarjetas
+    document.querySelectorAll('.card').forEach(function(card) {
+        card.classList.remove('activo');
+    });
 }
 </script>
 
