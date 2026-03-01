@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domingo Garay | Teledetección</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background-color: #1f3a56;
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card-emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #1f3a56;
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* === FORMATO ESTÁNDAR DE MENSAJE === */
+
+.mensaje-construccion {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 2px dashed #1f3a56;
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    display: none;
+}
+
+.mensaje-construccion .emoji-grande {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.mensaje-construccion h3 {
+    color: #1f3a56;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.volver-btn {
+    display: inline-block;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.volver-btn:hover {
+    background-color: #143048;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Teledetección</h1>
+</header>
+
+<section>
+
+<div class="card-container">
+
+    <div class="card" onclick="toggleSeccion('sat1')">
+        <div class="card-emoji">🛰️</div>
+        <h3>Monitoreo satelital</h3>
+        <p>Análisis multitemporal de imágenes para evaluación territorial.</p>
+    </div>
+
+    <div class="card" onclick="toggleSeccion('sat2')">
+        <div class="card-emoji">🌿</div>
+        <h3>Índices de vegetación</h3>
+        <p>Cálculo e interpretación de NDVI y otros indicadores biofísicos.</p>
+    </div>
+
+    <div class="card" onclick="toggleSeccion('sat3')">
+        <div class="card-emoji">🔥</div>
+        <h3>Evaluación post-incendio</h3>
+        <p>Determinación de severidad y afectación mediante imágenes satelitales.</p>
+    </div>
+
+    <!-- MENSAJES ESTÁNDAR -->
+
+    <div id="sat1" class="mensaje-construccion">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
+        <button class="volver-btn" onclick="toggleSeccion('sat1')">← Volver</button>
+    </div>
+
+    <div id="sat2" class="mensaje-construccion">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
+        <button class="volver-btn" onclick="toggleSeccion('sat2')">← Volver</button>
+    </div>
+
+    <div id="sat3" class="mensaje-construccion">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
+        <button class="volver-btn" onclick="toggleSeccion('sat3')">← Volver</button>
+    </div>
+
+</div>
+
+</section>
+
+<script>
+function toggleSeccion(id) {
+
+    document.getElementById('sat1').style.display = 'none';
+    document.getElementById('sat2').style.display = 'none';
+    document.getElementById('sat3').style.display = 'none';
+
+    var seccion = document.getElementById(id);
+
+    if (seccion.style.display !== 'block') {
+        seccion.style.display = 'block';
+        setTimeout(function() {
+            seccion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+}
+</script>
+
+</body>
+</html>
