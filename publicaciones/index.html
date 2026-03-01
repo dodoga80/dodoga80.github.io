@@ -39,12 +39,22 @@ section {
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card.activo {
+    background-color: #1f3a56;
+    color: white;
+}
+
+.card.activo h3,
+.card.activo p {
+    color: white;
 }
 
 .card-emoji {
@@ -115,46 +125,40 @@ section {
 
 <div class="card-container">
 
-    <!-- INFORMES -->
-    <div class="card" onclick="toggleSeccion('informesContent')">
+    <div class="card" onclick="toggleSeccion('informesContent', this)">
         <div class="card-emoji">📊</div>
         <h3>Informes técnicos</h3>
         <p>Documentos técnicos y reportes profesionales.</p>
     </div>
 
-    <!-- REVISTAS -->
-    <div class="card" onclick="toggleSeccion('revistasContent')">
+    <div class="card" onclick="toggleSeccion('revistasContent', this)">
         <div class="card-emoji">📰</div>
         <h3>Revistas de divulgación</h3>
         <p>Artículos y publicaciones de difusión.</p>
     </div>
 
-    <!-- CONGRESOS -->
-    <div class="card" onclick="toggleSeccion('congresosContent')">
+    <div class="card" onclick="toggleSeccion('congresosContent', this)">
         <div class="card-emoji">🎤</div>
         <h3>Congresos y ponencias</h3>
         <p>Ponencias y exposiciones en eventos académicos.</p>
     </div>
 
-    <!-- MENSAJE INFORMES -->
     <div id="informesContent" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="toggleSeccion('informesContent')">← Volver</button>
+        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
     </div>
 
-    <!-- MENSAJE REVISTAS -->
     <div id="revistasContent" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="toggleSeccion('revistasContent')">← Volver</button>
+        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
     </div>
 
-    <!-- MENSAJE CONGRESOS -->
     <div id="congresosContent" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="toggleSeccion('congresosContent')">← Volver</button>
+        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
     </div>
 
 </div>
@@ -163,21 +167,27 @@ section {
 
 <script>
 
-function toggleSeccion(id) {
+function toggleSeccion(id, elemento) {
 
-    // Cerrar todas primero
+    cerrarTodo();
+
+    document.getElementById(id).style.display = 'block';
+    elemento.classList.add('activo');
+
+    setTimeout(function() {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+}
+
+function cerrarTodo() {
+
     document.getElementById('informesContent').style.display = 'none';
     document.getElementById('revistasContent').style.display = 'none';
     document.getElementById('congresosContent').style.display = 'none';
 
-    // Si estaba cerrada, abrirla
-    var seccion = document.getElementById(id);
-    if (seccion.style.display !== 'block') {
-        seccion.style.display = 'block';
-        setTimeout(function() {
-            seccion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-    }
+    document.querySelectorAll('.card').forEach(function(card) {
+        card.classList.remove('activo');
+    });
 }
 
 </script>
