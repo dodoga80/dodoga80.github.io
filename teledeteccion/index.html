@@ -39,12 +39,23 @@ section {
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* 🔵 TARJETA ACTIVA */
+.card.activo {
+    background-color: #1f3a56;
+    color: white;
+}
+
+.card.activo h3,
+.card.activo p {
+    color: white;
 }
 
 .card-emoji {
@@ -62,7 +73,7 @@ section {
     color: #666;
 }
 
-/* === FORMATO ESTÁNDAR DE MENSAJE === */
+/* MENSAJE ESTÁNDAR */
 
 .mensaje-construccion {
     text-align: center;
@@ -101,7 +112,6 @@ section {
 .volver-btn:hover {
     background-color: #143048;
 }
-
 </style>
 </head>
 
@@ -115,42 +125,42 @@ section {
 
 <div class="card-container">
 
-    <div class="card" onclick="toggleSeccion('sat1')">
+    <div class="card" id="card-sat1" onclick="toggleSeccion('sat1','card-sat1')">
         <div class="card-emoji">🛰️</div>
         <h3>Monitoreo satelital</h3>
         <p>Análisis multitemporal de imágenes para evaluación territorial.</p>
     </div>
 
-    <div class="card" onclick="toggleSeccion('sat2')">
+    <div class="card" id="card-sat2" onclick="toggleSeccion('sat2','card-sat2')">
         <div class="card-emoji">🌿</div>
         <h3>Índices de vegetación</h3>
         <p>Cálculo e interpretación de NDVI y otros indicadores biofísicos.</p>
     </div>
 
-    <div class="card" onclick="toggleSeccion('sat3')">
+    <div class="card" id="card-sat3" onclick="toggleSeccion('sat3','card-sat3')">
         <div class="card-emoji">🔥</div>
         <h3>Evaluación post-incendio</h3>
         <p>Determinación de severidad y afectación mediante imágenes satelitales.</p>
     </div>
 
-    <!-- MENSAJES ESTÁNDAR -->
+    <!-- MENSAJES -->
 
     <div id="sat1" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="toggleSeccion('sat1')">← Volver</button>
+        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
     </div>
 
     <div id="sat2" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="toggleSeccion('sat2')">← Volver</button>
+        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
     </div>
 
     <div id="sat3" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
-        <button class="volver-btn" onclick="toggleSeccion('sat3')">← Volver</button>
+        <button class="volver-btn" onclick="cerrarTodo()">← Volver</button>
     </div>
 
 </div>
@@ -158,21 +168,30 @@ section {
 </section>
 
 <script>
-function toggleSeccion(id) {
+
+function toggleSeccion(id, cardId) {
+
+    cerrarTodo();
+
+    document.getElementById(id).style.display = 'block';
+    document.getElementById(cardId).classList.add('activo');
+
+    setTimeout(function() {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+}
+
+function cerrarTodo() {
 
     document.getElementById('sat1').style.display = 'none';
     document.getElementById('sat2').style.display = 'none';
     document.getElementById('sat3').style.display = 'none';
 
-    var seccion = document.getElementById(id);
-
-    if (seccion.style.display !== 'block') {
-        seccion.style.display = 'block';
-        setTimeout(function() {
-            seccion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-    }
+    document.getElementById('card-sat1').classList.remove('activo');
+    document.getElementById('card-sat2').classList.remove('activo');
+    document.getElementById('card-sat3').classList.remove('activo');
 }
+
 </script>
 
 </body>
