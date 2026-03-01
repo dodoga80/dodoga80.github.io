@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domingo Garay | Publicaciones</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background-color: #1f3a56;
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 42px;
+}
+
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Estilo para la tarjeta activa */
+.card.activo {
+    background-color: #1f3a56;
+    color: white;
+}
+
+.card.activo h3 {
+    color: white;
+}
+
+.card.activo p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.card-emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #1f3a56;
+    font-size: 22px;
+    margin: 10px 0;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.card p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.contenido-seccion {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    display: none;
+    scroll-margin-top: 20px;
+}
+
+.contenido-seccion.activo {
+    display: block;
+}
+
+.contenido-seccion h2 {
+    color: #1f3a56;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1f3a56;
+    padding-bottom: 10px;
+}
+
+.mensaje-construccion {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 2px dashed #1f3a56;
+}
+
+.mensaje-construccion .emoji-grande {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.mensaje-construccion h3 {
+    color: #1f3a56;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.mensaje-construccion p {
+    font-size: 16px;
+    color: #666;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.volver:hover {
+    background-color: #2a4a6e;
+}
+
+/* Scroll suave para toda la página */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Publicaciones</h1>
+</header>
+
+<section>
+
+    <!-- Tarjetas de navegación -->
+    <div class="card-container">
+        <!-- Informes técnicos -->
+        <div class="card" id="card-informes" onclick="mostrarSeccion('informes')">
+            <div class="card-emoji">📊</div>
+            <h3>Informes técnicos</h3>
+            <p>Documentos técnicos y reportes profesionales.</p>
+        </div>
+
+        <!-- Revistas de divulgación -->
+        <div class="card" id="card-revistas" onclick="mostrarSeccion('revistas')">
+            <div class="card-emoji">📰</div>
+            <h3>Revistas de divulgación</h3>
+            <p>Artículos y publicaciones de difusión.</p>
+        </div>
+
+        <!-- Presentaciones en congresos -->
+        <div class="card" id="card-congresos" onclick="mostrarSeccion('congresos')">
+            <div class="card-emoji">🎤</div>
+            <h3>Congresos y ponencias</h3>
+            <p>Ponencias y exposiciones en eventos académicos.</p>
+        </div>
+    </div>
+
+    <!-- Contenido de Informes técnicos -->
+    <div id="informes" class="contenido-seccion">
+        <h2>📊 Informes técnicos</h2>
+        
+        <div class="mensaje-construccion">
+            <div class="emoji-grande">🚧</div>
+            <h3>En desarrollo</h3>
+            <p>Esta sección se encuentra en construcción. Pronto podrás acceder a los informes técnicos.</p>
+        </div>
+        
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+    <!-- Contenido de Revistas de divulgación -->
+    <div id="revistas" class="contenido-seccion">
+        <h2>📰 Revistas de divulgación</h2>
+        
+        <div class="mensaje-construccion">
+            <div class="emoji-grande">🚧</div>
+            <h3>En desarrollo</h3>
+            <p>Esta sección se encuentra en construcción. Pronto podrás acceder a las revistas de divulgación.</p>
+        </div>
+        
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+    <!-- Contenido de Presentaciones en congresos -->
+    <div id="congresos" class="contenido-seccion">
+        <h2>🎤 Presentaciones en congresos</h2>
+        
+        <div class="mensaje-construccion">
+            <div class="emoji-grande">🚧</div>
+            <h3>En desarrollo</h3>
+            <p>Esta sección se encuentra en construcción. Pronto podrás acceder a las presentaciones en congresos.</p>
+        </div>
+        
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+</section>
+
+<script>
+function mostrarSeccion(id) {
+    // Ocultar todas las secciones
+    document.getElementById('informes').classList.remove('activo');
+    document.getElementById('revistas').classList.remove('activo');
+    document.getElementById('congresos').classList.remove('activo');
+    
+    // Quitar clase activo de todas las tarjetas
+    document.getElementById('card-informes').classList.remove('activo');
+    document.getElementById('card-revistas').classList.remove('activo');
+    document.getElementById('card-congresos').classList.remove('activo');
+    
+    // Mostrar la sección seleccionada
+    const seccion = document.getElementById(id);
+    seccion.classList.add('activo');
+    
+    // Activar la tarjeta correspondiente
+    document.getElementById('card-' + id).classList.add('activo');
+    
+    // Desplazar suavemente hasta el inicio de la sección
+    setTimeout(function() {
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+}
+
+function volver() {
+    // Ocultar todas las secciones
+    document.getElementById('informes').classList.remove('activo');
+    document.getElementById('revistas').classList.remove('activo');
+    document.getElementById('congresos').classList.remove('activo');
+    
+    // Quitar clase activo de todas las tarjetas
+    document.getElementById('card-informes').classList.remove('activo');
+    document.getElementById('card-revistas').classList.remove('activo');
+    document.getElementById('card-congresos').classList.remove('activo');
+    
+    // Desplazar suavemente hasta las tarjetas
+    document.querySelector('.card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>
