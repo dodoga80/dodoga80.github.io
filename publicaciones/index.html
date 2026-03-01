@@ -20,11 +20,6 @@ header {
     text-align: center;
 }
 
-header h1 {
-    margin-bottom: 10px;
-    font-size: 42px;
-}
-
 section {
     max-width: 1000px;
     margin: 40px auto;
@@ -35,7 +30,6 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
-    margin-bottom: 30px;
 }
 
 .card {
@@ -45,22 +39,12 @@ section {
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.card.activo {
-    background-color: #1f3a56;
-    color: white;
-}
-
-.card.activo h3,
-.card.activo p {
-    color: white;
 }
 
 .card-emoji {
@@ -70,33 +54,25 @@ section {
 
 .card h3 {
     color: #1f3a56;
-    font-size: 22px;
     margin: 10px 0;
-    font-weight: bold;
 }
 
 .card p {
-    margin-top: 10px;
     font-size: 14px;
     color: #666;
 }
 
-.contenido-seccion {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    margin-top: 20px;
-    display: none;
-}
-
-.contenido-seccion.activo {
-    display: block;
-}
+/* === MISMO ESTILO QUE PRECIPITACIONES === */
 
 .mensaje-construccion {
     text-align: center;
-    padding: 60px 20px;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 2px dashed #1f3a56;
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    display: none;
 }
 
 .mensaje-construccion .emoji-grande {
@@ -107,27 +83,25 @@ section {
 .mensaje-construccion h3 {
     color: #1f3a56;
     font-size: 24px;
+    margin-bottom: 15px;
 }
 
-.volver {
+.volver-btn {
     display: inline-block;
-    margin-top: 30px;
-    padding: 10px 20px;
     background-color: #1f3a56;
     color: white;
     border: none;
+    padding: 8px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
-.volver:hover {
-    background-color: #2a4a6e;
+.volver-btn:hover {
+    background-color: #143048;
 }
 
-html {
-    scroll-behavior: smooth;
-}
 </style>
 </head>
 
@@ -141,86 +115,71 @@ html {
 
 <div class="card-container">
 
-    <div class="card" id="card-informes" onclick="mostrarSeccion('informes')">
+    <!-- INFORMES -->
+    <div class="card" onclick="toggleSeccion('informesContent')">
         <div class="card-emoji">📊</div>
         <h3>Informes técnicos</h3>
         <p>Documentos técnicos y reportes profesionales.</p>
     </div>
 
-    <div class="card" id="card-revistas" onclick="mostrarSeccion('revistas')">
+    <!-- REVISTAS -->
+    <div class="card" onclick="toggleSeccion('revistasContent')">
         <div class="card-emoji">📰</div>
         <h3>Revistas de divulgación</h3>
         <p>Artículos y publicaciones de difusión.</p>
     </div>
 
-    <div class="card" id="card-congresos" onclick="mostrarSeccion('congresos')">
+    <!-- CONGRESOS -->
+    <div class="card" onclick="toggleSeccion('congresosContent')">
         <div class="card-emoji">🎤</div>
         <h3>Congresos y ponencias</h3>
         <p>Ponencias y exposiciones en eventos académicos.</p>
     </div>
 
-</div>
-
-<!-- INFORMES -->
-<div id="informes" class="contenido-seccion">
-    <div class="mensaje-construccion">
+    <!-- MENSAJE INFORMES -->
+    <div id="informesContent" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
+        <button class="volver-btn" onclick="toggleSeccion('informesContent')">← Volver</button>
     </div>
-    <button class="volver" onclick="volver()">← Volver</button>
-</div>
 
-<!-- REVISTAS -->
-<div id="revistas" class="contenido-seccion">
-    <div class="mensaje-construccion">
+    <!-- MENSAJE REVISTAS -->
+    <div id="revistasContent" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
+        <button class="volver-btn" onclick="toggleSeccion('revistasContent')">← Volver</button>
     </div>
-    <button class="volver" onclick="volver()">← Volver</button>
-</div>
 
-<!-- CONGRESOS -->
-<div id="congresos" class="contenido-seccion">
-    <div class="mensaje-construccion">
+    <!-- MENSAJE CONGRESOS -->
+    <div id="congresosContent" class="mensaje-construccion">
         <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
+        <button class="volver-btn" onclick="toggleSeccion('congresosContent')">← Volver</button>
     </div>
-    <button class="volver" onclick="volver()">← Volver</button>
+
 </div>
 
 </section>
 
 <script>
-function mostrarSeccion(id) {
 
-    document.getElementById('informes').classList.remove('activo');
-    document.getElementById('revistas').classList.remove('activo');
-    document.getElementById('congresos').classList.remove('activo');
+function toggleSeccion(id) {
 
-    document.getElementById('card-informes').classList.remove('activo');
-    document.getElementById('card-revistas').classList.remove('activo');
-    document.getElementById('card-congresos').classList.remove('activo');
+    // Cerrar todas primero
+    document.getElementById('informesContent').style.display = 'none';
+    document.getElementById('revistasContent').style.display = 'none';
+    document.getElementById('congresosContent').style.display = 'none';
 
-    document.getElementById(id).classList.add('activo');
-    document.getElementById('card-' + id).classList.add('activo');
-
-    setTimeout(function() {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    // Si estaba cerrada, abrirla
+    var seccion = document.getElementById(id);
+    if (seccion.style.display !== 'block') {
+        seccion.style.display = 'block';
+        setTimeout(function() {
+            seccion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
 }
 
-function volver() {
-
-    document.getElementById('informes').classList.remove('activo');
-    document.getElementById('revistas').classList.remove('activo');
-    document.getElementById('congresos').classList.remove('activo');
-
-    document.getElementById('card-informes').classList.remove('activo');
-    document.getElementById('card-revistas').classList.remove('activo');
-    document.getElementById('card-congresos').classList.remove('activo');
-
-    document.querySelector('.card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
 </script>
 
 </body>
