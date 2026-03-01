@@ -47,7 +47,6 @@ section {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* 🔵 TARJETA ACTIVA */
 .card.activo {
     background-color: #1f3a56;
     color: white;
@@ -118,26 +117,26 @@ section {
 <body>
 
 <header>
-    <h1>teledeteccion</h1>
+    <h1>Teledetección</h1>
 </header>
 
 <section>
 
 <div class="card-container">
 
-    <div class="card" id="card-sat1" onclick="toggleSeccion('sat1','card-sat1')">
+    <div class="card" onclick="toggleSeccion('sat1', this)">
         <div class="card-emoji">🛰️</div>
         <h3>Monitoreo satelital</h3>
         <p>Análisis multitemporal de imágenes para evaluación territorial.</p>
     </div>
 
-    <div class="card" id="card-sat2" onclick="toggleSeccion('sat2','card-sat2')">
+    <div class="card" onclick="toggleSeccion('sat2', this)">
         <div class="card-emoji">🌿</div>
         <h3>Índices de vegetación</h3>
         <p>Cálculo e interpretación de NDVI y otros indicadores biofísicos.</p>
     </div>
 
-    <div class="card" id="card-sat3" onclick="toggleSeccion('sat3','card-sat3')">
+    <div class="card" onclick="toggleSeccion('sat3', this)">
         <div class="card-emoji">🔥</div>
         <h3>Evaluación post-incendio</h3>
         <p>Determinación de severidad y afectación mediante imágenes satelitales.</p>
@@ -169,12 +168,12 @@ section {
 
 <script>
 
-function toggleSeccion(id, cardId) {
+function toggleSeccion(id, elemento) {
 
     cerrarTodo();
 
     document.getElementById(id).style.display = 'block';
-    document.getElementById(cardId).classList.add('activo');
+    elemento.classList.add('activo');
 
     setTimeout(function() {
         document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -187,9 +186,9 @@ function cerrarTodo() {
     document.getElementById('sat2').style.display = 'none';
     document.getElementById('sat3').style.display = 'none';
 
-    document.getElementById('card-sat1').classList.remove('activo');
-    document.getElementById('card-sat2').classList.remove('activo');
-    document.getElementById('card-sat3').classList.remove('activo');
+    document.querySelectorAll('.card').forEach(function(card) {
+        card.classList.remove('activo');
+    });
 }
 
 </script>
