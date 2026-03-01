@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domingo Garay | Perfil Profesional</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background-color: #1f3a56;
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 42px;
+}
+
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Estilo para la tarjeta activa */
+.card.activo {
+    background-color: #1f3a56;
+    color: white;
+}
+
+.card.activo h3 {
+    color: white;
+}
+
+.card.activo p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.card-emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #1f3a56;
+    font-size: 22px;
+    margin: 10px 0;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.card p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.contenido-seccion {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    display: none;
+    scroll-margin-top: 20px; /* Para que el desplazamiento tenga un margen superior */
+}
+
+.contenido-seccion.activo {
+    display: block;
+}
+
+.contenido-seccion h2 {
+    color: #1f3a56;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1f3a56;
+    padding-bottom: 10px;
+}
+
+.contenido-seccion p {
+    line-height: 1.6;
+    margin: 15px 0;
+    text-align: justify;
+}
+
+.contenido-seccion .item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.contenido-seccion .item:last-child {
+    border-bottom: none;
+}
+
+.contenido-seccion .item h4 {
+    color: #1f3a56;
+    font-size: 18px;
+    margin: 0 0 5px 0;
+}
+
+.contenido-seccion .item p {
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+.contenido-seccion .item .institucion {
+    font-style: italic;
+    color: #666;
+    font-size: 14px;
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.volver:hover {
+    background-color: #2a4a6e;
+}
+
+/* Scroll suave para toda la página */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Mi perfil</h1>
+</header>
+
+<section>
+
+    <!-- Tarjetas de navegación -->
+    <div class="card-container">
+        <!-- Acerca de mí -->
+        <div class="card" id="card-perfil" onclick="mostrarSeccion('perfil')">
+            <div class="card-emoji">👨‍🔬</div>
+            <h3>Acerca de mí</h3>
+            <p>Trayectoria profesional.</p>
+        </div>
+
+        <!-- Formación académica -->
+        <div class="card" id="card-formacion" onclick="mostrarSeccion('formacion')">
+            <div class="card-emoji">🎓</div>
+            <h3>Formación académica</h3>
+            <p>Estudios formales realizados.</p>
+        </div>
+
+        <!-- Especialidades -->
+        <div class="card" id="card-especialidades" onclick="mostrarSeccion('especialidades')">
+            <div class="card-emoji">💡</div>
+            <h3>Especialidades</h3>
+            <p>Detalle de expertise.</p>
+        </div>
+    </div>
+
+    <!-- Contenido de Acerca de mí -->
+    <div id="perfil" class="contenido-seccion">
+        <h2>Acerca de mí</h2>
+        <p>Profesional en Ambiente y Recursos Naturales, con experiencia en el uso de Sistemas de Información Geográfica (SIG) y Teledetección, gestión de incendios rurales y forestales y análisis pluviométrico, aplicados al análisis territorial y a la generación de información técnica para la toma de decisiones.</p>
+        <p>Desarrollo cartografía temática, análisis espaciales y estudios pluviométricos, incluyendo la gestión de bases de datos y redes de pluviómetros, y la elaboración de informes técnicos vinculados a dinámicas ambientales, recursos naturales, incendios de vegetación y gestión del territorio, con enfoque en los sistemas productivos locales.</p>
+        <p>Trabajo como docente de nivel medio en áreas de Ciencias Sociales y Ambientales, integrando contenidos de ciudadanía, ambiente y territorio.</p>
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+    <!-- Contenido de Formación académica -->
+    <div id="formacion" class="contenido-seccion">
+        <h2>Formación académica</h2>
+        
+        <div class="item">
+            <h4>Estudios Formativos de Nivel Primario</h4>
+            <p>Escuela N° 150 de Bajo Hondo</p>
+            <p class="institucion">Bajo Hondo, La Rioja, 2003</p>
+        </div>
+
+        <div class="item">
+            <h4>Perito Mercantil con Especialización Contable e Impositiva</h4>
+            <p>Escuela de Comercio Juan Facundo Quiroga</p>
+            <p class="institucion">Ulapes, La Rioja, 2003</p>
+        </div>
+
+        <div class="item">
+            <h4>Profesor para Educación en Ciencias Políticas</h4>
+            <p>Instituto Superior de Formación Docente Profesora Teresa L. Cavero</p>
+            <p class="institucion">Chamical, La Rioja, 2007</p>
+        </div>
+
+        <div class="item">
+            <h4>Licenciado en Enseñanza de las Ciencias del Ambiente</h4>
+            <p>Universidad Tecnológica Nacional, Facultad Regional San Francisco</p>
+            <p class="institucion">San Francisco, Córdoba, 2013</p>
+        </div>
+
+        <div class="item">
+            <h4>Diplomado en Bases y Herramientas para la Gestión del Cambio Climático</h4>
+            <p>MAyDS - Universidad Nacional de Quilmes - Universidad Nacional de Jujuy</p>
+            <p class="institucion">Quilmes, Buenos Aires, 2020</p>
+        </div>
+
+        <div class="item">
+            <h4>Diplomado en Manejo del Fuego y Cambio Climático</h4>
+            <p>Universidad Nacional de General San Martín</p>
+            <p class="institucion">San Martín, Buenos Aires, 2023</p>
+        </div>
+
+        <div class="item">
+            <h4>Técnico Universitario en Gestión Integral de Incendios Forestales</h4>
+            <p>Universidad Nacional de Los Comechingones</p>
+            <p class="institucion">Villa de Merlo, San Luis, 2024</p>
+        </div>
+
+        <div class="item">
+            <h4>Diplomado Superior en Inteligencia Artificial en Educación</h4>
+            <p>Universidad Nacional Arturo Jauretche</p>
+            <p class="institucion">Florencio Varela, Buenos Aires, 2025</p>
+        </div>
+
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+    <!-- Contenido de Especialidades -->
+    <div id="especialidades" class="contenido-seccion">
+        <h2>Especialidades</h2>
+        
+        <div class="item">
+            <h4>Gestión y análisis territorial mediante SIG y Teledetección</h4>
+            <p>Aplicada al estudio de recursos naturales, sistemas productivos y dinámicas ambientales, integrando herramientas de escritorio (QGIS) y plataformas en la nube como Google Earth Engine.</p>
+        </div>
+
+        <div class="item">
+            <h4>Análisis pluviométrico y estadística de precipitaciones</h4>
+            <p>Basado en datos de campo y satelitales, orientado al seguimiento de la variabilidad climática, la evaluación del estado hídrico del territorio y la generación de información técnica para la toma de decisiones.</p>
+        </div>
+
+        <div class="item">
+            <h4>Monitoreo satelital de la situación hídrica</h4>
+            <p>Complementando redes de pluviómetros con información de precipitaciones e indicadores ambientales, para el análisis temporal y espacial de sequías y excesos hídricos.</p>
+        </div>
+
+        <div class="item">
+            <h4>Gestión de incendios de vegetación</h4>
+            <p>Incluyendo evaluación de vulnerabilidad, detección y cuantificación de áreas quemadas, estimación de severidad, análisis de impactos del fuego en sistemas rurales y productivos, y determinación de procesos de regeneración vegetal.</p>
+        </div>
+
+        <div class="item">
+            <h4>Análisis ambiental aplicado a sistemas productivos locales</h4>
+            <p>Con enfoque territorial, orientado a la planificación, la gestión del riesgo y el apoyo a procesos institucionales y de extensión.</p>
+        </div>
+
+        <div class="item">
+            <h4>Docencia en ciencias sociales y ambientales en nivel secundario</h4>
+            <p>Integrando contenidos de ciudadanía, ambiente y territorio, y promoviendo el pensamiento crítico a partir de problemáticas locales concretas.</p>
+        </div>
+
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+</section>
+
+<script>
+function mostrarSeccion(id) {
+    // Ocultar todas las secciones
+    document.getElementById('perfil').classList.remove('activo');
+    document.getElementById('formacion').classList.remove('activo');
+    document.getElementById('especialidades').classList.remove('activo');
+    
+    // Quitar clase activo de todas las tarjetas
+    document.getElementById('card-perfil').classList.remove('activo');
+    document.getElementById('card-formacion').classList.remove('activo');
+    document.getElementById('card-especialidades').classList.remove('activo');
+    
+    // Mostrar la sección seleccionada
+    const seccion = document.getElementById(id);
+    seccion.classList.add('activo');
+    
+    // Activar la tarjeta correspondiente
+    document.getElementById('card-' + id).classList.add('activo');
+    
+    // Desplazar suavemente hasta el inicio de la sección (especialmente útil en móviles)
+    setTimeout(function() {
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100); // Pequeño retraso para asegurar que la sección ya es visible
+}
+
+function volver() {
+    // Ocultar todas las secciones
+    document.getElementById('perfil').classList.remove('activo');
+    document.getElementById('formacion').classList.remove('activo');
+    document.getElementById('especialidades').classList.remove('activo');
+    
+    // Quitar clase activo de todas las tarjetas
+    document.getElementById('card-perfil').classList.remove('activo');
+    document.getElementById('card-formacion').classList.remove('activo');
+    document.getElementById('card-especialidades').classList.remove('activo');
+    
+    // Desplazar suavemente hasta las tarjetas
+    document.querySelector('.card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>
