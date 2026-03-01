@@ -30,7 +30,6 @@ section {
     padding: 0 20px;
 }
 
-/* Estilo para la descripción (ahora vacío, pero se mantiene por si se quiere reutilizar) */
 .descripcion {
     text-align: center;
     margin-bottom: 40px;
@@ -49,6 +48,25 @@ section {
     border-radius: 10px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card:active {
+    background-color: #1f3a56;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.card:active a,
+.card:active p,
+.card:active .card-emoji {
+    color: white;
 }
 
 .card a {
@@ -56,23 +74,113 @@ section {
     color: #1f3a56;
     font-size: 18px;
     font-weight: bold;
-    display: block; /* Para que el emoji quede arriba del enlace */
+    display: block;
     margin-top: 10px;
+    transition: color 0.2s;
+    pointer-events: none;
 }
 
-/* Estilo para los emojis */
 .card-emoji {
-    font-size: 48px; /* Tamaño grande para el emoji */
+    font-size: 48px;
     margin-bottom: 10px;
+    transition: color 0.2s;
 }
 
 .card p {
     margin-top: 10px;
     font-size: 14px;
+    transition: color 0.2s;
+}
+
+/* Estilos para el contenido desplegable */
+.red-content {
+    grid-column: 1 / -1;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin-top: 10px;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.red-content.visible {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.red-content h2 {
+    color: #1f3a56;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.red-content h3 {
+    color: #1f3a56;
+    font-size: 1.2em;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.red-content p {
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.volver-btn {
+    display: inline-block;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.volver-btn:hover {
+    background-color: #143048;
+}
+
+/* Estilos para mensaje de construcción */
+.mensaje-construccion {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 2px dashed #1f3a56;
+    grid-column: 1 / -1;
+    margin-top: 10px;
+}
+
+.mensaje-construccion .emoji-grande {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.mensaje-construccion h3 {
+    color: #1f3a56;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.mensaje-construccion p {
+    font-size: 16px;
+    color: #666;
+    max-width: 400px;
+    margin: 0 auto 20px;
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -81,32 +189,127 @@ section {
 
 <section>
 
-<!-- El div de descripción se mantiene vacío -->
 <div class="descripcion"></div>
 
-<div class="card-container">
+<div class="card-container" id="cardContainer">
 
-    <div class="card">
+    <div class="card" onclick="window.location.href='anomalias/'">
         <div class="card-emoji">📊</div>
         <a href="anomalias/">Visor interactivo de anomalías</a>
         <p>Comparación de precipitaciones actuales respecto a valores históricos.</p>
     </div>
 
-    <div class="card">
+    <div class="card" id="informesCard" onclick="toggleInformesContent()">
         <div class="card-emoji">📄</div>
-        <a href="informes/">Informes de situación hídrica</a>
+        <a href="#">Informes de situación hídrica</a>
         <p>Reportes técnicos periódicos para apoyo a la toma de decisiones.</p>
     </div>
 
-    <div class="card">
-        <div class="card-emoji">🧪</div> <!-- Emoji cambiado a probeta/tubo de ensayo -->
-        <a href="red/">Red pluviométrica regional</a>
-        <p>Sistema colaborativo de registro de precipitaciones.</p>
+    <div class="card" id="redCard" onclick="toggleRedContent()">
+        <div class="card-emoji">🧪</div>
+        <a href="#">Red pluviométrica regional</a>
+        <p>Sistema colaborativo de medición y reportes para el registro de lluvias.</p>
+    </div>
+
+    <!-- Mensaje de construcción para Informes de situación hídrica -->
+    <div id="informesContent" class="mensaje-construccion" style="display: none;">
+        <div class="emoji-grande">🚧</div>
+        <h3>En desarrollo</h3>
+        <p>Esta sección se encuentra en construcción. Pronto podrás acceder a los informes de situación hídrica.</p>
+        <button class="volver-btn" onclick="toggleInformesContent()">← Volver</button>
+    </div>
+
+    <!-- Contenido desplegable de la red pluviométrica -->
+    <div id="redContent" class="red-content">
+        <h2>Red Pluviométrica de Los Llanos</h2>
+        
+        <h3>¿Qué es la Red Pluviométrica de Los Llanos?</h3>
+        <p>La Red de Pluviométrica de Los Llanos de La Rioja es una red de instrumentos de medición que han sido cedidos sin cargo principalmente a productores rurales para la medición de las precipitaciones en puntos estratégicos del territorio de la región. Funciona gracias a estas personas quienes voluntariamente han asumido el compromiso y la responsabilidad de reportar el milimetraje de cada uno de los eventos de lluvia. Estos reportes son registrados en una base de datos por un agente administrador.</p>
+
+        <h3>¿Cuándo nació?</h3>
+        <p>La red entró en funcionamiento en el año 2020, con la instalación de los primeros pluviómetros. Después esta se fue extendiendo hasta establecer 7 puntos de registro por cada departamento.</p>
+
+        <h3>¿Cuál es la utilidad de la información generada?</h3>
+        <p>La información de la red es útil para llevar a cabo informes mensuales, periódicos y anuales como también es útil para realizar un cálculo denominado "anomalías de precipitación" que, básicamente, son las desviaciones de los valores precipitados, en un determinado tiempo, con respecto al valor histórico normal (promedio multianual). Con este cálculo se intenta tener una aproximación general del comportamiento de las precipitaciones en cada departamento y en la región.</p>
+        <p>Además, esta información es útil para el productor, quien puede utilizarla como herramienta para la planificación de sus actividades y la toma de decisiones informadas en el manejo de su establecimiento.</p>
+
+        <h3>¿Quiénes participan?</h3>
+        <p>La red involucra a productores rurales e instituciones como el INTA, a través de su Estación Experimental Agropecuaria y las Agencias de Extensión Rural. También a los Bomberos Voluntarios de la región. Colaboran las comisarías y destacamentos policiales.</p>
+        
+        <button class="volver-btn" onclick="toggleRedContent()">← Volver</button>
     </div>
 
 </div>
 
 </section>
+
+<script>
+function toggleRedContent() {
+    var redContent = document.getElementById('redContent');
+    var informesContent = document.getElementById('informesContent');
+    
+    // Cerrar informes si está abierto
+    if (informesContent.style.display === 'block') {
+        informesContent.style.display = 'none';
+    }
+    
+    // Toggle red content
+    if (redContent.classList.contains('visible')) {
+        redContent.classList.remove('visible');
+        redContent.style.display = 'none';
+    } else {
+        redContent.style.display = 'block';
+        redContent.classList.add('visible');
+        setTimeout(function() {
+            redContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+}
+
+function toggleInformesContent() {
+    var informesContent = document.getElementById('informesContent');
+    var redContent = document.getElementById('redContent');
+    
+    // Cerrar red content si está abierto
+    if (redContent.classList.contains('visible')) {
+        redContent.classList.remove('visible');
+        redContent.style.display = 'none';
+    }
+    
+    // Toggle informes content
+    if (informesContent.style.display === 'block') {
+        informesContent.style.display = 'none';
+    } else {
+        informesContent.style.display = 'block';
+        setTimeout(function() {
+            informesContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+}
+
+// Cerrar si se hace clic fuera
+document.addEventListener('click', function(event) {
+    var redContent = document.getElementById('redContent');
+    var informesContent = document.getElementById('informesContent');
+    var redCard = document.getElementById('redCard');
+    var informesCard = document.getElementById('informesCard');
+    
+    // Cerrar red content si se hace clic fuera
+    if (redContent.classList.contains('visible') && 
+        !redContent.contains(event.target) && 
+        !redCard.contains(event.target)) {
+        redContent.classList.remove('visible');
+        redContent.style.display = 'none';
+    }
+    
+    // Cerrar informes content si se hace clic fuera
+    if (informesContent.style.display === 'block' && 
+        !informesContent.contains(event.target) && 
+        !informesCard.contains(event.target)) {
+        informesContent.style.display = 'none';
+    }
+});
+</script>
 
 </body>
 </html>
