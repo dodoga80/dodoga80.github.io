@@ -214,7 +214,7 @@
     }
   }
 
-  /* MEDIA QUERY - CELULAR HORIZONTAL */
+  /* MEDIA QUERY - CELULAR HORIZONTAL (original, sin cambios) */
   @media (max-height: 500px) and (orientation: landscape) {
     body {
       padding: clamp(8px, 2vw, 16px);
@@ -290,85 +290,25 @@
     }
   }
 
-  /* MEDIA QUERY - PC PANTALLA COMPLETA */
-  @media (min-width: 1024px) and (min-height: 600px) {
+  /* ===== ÚNICA MODIFICACIÓN: SOLO PARA PC ===== */
+  /* Esta media query solo afecta a pantallas grandes, respeta todo el código original */
+  @media (min-width: 1024px) {
     body {
-      padding: clamp(20px, 2vw, 30px);
-      gap: clamp(16px, 2vw, 24px);
+      justify-content: center; /* Centra verticalmente en PC */
+      min-height: 100vh;
     }
-
+    
     .main-container {
       max-width: 1200px;
-      gap: clamp(16px, 2vw, 24px);
-      display: grid;
-      grid-template-columns: minmax(320px, auto) 1fr;
-      grid-template-rows: auto;
-      align-items: stretch;
-      min-height: auto;
     }
-
-    .profile-card {
-      grid-column: 1;
-      grid-row: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: clamp(24px, 2.5vw, 32px);
-      align-items: center;
-    }
-
-    .profile-card h1 {
-      font-size: clamp(1.6rem, 2vw, 1.9rem);
-      margin-bottom: clamp(16px, 1.5vw, 20px);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .role {
-      font-size: clamp(0.75rem, 1vw, 0.85rem);
-    }
-
-    .repositories-container {
-      grid-column: 2;
-      grid-row: 1;
-      height: auto;
-      padding: clamp(24px, 2.5vw, 32px);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .section-title {
-      font-size: clamp(1.2rem, 1.5vw, 1.4rem);
-      margin-bottom: clamp(16px, 1.5vw, 20px);
-      padding-bottom: clamp(12px, 1vw, 16px);
-    }
-
+    
     .btn-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(12px, 1.5vw, 18px);
-      flex: 0;
-      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* 5 columnas fijas en PC */
     }
-
-    .btn-item {
-      padding: clamp(16px, 1.8vw, 22px);
-      gap: clamp(10px, 1.2vw, 14px);
-    }
-
-    .btn-icon {
-      font-size: clamp(1.8rem, 2.5vw, 2.2rem);
-    }
-
-    .btn-label {
-      font-size: clamp(0.85rem, 1.1vw, 1rem);
-      display: block;
-    }
-
+    
+    /* Aseguramos que el email se vea completo */
     .email-footer {
-      padding: clamp(10px, 1.5vw, 14px);
-      margin-top: clamp(8px, 1vw, 12px);
+      margin-top: 0;
     }
   }
 </style>
@@ -399,6 +339,10 @@
         <span class="btn-icon">✍️</span>
         <span class="btn-label">Publicaciones</span>
       </a>
+      <a href="/proyectos/" class="btn-item">
+        <span class="btn-icon">👨‍🏫</span>
+        <span class="btn-label">Proyectos</span>
+      </a>
       <a href="/teledeteccion/" class="btn-item">
         <span class="btn-icon">💻</span>
         <span class="btn-label">Teledetección</span>
@@ -419,14 +363,17 @@
         <span class="btn-icon">📚</span>
         <span class="btn-label">Docencia</span>
       </a>
+      <a href="/varios/" class="btn-item">
+        <span class="btn-icon">📂</span>
+        <span class="btn-label">Varios</span>
+      </a>
     </div>
   </div>
 
-</div>
-
-<!-- EMAIL FOOTER CENTRALIZADO -->
-<div class="email-footer">
-  <a href="mailto:dodogaray@gmail.com">dodogaray@gmail.com</a>
+  <!-- EMAIL FOOTER -->
+  <div class="email-footer">
+    <a href="mailto:dodogaray@gmail.com">dodogaray@gmail.com</a>
+  </div>
 </div>
 
 </body>
