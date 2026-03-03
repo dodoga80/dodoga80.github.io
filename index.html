@@ -3,378 +3,393 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Domingo Dolores GARAY</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Domingo Garay — Servicios profesionales de información ambiental para la gestión territorial">
+<title>Domingo GARAY</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #edeae3;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: clamp(16px, 5vw, 40px);
-    gap: clamp(16px, 4vw, 32px);
+:root {
+  --ink:       #0e1a0b;
+  --forest:    #1e3318;
+  --moss:      #3a5c30;
+  --leaf:      #5a8a4a;
+  --sage:      #8ab07a;
+  --mist:      #c8dbc0;
+  --parchment: #f2ede3;
+  --paper:     #f8f5ee;
+  --gold:      #b8913a;
+  --gold-lt:   #d4ae60;
+  --white:     #ffffff;
+  --border:    rgba(58,92,48,0.15);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--parchment);
+  color: var(--ink);
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(90,138,74,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 90% 80%, rgba(184,145,58,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.028'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 64px) clamp(16px, 5vw, 52px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 5vw, 48px);
+}
+
+/* ── HEADER ── */
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: clamp(20px, 4vw, 32px);
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  animation: appear 0.8s cubic-bezier(0.22,1,0.36,1) forwards;
+  text-align: center;
+}
+
+/* Línea superior decorativa */
+.header-line {
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0 auto 10px auto; /* Centrada */
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.eyebrow-line {
+  display: none; /* Ocultamos la línea lateral */
+}
+
+.eyebrow-text {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 7.5vw, 4.5rem); /* Aumentado: mínimo 2.5rem, máximo 4.5rem */
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+  white-space: nowrap;
+}
+
+.site-title em {
+  font-style: italic;
+  font-weight: 900;
+  color: var(--leaf);
+}
+
+.site-subtitle {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-weight: 300;
+  color: var(--moss);
+  line-height: 1.6;
+  /* font-style: italic;  quitado */
+}
+
+/* ── DIRECTORIOS ── */
+.dirs-section {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 3vw, 22px);
+  opacity: 0;
+  animation: appear 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s forwards;
+  align-items: center;
+}
+
+.section-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  justify-content: center;
+}
+
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--sage);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.section-rule {
+  display: none;
+}
+
+/* GRID - Reforzamos centrado de íconos y texto */
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(8px, 1.5vw, 14px);
+  width: 100%;
+}
+
+.repo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* Centrado horizontal */
+  justify-content: center; /* Centrado vertical */
+  gap: 10px;
+  padding: clamp(12px, 2vw, 20px) clamp(8px, 1.5vw, 12px);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.28s cubic-bezier(0.22,1,0.36,1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;      /* Centrado del texto */
+  min-height: 100px; 
+  height: auto;
+  aspect-ratio: auto;
+}
+
+@media (min-width: 700px) {
+  .repo-card {
+    min-height: 120px;
+    padding: 1.2rem 0.5rem;
   }
+}
 
-  .main-container {
-    width: 100%;
-    max-width: clamp(340px, 90vw, 1100px);
-    display: flex;
-    flex-direction: column;
-    gap: clamp(20px, 4vw, 32px);
+.repo-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, var(--leaf), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+
+.repo-card:hover {
+  background: var(--white);
+  border-color: var(--sage);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(30,51,24,0.09);
+}
+
+.repo-card:hover::after { transform: scaleX(1); }
+
+.repo-icon {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1);
+  display: block;
+  line-height: 1;
+}
+
+.repo-card:hover .repo-icon { transform: scale(1.12) translateY(-2px); }
+
+.repo-name {
+  font-size: clamp(0.62rem, 1.4vw, 0.82rem);
+  font-weight: 600;
+  color: var(--forest);
+  line-height: 1.3;
+}
+
+/* ── FOOTER (correo sin recuadro y sin ícono, con línea debajo) ── */
+footer {
+  display: flex;
+  flex-direction: column;  /* Cambiado a columna para poder añadir la línea debajo */
+  align-items: center;
+  justify-content: center;
+  gap: 16px;               /* Espacio entre el correo y la línea */
+  padding-top: clamp(16px, 3vw, 24px);
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  animation: appear 0.7s cubic-bezier(0.22,1,0.36,1) 0.28s forwards;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  text-decoration: none;
+  color: var(--forest);
+  background: transparent;
+  padding: 0;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  transition: color 0.2s;
+  border-radius: 0;
+}
+
+.contact-link:hover {
+  color: var(--leaf);
+  background: transparent;
+  border: none;
+}
+
+/* Línea decorativa inferior (idéntica a la superior) */
+.footer-line {
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0 auto; /* Centrada */
+}
+
+/* ── ANIMACIONES ── */
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MÓVILES (3 columnas con orden específico) ── */
+@media (max-width: 600px) {
+  .repo-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  /* TARJETA PRINCIPAL - Nombre y Títulos */
-  .profile-card {
-    background: #4a6741;
-    padding: clamp(24px, 6vw, 40px);
-    border-radius: clamp(4px, 1vw, 8px);
-    text-align: center;
-    color: white;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    opacity: 0;
-    animation: slideIn 0.6s ease-out forwards;
+  .repo-card {
+    min-height: 95px;
   }
+}
 
-  .profile-card h1 {
-    font-family: 'Lora', serif;
-    font-size: clamp(1.4rem, 6vw, 2.4rem);
-    line-height: 1.2;
-    margin-bottom: clamp(12px, 2vw, 20px);
-    font-weight: 600;
+@media (max-width: 380px) {
+  .repo-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  .roles {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(6px, 1.5vw, 12px);
+  .site-title {
+    font-size: clamp(2rem, 8vw, 2.5rem); /* Ajuste para móviles muy pequeños */
   }
+}
 
-  .role {
-    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
-    font-weight: 300;
-    line-height: 1.5;
-    opacity: 0.95;
-    letter-spacing: 0.3px;
-  }
-
-  /* SECCIÓN DE CONTENIDO */
-  .content-section {
-    background: white;
-    padding: clamp(20px, 5vw, 36px);
-    border-radius: clamp(4px, 1vw, 8px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    opacity: 0;
-    animation: slideIn 0.6s ease-out 0.15s forwards;
-  }
-
-  .section-title {
-    font-size: clamp(1rem, 3vw, 1.4rem);
-    font-weight: 600;
-    color: #2e4228;
-    margin-bottom: clamp(16px, 3vw, 24px);
-    padding-bottom: clamp(12px, 2vw, 16px);
-    border-bottom: 2px solid #4a6741;
-  }
-
-  /* LISTA DE CAPACIDADES */
-  .capabilities-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(14px, 3vw, 20px);
-  }
-
-  .capability-item {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(4px, 1vw, 8px);
-  }
-
-  .capability-title {
-    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-    font-weight: 600;
-    color: #2e4228;
-    line-height: 1.4;
-  }
-
-  .capability-desc {
-    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
-    color: #666;
-    line-height: 1.6;
-    text-align: justify;
-  }
-
-  /* SECCIÓN DE REPOSITORIOS */
-  .repositories-container {
-    background: white;
-    padding: clamp(20px, 5vw, 36px);
-    border-radius: clamp(4px, 1vw, 8px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    opacity: 0;
-    animation: slideIn 0.6s ease-out 0.3s forwards;
-  }
-
-  .btn-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(100px, 20vw, 160px), 1fr));
-    gap: clamp(12px, 2.5vw, 18px);
-  }
-
-  .btn-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(8px, 1.5vw, 12px);
-    padding: clamp(12px, 2vw, 18px);
-    background: #f9f7f3;
-    border: 2px solid #e0dbd0;
-    border-radius: clamp(4px, 1vw, 8px);
-    text-decoration: none;
-    color: #2e4228;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
-  .btn-item:hover {
-    background: #4a6741;
-    color: white;
-    border-color: #4a6741;
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(74, 103, 65, 0.2);
-  }
-
-  .btn-icon {
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    display: block;
-  }
-
-  .btn-label {
-    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
-    font-weight: 500;
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  /* EMAIL FOOTER */
-  .email-footer {
-    background: #f0ece4;
-    padding: clamp(12px, 2vw, 18px);
-    border-radius: clamp(4px, 1vw, 8px);
-    text-align: center;
-    opacity: 0;
-    animation: slideIn 0.6s ease-out 0.45s forwards;
-  }
-
-  .email-footer a {
-    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
-    color: #4a6741;
-    text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 0.2px;
-    transition: opacity 0.3s;
-  }
-
-  .email-footer a:hover {
-    opacity: 0.7;
-    text-decoration: underline;
-  }
-
-  .email-in-card {
-    margin-top: auto;
-    background: transparent;
-    padding: clamp(12px, 2vw, 18px) 0;
-  }
-
-  .email-in-card a {
-    color: #f4d03f;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-  }
-
-  .email-in-card a:hover {
-    color: #ffd700;
-    text-decoration: underline;
-  }
-
-  /* ANIMACIONES */
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* MEDIA QUERY - CELULAR HORIZONTAL (original, sin cambios) */
-  @media (max-height: 500px) and (orientation: landscape) {
-    body {
-      padding: clamp(8px, 2vw, 16px);
-      gap: clamp(8px, 2vw, 12px);
-    }
-
-    .main-container {
-      gap: clamp(8px, 2vw, 12px);
-    }
-
-    .profile-card {
-      padding: clamp(12px, 2vw, 16px);
-    }
-
-    .profile-card h1 {
-      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
-      margin-bottom: clamp(4px, 1vw, 8px);
-    }
-
-    .role {
-      font-size: clamp(0.5rem, 1vw, 0.6rem);
-    }
-
-    .content-section,
-    .repositories-container {
-      padding: clamp(12px, 2vw, 16px);
-    }
-
-    .section-title {
-      font-size: clamp(0.85rem, 1.8vw, 1rem);
-      margin-bottom: clamp(8px, 1.5vw, 12px);
-      padding-bottom: clamp(6px, 1vw, 8px);
-    }
-
-    .capability-item {
-      gap: clamp(2px, 0.8vw, 4px);
-    }
-
-    .capability-title {
-      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
-    }
-
-    .capability-desc {
-      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
-      line-height: 1.4;
-    }
-
-    .btn-grid {
-      gap: clamp(6px, 1vw, 8px);
-      grid-template-columns: repeat(6, 1fr);
-    }
-
-    .btn-item {
-      padding: clamp(6px, 1vw, 8px);
-      gap: clamp(3px, 0.8vw, 5px);
-    }
-
-    .btn-icon {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-    }
-
-    .btn-label {
-      font-size: clamp(0.5rem, 1vw, 0.65rem);
-      display: none;
-    }
-
-    .email-footer {
-      padding: clamp(6px, 1.5vw, 10px);
-    }
-
-    .email-footer a {
-      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
-    }
-  }
-
-  /* ===== ÚNICA MODIFICACIÓN: SOLO PARA PC ===== */
-  /* Esta media query solo afecta a pantallas grandes, respeta todo el código original */
-  @media (min-width: 1024px) {
-    body {
-      justify-content: center; /* Centra verticalmente en PC */
-      min-height: 100vh;
-    }
-    
-    .main-container {
-      max-width: 1200px;
-    }
-    
-    .btn-grid {
-      grid-template-columns: repeat(5, 1fr); /* 5 columnas fijas en PC */
-    }
-    
-    /* Aseguramos que el email se vea completo */
-    .email-footer {
-      margin-top: 0;
-    }
-  }
+/* ── LANDSCAPE CELU ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .page { padding: 16px 20px; gap: 16px; }
+  .site-title { font-size: 2.2rem; } /* Aumentado acorde */
+  .repo-grid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .repo-card { padding: 8px; min-height: 70px; }
+  .repo-icon { font-size: 1.2rem; }
+}
 </style>
 </head>
 <body>
+<main class="page">
 
-<div class="main-container">
-  <!-- TARJETA PERFIL -->
-  <div class="profile-card">
-    <h1>Domingo Dolores GARAY</h1>
-    <div class="roles">
-      <span class="role">Información ambiental para la gestión territorial</span>
+  <!-- HEADER -->
+  <header>
+    <!-- Línea decorativa arriba -->
+    <div class="header-line"></div>
+    
+    <div class="eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">dodoga80.github.io</span>
     </div>
-  </div>
+    <h1 class="site-title">Domingo GARAY</h1>
+    <p class="site-subtitle">Servicio técnico profesional de generación de información ambiental para gestión territorial</p>
+  </header>
 
-  <!-- SECCIÓN REPOSITORIOS -->
-  <div class="repositories-container">
-    <div class="btn-grid">
-      <a href="/perfil/" class="btn-item">
-        <span class="btn-icon">👤</span>
-        <span class="btn-label">Perfil</span>
+  <!-- DIRECTORIOS -->
+  <section class="dirs-section">
+    <div class="section-meta">
+      <span class="section-label">Directorios</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="repo-grid">
+      <!-- Orden: Perfil, Servicios, Publicaciones, Proyectos, Precipitaciones, Incendios, Transferencia, Varios, Contacto -->
+      <a href="/perfil/" class="repo-card">
+        <span class="repo-icon">👤</span>
+        <span class="repo-name">Perfil</span>
       </a>
-      <a href="/servicios/" class="btn-item">
-        <span class="btn-icon">🧰</span>
-        <span class="btn-label">Servicios</span>
+      <a href="/servicios/" class="repo-card">
+        <span class="repo-icon">🧰</span>
+        <span class="repo-name">Servicios</span>
       </a>
-      <a href="/publicaciones/" class="btn-item">
-        <span class="btn-icon">✍️</span>
-        <span class="btn-label">Publicaciones</span>
+      <a href="/publicaciones/" class="repo-card">
+        <span class="repo-icon">✍️</span>
+        <span class="repo-name">Publicaciones</span>
       </a>
-      <a href="/proyectos/" class="btn-item">
-        <span class="btn-icon">👨‍🏫</span>
-        <span class="btn-label">Proyectos</span>
+      <a href="/proyectos/" class="repo-card">
+        <span class="repo-icon">👨‍🏫</span>
+        <span class="repo-name">Proyectos</span>
       </a>
-      <a href="/teledeteccion/" class="btn-item">
-        <span class="btn-icon">💻</span>
-        <span class="btn-label">Teledetección</span>
+      <a href="/precipitaciones/" class="repo-card">
+        <span class="repo-icon">🌧️</span>
+        <span class="repo-name">Precipitaciones</span>
       </a>
-      <a href="/precipitaciones/" class="btn-item">
-        <span class="btn-icon">🌧️</span>
-        <span class="btn-label">Precipitaciones</span>
+      <a href="/incendios/" class="repo-card">
+        <span class="repo-icon">🔥</span>
+        <span class="repo-name">Incendios</span>
       </a>
-      <a href="/incendios/" class="btn-item">
-        <span class="btn-icon">🔥</span>
-        <span class="btn-label">Incendios</span>
+      <a href="/transferencia/" class="repo-card">
+        <span class="repo-icon">🔗</span>
+        <span class="repo-name">Transferencia</span>
       </a>
-      <a href="/ambiente/" class="btn-item">
-        <span class="btn-icon">🌎</span>
-        <span class="btn-label">Ambiente</span>
+      <a href="/varios/" class="repo-card">
+        <span class="repo-icon">📂</span>
+        <span class="repo-name">Varios</span>
       </a>
-      <a href="/docencia/" class="btn-item">
-        <span class="btn-icon">📚</span>
-        <span class="btn-label">Docencia</span>
-      </a>
-      <a href="/varios/" class="btn-item">
-        <span class="btn-icon">📂</span>
-        <span class="btn-label">Varios</span>
+      <a href="/contacto/" class="repo-card">
+        <span class="repo-icon">📱</span>
+        <span class="repo-name">Contacto</span>
       </a>
     </div>
-  </div>
+  </section>
 
-  <!-- EMAIL FOOTER -->
-  <div class="email-footer">
-    <a href="mailto:dodogaray@gmail.com">dodogaray@gmail.com</a>
-  </div>
-</div>
+  <!-- FOOTER (sin recuadro, sin ícono, con línea debajo) -->
+  <footer>
+    <a href="mailto:dodogaray@gmail.com" class="contact-link">
+      dodogaray@gmail.com
+    </a>
+    <!-- Línea decorativa debajo del email -->
+    <div class="footer-line"></div>
+  </footer>
 
+</main>
 </body>
 </html>
