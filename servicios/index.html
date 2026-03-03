@@ -22,7 +22,7 @@ header {
 
 header h1 {
     margin-bottom: 10px;
-    font-size: 32px;  /* MODIFICADO: de 42px a 32px */
+    font-size: 32px;
 }
 
 section {
@@ -53,7 +53,6 @@ section {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Estilo para la tarjeta activa */
 .card.activo {
     background-color: #1f3a56;
     color: white;
@@ -63,10 +62,6 @@ section {
     color: white;
 }
 
-.card.activo p {
-    color: rgba(255, 255, 255, 0.9);
-}
-
 .card-emoji {
     font-size: 48px;
     margin-bottom: 10px;
@@ -74,16 +69,9 @@ section {
 
 .card h3 {
     color: #1f3a56;
-    font-size: 18px;  /* MODIFICADO: de 22px a 18px */
+    font-size: 18px;
     margin: 10px 0;
     font-weight: bold;
-    transition: color 0.2s;
-}
-
-.card p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #666;
     transition: color 0.2s;
 }
 
@@ -103,17 +91,11 @@ section {
 
 .contenido-seccion h2 {
     color: #1f3a56;
-    font-size: 1.5em;  /* MODIFICADO: de 28px a 1.5em */
+    font-size: 1.5em;
     margin-top: 0;
     margin-bottom: 20px;
     border-bottom: 2px solid #1f3a56;
     padding-bottom: 10px;
-}
-
-.contenido-seccion h3 {
-    color: #1f3a56;
-    font-size: 22px;
-    margin: 20px 0 15px 0;
 }
 
 .servicio-item {
@@ -126,60 +108,41 @@ section {
     border-bottom: none;
 }
 
-.servicio-item h4 {
-    color: #1f3a56;
-    font-size: 18px;
-    margin: 0 0 10px 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.servicio-item h4 .emoji-pequeno {
-    font-size: 22px;
-}
+/* === LISTAS SIN VIÑETAS Y TEXTO JUSTIFICADO === */
 
 .servicio-item ul {
     margin: 0;
-    padding-left: 20px;
-    list-style-type: none;
+    padding-left: 0;
+    list-style: none;
 }
 
 .servicio-item li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 15px;
-    line-height: 1.5;
-    position: relative;
-    padding-left: 20px;
+    line-height: 1.6;
+    text-align: justify;
 }
 
-.servicio-item li::before {
-    content: "•";
-    color: #1f3a56;
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
+/* === BOTÓN VOLVER === */
 
 .volver {
     display: inline-block;
     margin-top: 20px;
-    padding: 8px 20px;  /* MODIFICADO: de 10px a 8px */
+    padding: 8px 20px;
     background-color: #1f3a56;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;  /* MODIFICADO: de 16px a 14px */
+    font-size: 14px;
     transition: background-color 0.2s;
-    font-weight: normal;  /* MODIFICADO: sin negrita */
+    font-weight: normal;
 }
 
 .volver:hover {
     background-color: #2a4a6e;
 }
 
-/* Scroll suave para toda la página */
 html {
     scroll-behavior: smooth;
 }
@@ -194,115 +157,101 @@ html {
 
 <section>
 
-    <!-- Tarjetas de navegación -->
-    <div class="card-container">
-        <!-- Incendios de vegetación -->
-        <div class="card" id="card-incendios" onclick="mostrarSeccion('incendios')">
-            <div class="card-emoji">🔥</div>
-            <h3>Incendios de vegetación</h3>
-            </div>
+<div class="card-container">
 
-        <!-- SIG y Teledetección -->
-        <div class="card" id="card-sig" onclick="mostrarSeccion('sig')">
-            <div class="card-emoji">🗺️</div>
-            <h3>SIG y Teledetección</h3>
-           </div>
-
-        <!-- Hidrología, clima y ambiente -->
-        <div class="card" id="card-hidrologia" onclick="mostrarSeccion('hidrologia')">
-            <div class="card-emoji">🌎</div>
-            <h3>Hidrología, clima y ambiente</h3>
-            </div>
+    <div class="card" id="card-incendios" onclick="mostrarSeccion('incendios')">
+        <div class="card-emoji">🔥</div>
+        <h3>Incendios de vegetación</h3>
     </div>
 
-    <!-- Contenido de Incendios de vegetación -->
-    <div id="incendios" class="contenido-seccion">
-        <h2>Incendios de vegetación</h2>
-        
-        <div class="servicio-item">
-            <ul>
-                <li>Evaluación de vulnerabilidades y análisis de riesgo</li>
-                <li>Diseño de estrategias de mitigación y prevención</li>
-                <li>Cuantificación de áreas quemadas</li>
-                <li>Investigación y determinación de causas</li>
-                <li>Estimación de severidad y análisis de impactos</li>
-            </ul>
-        </div>
-        
-        <button class="volver" onclick="volver()">← Volver</button>
+    <div class="card" id="card-sig" onclick="mostrarSeccion('sig')">
+        <div class="card-emoji">🗺️</div>
+        <h3>SIG y Teledetección</h3>
     </div>
 
-    <!-- Contenido de SIG y Teledetección -->
-    <div id="sig" class="contenido-seccion">
-        <h2>SIG y Teledetección</h2>
-        
-        <div class="servicio-item">
-            <ul>
-                <li>Generación de cartografía aplicada</li>
-                <li>Medición satelital de campos</li>
-                <li>Estimación de superficie productiva</li>
-                <li>Sistematización y análisis de información territorial</li>
-            </ul>
-        </div>
-        
-        <button class="volver" onclick="volver()">← Volver</button>
+    <div class="card" id="card-hidrologia" onclick="mostrarSeccion('hidrologia')">
+        <div class="card-emoji">🌎</div>
+        <h3>Hidrología, clima y ambiente</h3>
     </div>
 
-    <!-- Contenido de Hidrología, clima y ambiente -->
-    <div id="hidrologia" class="contenido-seccion">
-        <h2>Hidrología, clima y ambiente</h2>
-        
-        <div class="servicio-item">
-            <ul>
-                <li>Diseño y gestión de redes pluviométricas rurales</li>
-                <li>Análisis de precipitaciones y determinación de anomalías</li>
-                <li>Monitoreo hídrico mensual, estacional y anual</li>
-                <li>Análisis ambiental aplicado a proyectos productivos</li>
-            </ul>
-        </div>
-        
-        <button class="volver" onclick="volver()">← Volver</button>
+</div>
+
+<!-- Incendios -->
+<div id="incendios" class="contenido-seccion">
+    <h2>Incendios de vegetación</h2>
+    <div class="servicio-item">
+        <ul>
+            <li>+ Evaluación de vulnerabilidades y análisis de riesgo.</li>
+            <li>+ Diseño de estrategias de mitigación y prevención.</li>
+            <li>+ Cuantificación de áreas quemadas.</li>
+            <li>+ Investigación y determinación de causas.</li>
+            <li>+ Estimación de severidad y análisis de impactos.</li>
+        </ul>
     </div>
+    <button class="volver" onclick="volver()">← Volver</button>
+</div>
+
+<!-- SIG -->
+<div id="sig" class="contenido-seccion">
+    <h2>SIG y Teledetección</h2>
+    <div class="servicio-item">
+        <ul>
+            <li>+ Generación de cartografía aplicada.</li>
+            <li>+ Medición satelital de campos.</li>
+            <li>+ Estimación de superficie productiva.</li>
+            <li>+ Sistematización y análisis de información territorial.</li>
+        </ul>
+    </div>
+    <button class="volver" onclick="volver()">← Volver</button>
+</div>
+
+<!-- Hidrología -->
+<div id="hidrologia" class="contenido-seccion">
+    <h2>Hidrología, clima y ambiente</h2>
+    <div class="servicio-item">
+        <ul>
+            <li>+ Diseño y gestión de redes pluviométricas rurales.</li>
+            <li>+ Análisis de precipitaciones y determinación de anomalías.</li>
+            <li>+ Monitoreo hídrico mensual, estacional y anual.</li>
+            <li>+ Análisis ambiental aplicado a proyectos productivos.</li>
+        </ul>
+    </div>
+    <button class="volver" onclick="volver()">← Volver</button>
+</div>
 
 </section>
 
 <script>
 function mostrarSeccion(id) {
-    // Ocultar todas las secciones
+
     document.getElementById('incendios').classList.remove('activo');
     document.getElementById('sig').classList.remove('activo');
     document.getElementById('hidrologia').classList.remove('activo');
-    
-    // Quitar clase activo de todas las tarjetas
+
     document.getElementById('card-incendios').classList.remove('activo');
     document.getElementById('card-sig').classList.remove('activo');
     document.getElementById('card-hidrologia').classList.remove('activo');
-    
-    // Mostrar la sección seleccionada
+
     const seccion = document.getElementById(id);
     seccion.classList.add('activo');
-    
-    // Activar la tarjeta correspondiente
+
     document.getElementById('card-' + id).classList.add('activo');
-    
-    // Desplazar suavemente hasta el inicio de la sección
+
     setTimeout(function() {
         seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
 }
 
 function volver() {
-    // Ocultar todas las secciones
+
     document.getElementById('incendios').classList.remove('activo');
     document.getElementById('sig').classList.remove('activo');
     document.getElementById('hidrologia').classList.remove('activo');
-    
-    // Quitar clase activo de todas las tarjetas
+
     document.getElementById('card-incendios').classList.remove('activo');
     document.getElementById('card-sig').classList.remove('activo');
     document.getElementById('card-hidrologia').classList.remove('activo');
-    
-    // Desplazar suavemente hasta las tarjetas
+
     document.querySelector('.card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 </script>
