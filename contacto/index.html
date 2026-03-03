@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domingo Garay | Contacto</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background-color: #1f3a56;
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card-emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #1f3a56;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Sección Formulario */
+.seccion-container {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+    display: none;
+}
+
+.seccion-container.visible {
+    display: block;
+}
+
+.seccion-container h2 {
+    color: #1f3a56;
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #1f3a56;
+    padding-bottom: 12px;
+    font-weight: bold;
+}
+
+.mensaje-recuadro {
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+/* FORMULARIO */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #143048;
+}
+
+.volver-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.volver-btn::before {
+    content: "← ";
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Contacto</h1>
+</header>
+
+<section>
+
+<div class="card-container">
+
+    <!-- Email (DIRECTO) -->
+    <a class="card" href="mailto:dodogaray@gmail.com">
+        <div class="card-emoji">📧</div>
+        <h3>Email</h3>
+    </a>
+
+    <!-- WhatsApp (DIRECTO) -->
+    <a class="card" target="_blank"
+       href="https://wa.me/543804529915">
+        <div class="card-emoji">💬</div>
+        <h3>WhatsApp</h3>
+    </a>
+
+    <!-- Formulario (DESPLEGABLE) -->
+    <div class="card" onclick="toggleSeccion('formulario')">
+        <div class="card-emoji">📋</div>
+        <h3>Formulario</h3>
+    </div>
+
+    <!-- Contenedor Formulario -->
+    <div id="formulario" class="seccion-container">
+        <h2>Formulario</h2>
+        <div class="mensaje-recuadro">
+
+            <form onsubmit="enviarFormulario(event)">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="text" id="apellido" placeholder="Apellido" required>
+                <input type="tel" id="telefono" placeholder="Teléfono">
+                <input type="email" id="emailform" placeholder="Email" required>
+                <textarea id="mensaje" placeholder="Mensaje" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+
+        </div>
+        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+    </div>
+
+</div>
+
+</section>
+
+<script>
+function toggleSeccion(id) {
+    let seccion = document.getElementById(id);
+    seccion.classList.add('visible');
+
+    // Scroll automático suave
+    setTimeout(function() {
+        seccion.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }, 100);
+}
+
+function cerrarTodo() {
+    document.getElementById('formulario').classList.remove('visible');
+}
+
+function enviarFormulario(e) {
+    e.preventDefault();
+
+    let nombre = document.getElementById("nombre").value;
+    let apellido = document.getElementById("apellido").value;
+    let telefono = document.getElementById("telefono").value;
+    let email = document.getElementById("emailform").value;
+    let mensaje = document.getElementById("mensaje").value;
+
+    let asunto = "Consulta desde sitio web";
+    let cuerpo =
+        "Nombre: " + nombre + "%0D%0A" +
+        "Apellido: " + apellido + "%0D%0A" +
+        "Teléfono: " + telefono + "%0D%0A" +
+        "Email: " + email + "%0D%0A%0D%0A" +
+        "Mensaje:%0D%0A" + mensaje;
+
+    window.location.href =
+        "mailto:dodogaray@gmail.com?subject=" + asunto + "&body=" + cuerpo;
+}
+</script>
+
+</body>
+</html>
