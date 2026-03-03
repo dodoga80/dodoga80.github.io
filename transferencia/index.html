@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domingo Garay | Transferencia</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background-color: #1f3a56;
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card.activo {
+    background-color: #1f3a56;
+    color: white;
+}
+
+.card.activo h3 {
+    color: white;
+}
+
+.card-emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #1f3a56;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* === CONTENEDOR DE SECCIÓN === */
+.seccion-container {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+    display: none;
+}
+
+.seccion-container.visible {
+    display: block;
+}
+
+.seccion-container h2 {
+    color: #1f3a56;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #1f3a56;
+    padding-bottom: 12px;
+    font-weight: bold;
+}
+
+/* === RECUADRO DE MENSAJE === */
+.mensaje-recuadro {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    border: 2px dashed #1f3a56;
+}
+
+.mensaje-recuadro .emoji-grande {
+    font-size: 80px;
+    margin-bottom: 25px;
+}
+
+.mensaje-recuadro h3 {
+    color: #1f3a56;
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* === BOTÓN VOLVER === */
+.volver-btn {
+    display: inline-block;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    transition: background-color 0.2s;
+}
+
+.volver-btn:hover {
+    background-color: #143048;
+}
+
+.volver-btn::before {
+    content: "← ";
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Transferencia</h1>
+</header>
+
+<section>
+
+<div class="card-container">
+
+    <!-- Tarjetas -->
+    <div class="card" onclick="toggleSeccion('talleres', this)">
+        <div class="card-emoji">✋</div>
+        <h3>Talleres</h3>
+    </div>
+
+    <div class="card" onclick="toggleSeccion('cursos', this)">
+        <div class="card-emoji">📖</div>
+        <h3>Cursos</h3>
+    </div>
+
+    <div class="card" onclick="toggleSeccion('charlas', this)">
+        <div class="card-emoji">🗣️</div>
+        <h3>Charlas</h3>
+    </div>
+
+    <!-- Contenedor Talleres -->
+    <div id="talleres" class="seccion-container">
+        <h2>Talleres</h2>
+        <div class="mensaje-recuadro">
+            <div class="emoji-grande">🚧</div>
+            <h3>Esta sección se encuentra en construcción</h3>
+        </div>
+        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+    </div>
+
+    <!-- Contenedor Cursos -->
+    <div id="cursos" class="seccion-container">
+        <h2>Cursos</h2>
+        <div class="mensaje-recuadro">
+            <div class="emoji-grande">🚧</div>
+            <h3>Esta sección se encuentra en construcción</h3>
+        </div>
+        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+    </div>
+
+    <!-- Contenedor Charlas -->
+    <div id="charlas" class="seccion-container">
+        <h2>Charlas</h2>
+        <div class="mensaje-recuadro">
+            <div class="emoji-grande">🚧</div>
+            <h3>Esta sección se encuentra en construcción</h3>
+        </div>
+        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+    </div>
+
+</div>
+
+</section>
+
+<script>
+function toggleSeccion(id, elemento) {
+    cerrarTodo();
+    document.getElementById(id).classList.add('visible');
+    elemento.classList.add('activo');
+
+    setTimeout(function() {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+}
+
+function cerrarTodo() {
+    document.getElementById('talleres').classList.remove('visible');
+    document.getElementById('cursos').classList.remove('visible');
+    document.getElementById('charlas').classList.remove('visible');
+
+    document.querySelectorAll('.card').forEach(function(card) {
+        card.classList.remove('activo');
+    });
+}
+</script>
+
+</body>
+</html>
