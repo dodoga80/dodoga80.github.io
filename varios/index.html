@@ -11,22 +11,28 @@ body {
     margin: 0;
     background-color: #f4f6f8;
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+}
+
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* === CONTENEDOR === */
+.seccion-container {
+    margin-top: 20px;
 }
 
 /* === RECUADRO DE MENSAJE === */
 .mensaje-recuadro {
     text-align: center;
-    padding: 60px 40px;
+    padding: 50px 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
     border: 2px dashed #1f3a56;
-    max-width: 600px;
-    width: 90%;
 }
 
 .mensaje-recuadro .emoji-grande {
@@ -40,15 +46,59 @@ body {
     margin: 0;
     font-weight: bold;
 }
+
+/* === BOTÓN VOLVER === */
+.volver-btn {
+    display: inline-block;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    transition: background-color 0.2s;
+}
+
+.volver-btn:hover {
+    background-color: #143048;
+}
+
+.volver-btn::before {
+    content: "← ";
+    font-weight: normal;
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
 </style>
 </head>
 
 <body>
 
-<div class="mensaje-recuadro">
-    <div class="emoji-grande">🚧</div>
-    <h3>Este directorio se encuentra en construcción</h3>
-</div>
+<section>
+
+    <div class="seccion-container">
+
+        <div class="mensaje-recuadro">
+            <div class="emoji-grande">🚧</div>
+            <h3>Este directorio se encuentra en construcción</h3>
+        </div>
+
+        <button class="volver-btn" onclick="volver()">Volver</button>
+
+    </div>
+
+</section>
+
+<script>
+function volver() {
+    window.history.back();
+}
+</script>
 
 </body>
 </html>
