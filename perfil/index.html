@@ -3,690 +3,343 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Domingo Garay — Servicios profesionales de información ambiental para la gestión territorial">
-<title>Domingo GARAY — Información Ambiental</title>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=JetBrains+Mono:wght@400;600&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Domingo Garay | Perfil Profesional</title>
+
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  /* Colores primarios - Naturaleza sofisticada */
-  --black-deep:    #0d1117;
-  --black-soft:    #1a1f1b;
-  --forest-night:  #0f1810;
-  --forest-dark:   #1a2e1a;
-  --forest-mid:    #2d4a2f;
-  --forest-light:  #4a6d48;
-  --sage-dark:     #5a7d5a;
-  --sage-mid:      #7a9d7a;
-  --sage-light:    #a8c895;
-  --cream-warm:    #f5f1e8;
-  --cream-light:   #fbf9f4;
-  --white-pure:    #ffffff;
-  --accent-gold:   #d4af37;
-  --accent-bronze: #8b7355;
-  --accent-terr:   #a67c52;
-  --border-cards:  #1f3a56;
-  
-  /* Sombras sofisticadas */
-  --shadow-sm:     0 1px 3px rgba(15, 24, 16, 0.12);
-  --shadow-md:     0 4px 12px rgba(15, 24, 16, 0.15);
-  --shadow-lg:     0 12px 32px rgba(15, 24, 16, 0.18);
-  --shadow-xl:     0 20px 48px rgba(15, 24, 16, 0.22);
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: 'Quicksand', sans-serif;
-  background: linear-gradient(135deg, var(--cream-warm) 0%, var(--cream-light) 100%);
-  color: var(--forest-night);
-  min-height: 100vh;
-  min-height: 100dvh;
-  position: relative;
-  overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #333;
 }
-
-/* Fondo dinámico con capas */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 100% 80% at 0% 0%, rgba(74, 109, 72, 0.08) 0%, transparent 40%),
-    radial-gradient(ellipse 80% 100% at 100% 100%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(90, 125, 90, 0.03) 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Textura sutil */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-
-.page {
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: clamp(16px, 2vw, 40px) clamp(16px, 3vw, 40px);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(24px, 4vw, 40px);
-}
-
-/* ════════════════════════════════════════════════════════════ */
-/* HEADER - Editorial & Dramatic */
-/* ════════════════════════════════════════════════════════════ */
 
 header {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(8px, 1.5vw, 14px);
-  padding-bottom: clamp(16px, 2.5vw, 28px);
-  border-bottom: 2px solid var(--border-cards);
-  position: relative;
+    background-color: #1f3a56;
+    color: white;
+    padding: 35px;
+    text-align: center;
 }
 
-header::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--border-cards);
-  opacity: 1;
+header h1 {
+    margin-bottom: 10px;
+    font-size: 32px;  /* MODIFICADO: de 42px a 32px */
 }
 
-.header-mark {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-  justify-content: center;
+section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-.mark-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent-bronze);
-  opacity: 0;
-  animation: fadeIn 0.8s ease-out 0.2s forwards;
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
 }
 
-.site-title {
-  font-family: 'Bodoni Moda', serif;
-  font-size: clamp(3.2rem, 9vw, 4.5rem);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  color: var(--forest-dark);
-  position: relative;
-  opacity: 0;
-  animation: slideInDown 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
-  text-align: center;
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
-.site-title em {
-  font-style: normal;
-  color: var(--forest-dark);
-  display: inline;
-  margin-left: 0;
-  position: relative;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.site-title em::before {
-  display: none;
+/* Estilo para la tarjeta activa */
+.card.activo {
+    background-color: #1f3a56;
+    color: white;
 }
 
-.site-subtitle {
-  font-size: clamp(0.85rem, 1.8vw, 0.95rem);
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--sage-dark);
-  max-width: 100%;
-  opacity: 0;
-  animation: fadeIn 0.9s ease-out 0.3s forwards;
-  letter-spacing: 0.3px;
-  text-align: center;
-  margin: 0 auto;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.card.activo h3 {
+    color: white;
 }
 
-@media (max-width: 900px) {
-  .site-subtitle {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-  }
+.card.activo p {
+    color: rgba(255, 255, 255, 0.9);
 }
 
-/* ════════════════════════════════════════════════════════════ */
-/* DIRECTORIOS - Grid Asimétrico y Dinámico */
-/* ════════════════════════════════════════════════════════════ */
-
-.dirs-section {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(10px, 2vw, 16px);
-  opacity: 0;
-  animation: fadeIn 0.8s ease-out 0.35s forwards;
+.card-emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
 }
 
-.section-header {
-  display: none;
-  align-items: baseline;
-  gap: 20px;
-  position: relative;
+.card h3 {
+    color: #1f3a56;
+    font-size: 18px;
+    margin: 10px 0;
+    font-weight: bold;
+    transition: color 0.2s;
 }
 
-.section-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--accent-bronze);
-  white-space: nowrap;
-  flex-shrink: 0;
-  display: none;
+.card p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    transition: color 0.2s;
 }
 
-.section-rule {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    var(--forest-light) 0%,
-    transparent 100%);
-  display: none;
-}
-
-/* Grid asimétrico con 5 columnas en desktop */
-.repo-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(12px, 1.5vw, 16px);
-  width: 100%;
-  animation-delay: 0.4s;
-}
-
-.repo-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: clamp(14px, 2vw, 22px) clamp(8px, 1.5vw, 14px);
-  background: var(--white-pure);
-  border: 1.5px solid var(--border-cards);
-  border-radius: 20px;
-  text-decoration: none;
-  color: var(--forest-night);
-  cursor: pointer;
-  text-align: center;
-  min-height: 100px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0;
-  animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  box-shadow: var(--shadow-sm);
-}
-
-/* Stagger animation para cada card */
-.repo-card:nth-child(1) { animation-delay: 0.45s; }
-.repo-card:nth-child(2) { animation-delay: 0.52s; }
-.repo-card:nth-child(3) { animation-delay: 0.59s; }
-.repo-card:nth-child(4) { animation-delay: 0.66s; }
-.repo-card:nth-child(5) { animation-delay: 0.73s; }
-.repo-card:nth-child(6) { animation-delay: 0.52s; }
-.repo-card:nth-child(7) { animation-delay: 0.59s; }
-.repo-card:nth-child(8) { animation-delay: 0.66s; }
-.repo-card:nth-child(9) { animation-delay: 0.73s; }
-
-/* Efecto de luz en background */
-.repo-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 30%, 
-              rgba(212, 175, 55, 0.12) 0%, 
-              transparent 50%);
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-  pointer-events: none;
-}
-
-/* Línea de acento inferior */
-.repo-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--border-cards);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  display: none;
-}
-
-.repo-card:hover {
-  background: linear-gradient(135deg, var(--white-pure) 0%, rgba(212, 175, 55, 0.03) 100%);
-  border-color: var(--border-cards);
-  border-width: 3.5px;
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--shadow-lg);
-}
-
-.repo-card:hover::before {
-  opacity: 1;
-}
-
-.repo-card:hover::after {
-  transform: scaleX(1);
-  display: none;
-}
-
-.repo-icon {
-  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  display: block;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(15, 24, 16, 0.1));
-}
-
-.repo-card:hover .repo-icon {
-  transform: scale(1.2) rotateY(5deg);
-  filter: drop-shadow(0 6px 16px rgba(212, 175, 55, 0.2));
-}
-
-.repo-name {
-  font-size: clamp(0.8rem, 1.8vw, 1rem);
-  font-weight: 600;
-  color: var(--forest-dark);
-  line-height: 1.4;
-  transition: color 0.4s ease;
-}
-
-.repo-card:hover .repo-name {
-  color: var(--border-cards);
-}
-
-/* ════════════════════════════════════════════════════════════ */
-/* FOOTER - Elegante y Sofisticado */
-/* ════════════════════════════════════════════════════════════ */
-
-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding-top: clamp(16px, 2.5vw, 28px);
-  border-top: 2px solid var(--border-cards);
-  position: relative;
-  opacity: 0;
-  animation: fadeIn 0.8s ease-out 0.5s forwards;
-}
-
-footer::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--border-cards);
-  opacity: 1;
-}
-
-.contact-link {
-  display: none;
-}
-
-.footer-decoration {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  align-items: center;
-}
-
-.footer-dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent-gold);
-  opacity: 0.8;
-  animation: pulse 2.4s ease-in-out infinite;
-}
-
-.footer-dot:nth-child(1) { animation-delay: 0s; }
-.footer-dot:nth-child(2) { animation-delay: 0.4s; }
-.footer-dot:nth-child(3) { animation-delay: 0.8s; }
-
-.footer-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent-bronze);
-  opacity: 0.7;
-}
-
-/* ════════════════════════════════════════════════════════════ */
-/* ANIMACIONES */
-/* ════════════════════════════════════════════════════════════ */
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes expandWidth {
-  from {
-    width: 0;
-    opacity: 0;
-  }
-  to {
-    width: 100%;
-    opacity: 1;
-  }
-}
-
-@keyframes glowPulse {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-
-/* ════════════════════════════════════════════════════════════ */
-/* RESPONSIVE */
-/* ════════════════════════════════════════════════════════════ */
-
-@media (max-width: 900px) {
-  .page {
-    gap: clamp(44px, 8vw, 64px);
-  }
-
-  .site-title {
-    font-size: clamp(2.8rem, 9vw, 4rem);
-  }
-
-  .repo-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(14px, 2vw, 18px);
-  }
-}
-
-@media (max-width: 700px) {
-  .site-title {
-    font-size: clamp(2.2rem, 8vw, 3.5rem);
-    white-space: normal;
-  }
-
-  .site-title em {
-    display: inline;
-    margin-left: 0;
-  }
-
-  .repo-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(12px, 2.5vw, 16px);
-  }
-
-  .repo-card {
-    min-height: 110px;
-    padding: 16px 10px;
-    gap: 10px;
-  }
-
-  .repo-icon {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-  }
-
-  .repo-name {
-    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
-  }
-
-  .section-rule {
+.contenido-seccion {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
     display: none;
-  }
-
-  .section-header {
-    justify-content: center;
-  }
+    scroll-margin-top: 20px;
 }
 
-@media (max-width: 520px) {
-  .page {
-    padding: clamp(28px, 5vw, 40px) clamp(16px, 4vw, 28px);
-    gap: clamp(36px, 6vw, 48px);
-  }
-
-  .site-title {
-    font-size: clamp(1.9rem, 7vw, 2.8rem);
-  }
-
-  .site-subtitle {
-    font-size: clamp(0.88rem, 2vw, 1.05rem);
-    line-height: 1.5;
-  }
-
-  .repo-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-
-  .repo-card {
-    min-height: 100px;
-    padding: 14px 8px;
-    gap: 8px;
-    border-radius: 16px;
-  }
-
-  .repo-icon {
-    font-size: clamp(1.4rem, 3.5vw, 2rem);
-  }
-
-  .repo-name {
-    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
-  }
-
-  .mark-text {
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-  }
+.contenido-seccion.activo {
+    display: block;
 }
 
-@media (max-width: 380px) {
-  .site-title {
-    font-size: clamp(1.6rem, 6vw, 2.2rem);
-  }
-
-  .site-subtitle {
-    font-size: clamp(0.9rem, 2vw, 1rem);
-  }
-
-  .repo-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-
-  .repo-card {
-    min-height: 95px;
-    padding: 12px 6px;
-  }
+.contenido-seccion h2 {
+    color: #1f3a56;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1f3a56;
+    padding-bottom: 10px;
 }
 
-@media (max-height: 500px) and (orientation: landscape) {
-  .page {
-    padding: 20px 24px;
-    gap: 24px;
-  }
-
-  header {
-    gap: 16px;
-    padding-bottom: 20px;
-  }
-
-  .site-title {
-    font-size: 2rem;
-  }
-
-  .site-subtitle {
-    font-size: 0.9rem;
-    max-width: 600px;
-  }
-
-  .repo-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-  }
-
-  .repo-card {
-    min-height: 85px;
-    padding: 10px 6px;
-    gap: 6px;
-  }
-
-  .repo-icon {
-    font-size: 1.4rem;
-  }
-
-  .repo-name {
-    font-size: 0.65rem;
-  }
-
-  footer {
-    gap: 16px;
-    padding-top: 20px;
-  }
+.contenido-seccion p {
+    line-height: 1.6;
+    margin: 15px 0;
+    text-align: justify;
 }
 
-@media print {
-  body::before, body::after {
-    display: none;
-  }
+.contenido-seccion .item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
 
-  .repo-card {
-    box-shadow: none;
-    page-break-inside: avoid;
-  }
+.contenido-seccion .item:last-child {
+    border-bottom: none;
+}
+
+.contenido-seccion .item h4 {
+    color: #1f3a56;
+    font-size: 18px;
+    margin: 0 0 5px 0;
+}
+
+.contenido-seccion .item p {
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+.contenido-seccion .item .institucion {
+    font-style: italic;
+    color: #666;
+    font-size: 14px;
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.volver:hover {
+    background-color: #2a4a6e;
+}
+
+/* Scroll suave para toda la página */
+html {
+    scroll-behavior: smooth;
 }
 </style>
 </head>
+
 <body>
-<main class="page">
 
-  <!-- HEADER -->
-  <header>
-    <h1 class="site-title">Domingo <em>GARAY</em></h1>
+<header>
+    <h1>Mi perfil</h1>
+</header>
+
+<section>
+
+    <!-- Tarjetas de navegación -->
+    <div class="card-container">
+        <!-- Acerca de mí -->
+        <div class="card" id="card-perfil" onclick="mostrarSeccion('perfil')">
+            <div class="card-emoji">🙋</div>
+            <h3>Acerca de mí</h3>
+            </div>
+
+        <!-- Formación académica -->
+        <div class="card" id="card-formacion" onclick="mostrarSeccion('formacion')">
+            <div class="card-emoji">🎓</div>
+            <h3>Formación académica</h3>
+            </div>
+
+        <!-- Especialidades -->
+        <div class="card" id="card-especialidades" onclick="mostrarSeccion('especialidades')">
+            <div class="card-emoji">💡</div>
+            <h3>Especialidades</h3>
+            </div>
+
+       </div>
+
+    <!-- Contenido de Acerca de mí -->
+    <div id="perfil" class="contenido-seccion">
+        <h2>Acerca de mí</h2>
+        <p>Soy Domingo GARAY, profesional en Ambiente y Recursos Naturales, con experiencia en el uso de Sistemas de Información Geográfica (SIG) y Teledetección, gestión de incendios rurales y forestales y análisis pluviométrico, aplicados al análisis territorial y a la generación de información técnica para la toma de decisiones.</p>
+        <p>Trabajo en el Instituto Nacional de Tecnología Agropecuaria (INTA) desde el año 2006. Me desempeño en el Grupo de Recursos Naturales de la Estación Experimental Agropecuaria La Rioja.</p>
+        <p>Soy docente desde el año 2007. Actualmente me desempeño en áreas de Ciencias Sociales y Ambientales de nivel medio en los colegios de Loma Blanca y Punta de los Llanos.</p>
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+    <!-- Contenido de Formación académica -->
+    <div id="formacion" class="contenido-seccion">
+        <h2>Formación académica</h2>
+        
+        <div class="item">
+            <h4>Estudios Formativos de Nivel Primario</h4>
+            <p>Escuela N° 150 de Bajo Hondo</p>
+            <p class="institucion">Bajo Hondo, La Rioja, 2003</p>
+        </div>
+
+        <div class="item">
+            <h4>Perito Mercantil con Especialización Contable e Impositiva</h4>
+            <p>Escuela de Comercio Juan Facundo Quiroga</p>
+            <p class="institucion">Ulapes, La Rioja, 2003</p>
+        </div>
+
+        <div class="item">
+            <h4>Profesor para Educación en Ciencias Políticas</h4>
+            <p>Instituto Superior de Formación Docente Profesora Teresa L. Cavero</p>
+            <p class="institucion">Chamical, La Rioja, 2007</p>
+        </div>
+
+        <div class="item">
+            <h4>Licenciado en Enseñanza de las Ciencias del Ambiente</h4>
+            <p>Universidad Tecnológica Nacional, Facultad Regional San Francisco</p>
+            <p class="institucion">San Francisco, Córdoba, 2013</p>
+        </div>
+
+        <div class="item">
+            <h4>Diplomado en Bases y Herramientas para la Gestión del Cambio Climático</h4>
+            <p>MAyDS - Universidad Nacional de Quilmes - Universidad Nacional de Jujuy</p>
+            <p class="institucion">Quilmes, Buenos Aires, 2020</p>
+        </div>
+
+        <div class="item">
+            <h4>Diplomado en Manejo del Fuego y Cambio Climático</h4>
+            <p>Universidad Nacional de General San Martín</p>
+            <p class="institucion">San Martín, Buenos Aires, 2023</p>
+        </div>
+
+        <div class="item">
+            <h4>Técnico Universitario en Gestión Integral de Incendios Forestales</h4>
+            <p>Universidad Nacional de Los Comechingones</p>
+            <p class="institucion">Villa de Merlo, San Luis, 2024</p>
+        </div>
+
+        <div class="item">
+            <h4>Diplomado Superior en Inteligencia Artificial en Educación</h4>
+            <p>Universidad Nacional Arturo Jauretche</p>
+            <p class="institucion">Florencio Varela, Buenos Aires, 2025</p>
+        </div>
+
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+    <!-- Contenido de Especialidades -->
+    <div id="especialidades" class="contenido-seccion">
+        <h2>Especialidades</h2>
+        
+        <div class="item">
+            <h4>Gestión y análisis territorial mediante SIG y Teledetección</h4>
+            <p>Aplicada al estudio de recursos naturales, sistemas productivos y dinámicas ambientales, integrando herramientas de escritorio (QGIS) y plataformas en la nube como Google Earth Engine.</p>
+        </div>
+
+        <div class="item">
+            <h4>Análisis pluviométrico y estadística de precipitaciones</h4>
+            <p>Basado en datos de campo y satelitales, orientado al seguimiento de la variabilidad climática, la evaluación del estado hídrico del territorio y la generación de información técnica para la toma de decisiones.</p>
+        </div>
+
+        <div class="item">
+            <h4>Monitoreo satelital de la situación hídrica</h4>
+            <p>Complementando redes de pluviómetros con información de precipitaciones e indicadores ambientales, para el análisis temporal y espacial de sequías y excesos hídricos.</p>
+        </div>
+
+        <div class="item">
+            <h4>Gestión de incendios de vegetación</h4>
+            <p>Incluyendo evaluación de vulnerabilidad, detección y cuantificación de áreas quemadas, estimación de severidad, análisis de impactos del fuego en sistemas rurales y productivos, y determinación de procesos de regeneración vegetal.</p>
+        </div>
+
+        <div class="item">
+            <h4>Análisis ambiental aplicado a sistemas productivos locales</h4>
+            <p>Con enfoque territorial, orientado a la planificación, la gestión del riesgo y el apoyo a procesos institucionales y de extensión.</p>
+        </div>
+
+        <div class="item">
+            <h4>Docencia en ciencias sociales y ambientales en nivel secundario</h4>
+            <p>Integrando contenidos de ciudadanía, ambiente y territorio, y promoviendo el pensamiento crítico a partir de problemáticas locales concretas.</p>
+        </div>
+
+        <button class="volver" onclick="volver()">← Volver</button>
+    </div>
+
+</section>
+
+<script>
+function mostrarSeccion(id) {
+    // Ocultar todas las secciones
+    document.getElementById('perfil').classList.remove('activo');
+    document.getElementById('formacion').classList.remove('activo');
+    document.getElementById('especialidades').classList.remove('activo');
     
-    <p class="site-subtitle">
-      Servicio técnico profesional de generación de información ambiental para gestión territorial
-    </p>
-  </header>
+    // Quitar clase activo de todas las tarjetas
+    document.getElementById('card-perfil').classList.remove('activo');
+    document.getElementById('card-formacion').classList.remove('activo');
+    document.getElementById('card-especialidades').classList.remove('activo');
+    
+    // Mostrar la sección seleccionada
+    const seccion = document.getElementById(id);
+    seccion.classList.add('activo');
+    
+    // Activar la tarjeta correspondiente
+    document.getElementById('card-' + id).classList.add('activo');
+    
+    // Desplazar suavemente hasta el inicio de la sección
+    setTimeout(function() {
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+}
 
-  <!-- DIRECTORIOS -->
-  <section class="dirs-section">
-    <div class="section-header">
-      <div class="section-rule"></div>
-    </div>
+function volver() {
+    // Ocultar todas las secciones
+    document.getElementById('perfil').classList.remove('activo');
+    document.getElementById('formacion').classList.remove('activo');
+    document.getElementById('especialidades').classList.remove('activo');
+    
+    // Quitar clase activo de todas las tarjetas
+    document.getElementById('card-perfil').classList.remove('activo');
+    document.getElementById('card-formacion').classList.remove('activo');
+    document.getElementById('card-especialidades').classList.remove('activo');
+    
+    // Desplazar suavemente hasta las tarjetas
+    document.querySelector('.card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
 
-    <div class="repo-grid">
-      <a href="/perfil/" class="repo-card">
-        <span class="repo-icon">👤</span>
-        <span class="repo-name">Perfil</span>
-      </a>
-      <a href="/servicios/" class="repo-card">
-        <span class="repo-icon">🧰</span>
-        <span class="repo-name">Servicios</span>
-      </a>
-      <a href="/publicaciones/" class="repo-card">
-        <span class="repo-icon">✍️</span>
-        <span class="repo-name">Publicaciones</span>
-      </a>
-      <a href="/proyectos/" class="repo-card">
-        <span class="repo-icon">👨‍🏫</span>
-        <span class="repo-name">Proyectos</span>
-      </a>
-      <a href="/precipitaciones/" class="repo-card">
-        <span class="repo-icon">🌧️</span>
-        <span class="repo-name">Precipitaciones</span>
-      </a>
-      <a href="/incendios/" class="repo-card">
-        <span class="repo-icon">🔥</span>
-        <span class="repo-name">Incendios</span>
-      </a>
-      <a href="/extension/" class="repo-card">
-        <span class="repo-icon">🔗</span>
-        <span class="repo-name">Extensión</span>
-      </a>
-      <a href="/varios/" class="repo-card">
-        <span class="repo-icon">📂</span>
-        <span class="repo-name">Varios</span>
-      </a>
-      <a href="/contacto/" class="repo-card">
-        <span class="repo-icon">📱</span>
-        <span class="repo-name">Contacto</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p class="footer-text">© Domingo Garay • 2026</p>
-    <p class="footer-text">Versión 1.0</p>
-  </footer>
-
-</main>
 </body>
 </html>
