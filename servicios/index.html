@@ -16,7 +16,7 @@ body {
 header {
     background-color: #1f3a56;
     color: white;
-    padding: 35px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -27,7 +27,7 @@ header h1 {
 
 section {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 40px auto 120px auto;
     padding: 0 20px;
 }
 
@@ -83,6 +83,7 @@ section {
     margin-top: 20px;
     display: none;
     scroll-margin-top: 20px;
+    text-align: justify;
 }
 
 .contenido-seccion.activo {
@@ -108,8 +109,6 @@ section {
     border-bottom: none;
 }
 
-/* === LISTAS SIN VIÑETAS Y TEXTO JUSTIFICADO === */
-
 .servicio-item ul {
     margin: 0;
     padding-left: 0;
@@ -123,23 +122,47 @@ section {
     text-align: justify;
 }
 
-/* === BOTÓN VOLVER === */
+/* BOTÓN FIJO GLOBAL */
+.boton-principal-wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
 
-.volver {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 8px 20px;
+.boton-principal-inner {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+.boton-principal {
+    pointer-events: all;
+    padding: 10px 22px;
     background-color: #1f3a56;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     transition: background-color 0.2s;
-    font-weight: normal;
+    min-width: 120px;
+    width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1001;
 }
 
-.volver:hover {
+.boton-principal:hover {
     background-color: #2a4a6e;
 }
 
@@ -157,7 +180,7 @@ html {
 
 <section>
 
-<div class="card-container">
+<div class="card-container" id="directorio">
 
     <div class="card" id="card-incendios" onclick="mostrarSeccion('incendios')">
         <div class="card-emoji">🔥</div>
@@ -188,7 +211,6 @@ html {
             <li>Estimación de severidad y análisis de impactos.</li>
         </ul>
     </div>
-    <button class="volver" onclick="volver()">← Volver</button>
 </div>
 
 <!-- SIG -->
@@ -202,7 +224,6 @@ html {
             <li>Sistematización y análisis de información territorial.</li>
         </ul>
     </div>
-    <button class="volver" onclick="volver()">← Volver</button>
 </div>
 
 <!-- Hidrología -->
@@ -216,13 +237,24 @@ html {
             <li>Análisis ambiental aplicado a proyectos productivos.</li>
         </ul>
     </div>
-    <button class="volver" onclick="volver()">← Volver</button>
 </div>
 
 </section>
 
+<!-- BOTÓN ÚNICO DINÁMICO -->
+<div class="boton-principal-wrapper">
+    <div class="boton-principal-inner">
+        <button id="botonPrincipal" class="boton-principal" onclick="accionBoton()">← Inicio</button>
+    </div>
+</div>
+
 <script>
+
+let seccionActiva = null;
+
 function mostrarSeccion(id) {
+
+    document.getElementById("directorio").style.display = "none";
 
     document.getElementById('incendios').classList.remove('activo');
     document.getElementById('sig').classList.remove('activo');
@@ -236,6 +268,12 @@ function mostrarSeccion(id) {
     seccion.classList.add('activo');
 
     document.getElementById('card-' + id).classList.add('activo');
+
+    seccionActiva = id;
+
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Volver";
+    btn.style.display = "block";
 
     setTimeout(function() {
         seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -252,8 +290,32 @@ function volver() {
     document.getElementById('card-sig').classList.remove('activo');
     document.getElementById('card-hidrologia').classList.remove('activo');
 
-    document.querySelector('.card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById("directorio").style.display = "grid";
+
+    seccionActiva = null;
+
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Inicio";
+    btn.style.display = "block";
+
+    document.querySelector('.card-container')
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+function accionBoton() {
+    if (seccionActiva) {
+        volver();
+    } else {
+        window.location.assign("https://dodoga80.github.io/");
+    }
+}
+
+window.onload = function() {
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Inicio";
+    btn.style.display = "block";
+};
+
 </script>
 
 </body>
