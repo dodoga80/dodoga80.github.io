@@ -13,25 +13,30 @@ body {
     color: #333;
 }
 
+header {
+    background-color: #1f3a56;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+
 section {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 40px auto 120px auto;
     padding: 0 20px;
 }
 
-/* === CONTENEDOR === */
-.seccion-container {
-    margin-top: 20px;
-}
-
-/* === RECUADRO DE MENSAJE === */
 .mensaje-recuadro {
     text-align: center;
     padding: 50px 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    margin-bottom: 25px;
     border: 2px dashed #1f3a56;
 }
 
@@ -47,30 +52,50 @@ section {
     font-weight: bold;
 }
 
-/* === BOTÓN VOLVER === */
-.volver-btn {
-    display: inline-block;
+/* BOTÓN FIJO GLOBAL */
+.boton-principal-wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.boton-principal-inner {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+.boton-principal {
+    pointer-events: all;
+    padding: 10px 22px;
     background-color: #1f3a56;
     color: white;
     border: none;
-    padding: 8px 20px;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: normal;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     transition: background-color 0.2s;
+    min-width: 120px;
+    width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1001;
 }
 
-.volver-btn:hover {
-    background-color: #143048;
+.boton-principal:hover {
+    background-color: #2a4a6e;
 }
 
-.volver-btn::before {
-    content: "← ";
-    font-weight: normal;
-}
-
-/* Scroll suave */
 html {
     scroll-behavior: smooth;
 }
@@ -79,26 +104,23 @@ html {
 
 <body>
 
+<header>
+    <h1>Varios</h1>
+</header>
+
 <section>
-
-    <div class="seccion-container">
-
-        <div class="mensaje-recuadro">
-            <div class="emoji-grande">🚧</div>
-            <h3>Este directorio se encuentra en construcción</h3>
-        </div>
-
-        <button class="volver-btn" onclick="volver()">Volver</button>
-
+    <div class="mensaje-recuadro">
+        <div class="emoji-grande">🚧</div>
+        <h3>Este directorio se encuentra en construcción</h3>
     </div>
-
 </section>
 
-<script>
-function volver() {
-    window.history.back();
-}
-</script>
+<!-- BOTÓN INICIO -->
+<div class="boton-principal-wrapper">
+    <div class="boton-principal-inner">
+        <button class="boton-principal" onclick="window.location.assign('https://dodoga80.github.io/')">← Inicio</button>
+    </div>
+</div>
 
 </body>
 </html>
