@@ -16,18 +16,18 @@ body {
 header {
     background-color: #1f3a56;
     color: white;
-    padding: 35px;
+    padding: 20px;
     text-align: center;
 }
 
 header h1 {
     margin-bottom: 10px;
-    font-size: 32px;  /* MODIFICADO: tamaño por defecto */
+    font-size: 32px;
 }
 
 section {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 40px auto 120px auto;
     padding: 0 20px;
 }
 
@@ -35,6 +35,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
+    margin-bottom: 30px;
 }
 
 .card {
@@ -70,8 +71,8 @@ section {
 .card h3 {
     color: #1f3a56;
     margin: 10px 0;
-    font-size: 18px;  /* MODIFICADO: de tamaño por defecto a 18px */
-    font-weight: bold; /* MODIFICADO: agregada negrita */
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .card p {
@@ -79,36 +80,39 @@ section {
     color: #666;
 }
 
-/* === CONTENEDOR DE SECCIÓN (título + recuadro + botón) === */
-.seccion-container {
-    grid-column: 1 / -1;
+/* SECCIONES */
+.contenido-seccion {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     margin-top: 20px;
     display: none;
+    scroll-margin-top: 20px;
+    text-align: justify;
 }
 
-.seccion-container.visible {
+.contenido-seccion.activo {
     display: block;
 }
 
-.seccion-container h2 {
+.contenido-seccion h2 {
     color: #1f3a56;
-    font-size: 1.5em;  /* MODIFICADO: de 1.8em a 1.5em (aprox 24px) */
+    font-size: 1.5em;
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     border-bottom: 2px solid #1f3a56;
-    padding-bottom: 12px;
-    font-weight: bold;
+    padding-bottom: 10px;
 }
 
-/* === RECUADRO DE MENSAJE === */
+/* RECUADRO EN CONSTRUCCIÓN */
 .mensaje-recuadro {
     text-align: center;
     padding: 50px 20px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    margin-bottom: 25px;
-    border: 2px dashed #1f3a56;  /* Borde discontinuo azul */
+    margin-bottom: 10px;
+    border: 2px dashed #1f3a56;
 }
 
 .mensaje-recuadro .emoji-grande {
@@ -118,32 +122,57 @@ section {
 
 .mensaje-recuadro h3 {
     color: #1f3a56;
-    font-size: 24px;  /* MODIFICADO: de 26px a 24px */
+    font-size: 24px;
     margin: 0;
     font-weight: bold;
 }
 
-/* === BOTÓN VOLVER === */
-.volver-btn {
-    display: inline-block;
+/* BOTÓN FIJO GLOBAL */
+.boton-principal-wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.boton-principal-inner {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+.boton-principal {
+    pointer-events: all;
+    padding: 10px 22px;
     background-color: #1f3a56;
     color: white;
     border: none;
-    padding: 8px 20px;  /* MODIFICADO: de 10px 25px a 8px 20px */
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;  /* MODIFICADO: de 16px a 14px */
-    font-weight: normal;  /* MODIFICADO: sin negrita */
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     transition: background-color 0.2s;
+    min-width: 120px;
+    width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1001;
 }
 
-.volver-btn:hover {
-    background-color: #143048;
+.boton-principal:hover {
+    background-color: #2a4a6e;
 }
 
-.volver-btn::before {
-    content: "← ";
-    font-weight: normal;  /* MODIFICADO: acorde al botón */
+html {
+    scroll-behavior: smooth;
 }
 </style>
 </head>
@@ -156,86 +185,129 @@ section {
 
 <section>
 
-<div class="card-container">
+<div class="card-container" id="directorio">
 
-    <!-- Tarjetas -->
-    <div class="card" onclick="toggleSeccion('informes', this)">
+    <div class="card" id="card-informes" onclick="mostrarSeccion('informes')">
         <div class="card-emoji">📈</div>
         <h3>Informes técnicos</h3>
     </div>
 
-    <div class="card" onclick="toggleSeccion('revistas', this)">
+    <div class="card" id="card-revistas" onclick="mostrarSeccion('revistas')">
         <div class="card-emoji">📰</div>
         <h3>Revistas de divulgación</h3>
     </div>
 
-    <div class="card" onclick="toggleSeccion('congresos', this)">
+    <div class="card" id="card-congresos" onclick="mostrarSeccion('congresos')">
         <div class="card-emoji">🎙️</div>
         <h3>Congresos y ponencias</h3>
     </div>
 
-    <!-- Contenedor Informes técnicos -->
-    <div id="informes" class="seccion-container">
-        <h2>Informes técnicos</h2>
-        <div class="mensaje-recuadro">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
-        </div>
-        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
-    </div>
+</div>
 
-    <!-- Contenedor Revistas de divulgación -->
-    <div id="revistas" class="seccion-container">
-        <h2>Revistas de divulgación</h2>
-        <div class="mensaje-recuadro">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
-        </div>
-        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+<!-- Informes técnicos -->
+<div id="informes" class="contenido-seccion">
+    <h2>Informes técnicos</h2>
+    <div class="mensaje-recuadro">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
     </div>
+</div>
 
-    <!-- Contenedor Congresos y ponencias -->
-    <div id="congresos" class="seccion-container">
-        <h2>Congresos y ponencias</h2>
-        <div class="mensaje-recuadro">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
-        </div>
-        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+<!-- Revistas de divulgación -->
+<div id="revistas" class="contenido-seccion">
+    <h2>Revistas de divulgación</h2>
+    <div class="mensaje-recuadro">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
     </div>
+</div>
 
+<!-- Congresos y ponencias -->
+<div id="congresos" class="contenido-seccion">
+    <h2>Congresos y ponencias</h2>
+    <div class="mensaje-recuadro">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
+    </div>
 </div>
 
 </section>
 
+<!-- BOTÓN ÚNICO DINÁMICO -->
+<div class="boton-principal-wrapper">
+    <div class="boton-principal-inner">
+        <button id="botonPrincipal" class="boton-principal" onclick="accionBoton()">← Inicio</button>
+    </div>
+</div>
+
 <script>
-function toggleSeccion(id, elemento) {
-    // Cerrar todas las secciones
-    cerrarTodo();
-    
-    // Mostrar la sección seleccionada
-    document.getElementById(id).classList.add('visible');
-    
-    // Activar la tarjeta correspondiente
-    elemento.classList.add('activo');
-    
-    // Desplazar suavemente
+
+let seccionActiva = null;
+
+function mostrarSeccion(id) {
+
+    document.getElementById("directorio").style.display = "none";
+
+    document.getElementById('informes').classList.remove('activo');
+    document.getElementById('revistas').classList.remove('activo');
+    document.getElementById('congresos').classList.remove('activo');
+
+    document.getElementById('card-informes').classList.remove('activo');
+    document.getElementById('card-revistas').classList.remove('activo');
+    document.getElementById('card-congresos').classList.remove('activo');
+
+    const seccion = document.getElementById(id);
+    seccion.classList.add('activo');
+
+    document.getElementById('card-' + id).classList.add('activo');
+
+    seccionActiva = id;
+
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Volver";
+    btn.style.display = "block";
+
     setTimeout(function() {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
 }
 
-function cerrarTodo() {
-    // Ocultar todas las secciones
-    document.getElementById('informes').classList.remove('visible');
-    document.getElementById('revistas').classList.remove('visible');
-    document.getElementById('congresos').classList.remove('visible');
-    
-    // Desactivar todas las tarjetas
-    document.querySelectorAll('.card').forEach(function(card) {
-        card.classList.remove('activo');
-    });
+function volver() {
+
+    document.getElementById('informes').classList.remove('activo');
+    document.getElementById('revistas').classList.remove('activo');
+    document.getElementById('congresos').classList.remove('activo');
+
+    document.getElementById('card-informes').classList.remove('activo');
+    document.getElementById('card-revistas').classList.remove('activo');
+    document.getElementById('card-congresos').classList.remove('activo');
+
+    document.getElementById("directorio").style.display = "grid";
+
+    seccionActiva = null;
+
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Inicio";
+    btn.style.display = "block";
+
+    document.querySelector('.card-container')
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+function accionBoton() {
+    if (seccionActiva) {
+        volver();
+    } else {
+        window.location.assign("https://dodoga80.github.io/");
+    }
+}
+
+window.onload = function() {
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Inicio";
+    btn.style.display = "block";
+};
+
 </script>
 
 </body>
