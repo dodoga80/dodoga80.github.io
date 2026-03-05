@@ -16,7 +16,7 @@ body {
 header {
     background-color: #1f3a56;
     color: white;
-    padding: 35px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -27,7 +27,7 @@ header h1 {
 
 section {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 40px auto 120px auto;
     padding: 0 20px;
 }
 
@@ -35,6 +35,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
+    margin-bottom: 30px;
 }
 
 .card {
@@ -66,32 +67,29 @@ section {
     font-weight: bold;
 }
 
-/* Sección Formulario */
-.seccion-container {
-    grid-column: 1 / -1;
+/* SECCIÓN FORMULARIO */
+.contenido-seccion {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     margin-top: 20px;
     display: none;
+    scroll-margin-top: 20px;
+    text-align: justify;
 }
 
-.seccion-container.visible {
+.contenido-seccion.activo {
     display: block;
 }
 
-.seccion-container h2 {
+.contenido-seccion h2 {
     color: #1f3a56;
     font-size: 1.5em;
-    margin-bottom: 25px;
+    margin-top: 0;
+    margin-bottom: 20px;
     border-bottom: 2px solid #1f3a56;
-    padding-bottom: 12px;
-    font-weight: bold;
-}
-
-.mensaje-recuadro {
-    padding: 40px 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    margin-bottom: 25px;
+    padding-bottom: 10px;
 }
 
 /* FORMULARIO */
@@ -113,33 +111,66 @@ textarea {
     min-height: 120px;
 }
 
-button {
+form button {
     background-color: #1f3a56;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: #143048;
-}
-
-.volver-btn {
-    display: inline-block;
-    margin-top: 20px;
-    background-color: #1f3a56;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 5px;
-    cursor: pointer;
     font-size: 14px;
 }
 
-.volver-btn::before {
-    content: "← ";
+form button:hover {
+    background-color: #143048;
+}
+
+/* BOTÓN FIJO GLOBAL */
+.boton-principal-wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.boton-principal-inner {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+.boton-principal {
+    pointer-events: all;
+    padding: 10px 22px;
+    background-color: #1f3a56;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
+    min-width: 120px;
+    width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1001;
+}
+
+.boton-principal:hover {
+    background-color: #2a4a6e;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 </style>
 </head>
@@ -152,7 +183,7 @@ button:hover {
 
 <section>
 
-<div class="card-container">
+<div class="card-container" id="directorio">
 
     <!-- Email (DIRECTO) -->
     <a class="card" href="mailto:dodogaray@gmail.com">
@@ -161,56 +192,90 @@ button:hover {
     </a>
 
     <!-- WhatsApp (DIRECTO) -->
-    <a class="card" target="_blank"
-       href="https://wa.me/543804529915">
+    <a class="card" target="_blank" href="https://wa.me/543804529915">
         <div class="card-emoji">💬</div>
         <h3>Chat de WhatsApp</h3>
     </a>
 
     <!-- Formulario (DESPLEGABLE) -->
-    <div class="card" onclick="toggleSeccion('formulario')">
+    <div class="card" id="card-formulario" onclick="mostrarSeccion('formulario')">
         <div class="card-emoji">📋</div>
         <h3>Formulario de contacto</h3>
     </div>
 
-    <!-- Contenedor Formulario -->
-    <div id="formulario" class="seccion-container">
-        <h2>Formulario de contacto</h2>
-        <div class="mensaje-recuadro">
+</div>
 
-            <form onsubmit="enviarFormulario(event)">
-                <input type="text" id="nombre" placeholder="Nombre" required>
-                <input type="text" id="apellido" placeholder="Apellido" required>
-                <input type="tel" id="telefono" placeholder="Teléfono">
-                <input type="email" id="emailform" placeholder="Email" required>
-                <textarea id="mensaje" placeholder="Mensaje" required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
-
-        </div>
-        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
-    </div>
-
+<!-- Formulario de contacto -->
+<div id="formulario" class="contenido-seccion">
+    <h2>Formulario de contacto</h2>
+    <form onsubmit="enviarFormulario(event)">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellido" placeholder="Apellido" required>
+        <input type="tel" id="telefono" placeholder="Teléfono">
+        <input type="email" id="emailform" placeholder="Email" required>
+        <textarea id="mensaje" placeholder="Mensaje" required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
 </div>
 
 </section>
 
-<script>
-function toggleSeccion(id) {
-    let seccion = document.getElementById(id);
-    seccion.classList.add('visible');
+<!-- BOTÓN ÚNICO DINÁMICO -->
+<div class="boton-principal-wrapper">
+    <div class="boton-principal-inner">
+        <button id="botonPrincipal" class="boton-principal" onclick="accionBoton()">← Inicio</button>
+    </div>
+</div>
 
-    // Scroll automático suave
+<script>
+
+let seccionActiva = null;
+
+function mostrarSeccion(id) {
+
+    document.getElementById("directorio").style.display = "none";
+
+    document.getElementById('formulario').classList.remove('activo');
+    document.getElementById('card-formulario').classList.remove('activo');
+
+    const seccion = document.getElementById(id);
+    seccion.classList.add('activo');
+    document.getElementById('card-' + id).classList.add('activo');
+
+    seccionActiva = id;
+
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Volver";
+    btn.style.display = "block";
+
     setTimeout(function() {
-        seccion.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
 }
 
-function cerrarTodo() {
-    document.getElementById('formulario').classList.remove('visible');
+function volver() {
+
+    document.getElementById('formulario').classList.remove('activo');
+    document.getElementById('card-formulario').classList.remove('activo');
+
+    document.getElementById("directorio").style.display = "grid";
+
+    seccionActiva = null;
+
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Inicio";
+    btn.style.display = "block";
+
+    document.querySelector('.card-container')
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function accionBoton() {
+    if (seccionActiva) {
+        volver();
+    } else {
+        window.location.assign("https://dodoga80.github.io/");
+    }
 }
 
 function enviarFormulario(e) {
@@ -233,6 +298,13 @@ function enviarFormulario(e) {
     window.location.href =
         "mailto:dodogaray@gmail.com?subject=" + asunto + "&body=" + cuerpo;
 }
+
+window.onload = function() {
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Inicio";
+    btn.style.display = "block";
+};
+
 </script>
 
 </body>
