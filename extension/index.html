@@ -16,7 +16,7 @@ body {
 header {
     background-color: #1f3a56;
     color: white;
-    padding: 35px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -27,7 +27,7 @@ header h1 {
 
 section {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 40px auto 120px auto;
     padding: 0 20px;
 }
 
@@ -35,6 +35,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
+    margin-bottom: 30px;
 }
 
 .card {
@@ -73,35 +74,38 @@ section {
     font-weight: bold;
 }
 
-/* === CONTENEDOR DE SECCIÓN === */
-.seccion-container {
-    grid-column: 1 / -1;
+/* SECCIONES */
+.contenido-seccion {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     margin-top: 20px;
     display: none;
+    scroll-margin-top: 20px;
+    text-align: justify;
 }
 
-.seccion-container.visible {
+.contenido-seccion.activo {
     display: block;
 }
 
-.seccion-container h2 {
+.contenido-seccion h2 {
     color: #1f3a56;
     font-size: 1.5em;
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     border-bottom: 2px solid #1f3a56;
-    padding-bottom: 12px;
-    font-weight: bold;
+    padding-bottom: 10px;
 }
 
-/* === RECUADRO DE MENSAJE === */
+/* RECUADRO EN CONSTRUCCIÓN */
 .mensaje-recuadro {
     text-align: center;
     padding: 50px 20px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     border: 2px dashed #1f3a56;
 }
 
@@ -117,26 +121,52 @@ section {
     font-weight: bold;
 }
 
-/* === BOTÓN VOLVER === */
-.volver-btn {
-    display: inline-block;
+/* BOTÓN FIJO GLOBAL */
+.boton-principal-wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.boton-principal-inner {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+.boton-principal {
+    pointer-events: all;
+    padding: 10px 22px;
     background-color: #1f3a56;
     color: white;
     border: none;
-    padding: 8px 20px;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: normal;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     transition: background-color 0.2s;
+    min-width: 120px;
+    width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1001;
 }
 
-.volver-btn:hover {
-    background-color: #143048;
+.boton-principal:hover {
+    background-color: #2a4a6e;
 }
 
-.volver-btn::before {
-    content: "← ";
+html {
+    scroll-behavior: smooth;
 }
 </style>
 </head>
@@ -149,78 +179,129 @@ section {
 
 <section>
 
-<div class="card-container">
+<div class="card-container" id="directorio">
 
-    <!-- Tarjetas -->
-    <div class="card" onclick="toggleSeccion('talleres', this)">
+    <div class="card" id="card-talleres" onclick="mostrarSeccion('talleres')">
         <div class="card-emoji">✋</div>
         <h3>Talleres y prácticas</h3>
     </div>
 
-    <div class="card" onclick="toggleSeccion('cursos', this)">
+    <div class="card" id="card-cursos" onclick="mostrarSeccion('cursos')">
         <div class="card-emoji">📖</div>
         <h3>Cursos y seminarios</h3>
     </div>
 
-    <div class="card" onclick="toggleSeccion('charlas', this)">
+    <div class="card" id="card-charlas" onclick="mostrarSeccion('charlas')">
         <div class="card-emoji">🗣️</div>
         <h3>Charlas y conferencias</h3>
     </div>
 
-    <!-- Contenedor Talleres -->
-    <div id="talleres" class="seccion-container">
-        <h2>Talleres y prácticas</h2>
-        <div class="mensaje-recuadro">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
-        </div>
-        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
-    </div>
+</div>
 
-    <!-- Contenedor Cursos -->
-    <div id="cursos" class="seccion-container">
-        <h2>Cursos y seminario</h2>
-        <div class="mensaje-recuadro">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
-        </div>
-        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+<!-- Talleres y prácticas -->
+<div id="talleres" class="contenido-seccion">
+    <h2>Talleres y prácticas</h2>
+    <div class="mensaje-recuadro">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
     </div>
+</div>
 
-    <!-- Contenedor Charlas -->
-    <div id="charlas" class="seccion-container">
-        <h2>Charlas y conferencias</h2>
-        <div class="mensaje-recuadro">
-            <div class="emoji-grande">🚧</div>
-            <h3>Esta sección se encuentra en construcción</h3>
-        </div>
-        <button class="volver-btn" onclick="cerrarTodo()">Volver</button>
+<!-- Cursos y seminarios -->
+<div id="cursos" class="contenido-seccion">
+    <h2>Cursos y seminarios</h2>
+    <div class="mensaje-recuadro">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
     </div>
+</div>
 
+<!-- Charlas y conferencias -->
+<div id="charlas" class="contenido-seccion">
+    <h2>Charlas y conferencias</h2>
+    <div class="mensaje-recuadro">
+        <div class="emoji-grande">🚧</div>
+        <h3>Esta sección se encuentra en construcción</h3>
+    </div>
 </div>
 
 </section>
 
+<!-- BOTÓN ÚNICO DINÁMICO -->
+<div class="boton-principal-wrapper">
+    <div class="boton-principal-inner">
+        <button id="botonPrincipal" class="boton-principal" onclick="accionBoton()">← Inicio</button>
+    </div>
+</div>
+
 <script>
-function toggleSeccion(id, elemento) {
-    cerrarTodo();
-    document.getElementById(id).classList.add('visible');
-    elemento.classList.add('activo');
+
+let seccionActiva = null;
+
+function mostrarSeccion(id) {
+
+    document.getElementById("directorio").style.display = "none";
+
+    document.getElementById('talleres').classList.remove('activo');
+    document.getElementById('cursos').classList.remove('activo');
+    document.getElementById('charlas').classList.remove('activo');
+
+    document.getElementById('card-talleres').classList.remove('activo');
+    document.getElementById('card-cursos').classList.remove('activo');
+    document.getElementById('card-charlas').classList.remove('activo');
+
+    const seccion = document.getElementById(id);
+    seccion.classList.add('activo');
+
+    document.getElementById('card-' + id).classList.add('activo');
+
+    seccionActiva = id;
+
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Volver";
+    btn.style.display = "block";
 
     setTimeout(function() {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
 }
 
-function cerrarTodo() {
-    document.getElementById('talleres').classList.remove('visible');
-    document.getElementById('cursos').classList.remove('visible');
-    document.getElementById('charlas').classList.remove('visible');
+function volver() {
 
-    document.querySelectorAll('.card').forEach(function(card) {
-        card.classList.remove('activo');
-    });
+    document.getElementById('talleres').classList.remove('activo');
+    document.getElementById('cursos').classList.remove('activo');
+    document.getElementById('charlas').classList.remove('activo');
+
+    document.getElementById('card-talleres').classList.remove('activo');
+    document.getElementById('card-cursos').classList.remove('activo');
+    document.getElementById('card-charlas').classList.remove('activo');
+
+    document.getElementById("directorio").style.display = "grid";
+
+    seccionActiva = null;
+
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Inicio";
+    btn.style.display = "block";
+
+    document.querySelector('.card-container')
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+function accionBoton() {
+    if (seccionActiva) {
+        volver();
+    } else {
+        window.location.assign("https://dodoga80.github.io/");
+    }
+}
+
+window.onload = function() {
+    const btn = document.getElementById("botonPrincipal");
+    btn.innerText = "← Inicio";
+    btn.style.display = "block";
+};
+
 </script>
 
 </body>
