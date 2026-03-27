@@ -109,10 +109,11 @@ section {
     border-bottom: none;
 }
 
+/* ✅ ACA ESTA EL CAMBIO IMPORTANTE */
 .servicio-item ul {
     margin: 0;
-    padding-left: 0;
-    list-style: none;
+    padding-left: 20px;
+    list-style: disc;
 }
 
 .servicio-item li {
@@ -241,7 +242,7 @@ html {
 
 </section>
 
-<!-- BOTÓN ÚNICO DINÁMICO -->
+<!-- BOTÓN -->
 <div class="boton-principal-wrapper">
     <div class="boton-principal-inner">
         <button id="botonPrincipal" class="boton-principal" onclick="accionBoton()">← Inicio</button>
@@ -271,9 +272,7 @@ function mostrarSeccion(id) {
 
     seccionActiva = id;
 
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Volver";
-    btn.style.display = "block";
+    document.getElementById("botonPrincipal").innerText = "← Volver";
 
     setTimeout(function() {
         seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -294,12 +293,7 @@ function volver() {
 
     seccionActiva = null;
 
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Inicio";
-    btn.style.display = "block";
-
-    document.querySelector('.card-container')
-        .scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById("botonPrincipal").innerText = "← Inicio";
 }
 
 function accionBoton() {
@@ -309,12 +303,6 @@ function accionBoton() {
         window.location.assign("https://dodoga80.github.io/");
     }
 }
-
-window.onload = function() {
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Inicio";
-    btn.style.display = "block";
-};
 
 </script>
 
