@@ -45,12 +45,6 @@ section {
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .card.activo {
@@ -82,7 +76,6 @@ section {
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     margin-top: 20px;
     display: none;
-    scroll-margin-top: 20px;
     text-align: justify;
 }
 
@@ -93,44 +86,53 @@ section {
 .contenido-seccion h2 {
     color: #1f3a56;
     font-size: 1.5em;
-    margin-top: 0;
     margin-bottom: 20px;
     border-bottom: 2px solid #1f3a56;
     padding-bottom: 10px;
 }
 
-/* RECUADRO EN CONSTRUCCIÓN */
+/* PROYECTOS */
+.proyecto {
+    margin-bottom: 30px;
+}
+
+.proyecto strong {
+    display: block;
+    font-size: 16px;
+    color: #1f3a56;
+}
+
+.proyecto .fecha {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.proyecto p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* MENSAJE VACÍO */
 .mensaje-recuadro {
     text-align: center;
     padding: 50px 20px;
-    background-color: white;
-    border-radius: 10px;
-    margin-bottom: 10px;
     border: 2px dashed #1f3a56;
-}
-
-.mensaje-recuadro .emoji-grande {
-    font-size: 80px;
-    margin-bottom: 25px;
+    border-radius: 10px;
 }
 
 .mensaje-recuadro h3 {
     color: #1f3a56;
-    font-size: 24px;
-    margin: 0;
-    font-weight: bold;
 }
 
-/* BOTÓN FIJO GLOBAL */
+/* BOTÓN */
 .boton-principal-wrapper {
     position: fixed;
     bottom: 20px;
     left: 0;
     right: 0;
-    z-index: 1000;
     display: flex;
     justify-content: center;
-    pointer-events: none;
 }
 
 .boton-principal-inner {
@@ -139,35 +141,17 @@ section {
     padding: 0 20px;
     display: flex;
     justify-content: flex-start;
-    pointer-events: none;
 }
 
 .boton-principal {
-    pointer-events: all;
     padding: 10px 22px;
     background-color: #1f3a56;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: background-color 0.2s;
-    min-width: 120px;
-    width: 120px;
-    text-align: center;
-    white-space: nowrap;
-    position: relative;
-    z-index: 1001;
 }
 
-.boton-principal:hover {
-    background-color: #2a4a6e;
-}
-
-html {
-    scroll-behavior: smooth;
-}
 </style>
 </head>
 
@@ -198,36 +182,60 @@ html {
 
 </div>
 
-<!-- Nacionales -->
+<!-- NACIONALES -->
 <div id="nacionales" class="contenido-seccion">
     <h2>De alcance nacional</h2>
-    <div class="mensaje-recuadro">
-        <div class="emoji-grande">🚧</div>
-        <h3>Esta sección se encuentra en construcción</h3>
+
+    <div class="proyecto">
+        <strong>Abordaje para la Prevención y Mitigación de la Degradación Ambiental</strong>
+        <div class="fecha">ene. 2023 – dic. 2025</div>
+        <p>Integración de información pluviométrica y de incendios rurales y forestales para la comprensión de dinámicas ambientales y la generación de insumos técnicos orientados a la toma de decisiones informadas.</p>
     </div>
+
+    <div class="proyecto">
+        <strong>Adaptación a la Variabilidad y al Cambio Global</strong>
+        <div class="fecha">ene. 2023 – dic. 2025</div>
+        <p>Profundización del trabajo en gestión de incendios rurales mediante la evaluación de vulnerabilidad territorial, incorporando análisis espacial y criterios ambientales para identificar áreas críticas. Desarrollo y aplicación de un protocolo propio de evaluación de vulnerabilidad a incendios, como herramienta de apoyo a la planificación y la adaptación territorial.</p>
+    </div>
+
+    <div class="proyecto">
+        <strong>Caracterización Diagnóstica de la Variabilidad Climática</strong>
+        <div class="fecha">ene. 2019 – dic. 2022</div>
+        <p>Análisis estadístico de datos de precipitación y caracterización de la variabilidad climática a distintas escalas. En este marco surge el diseño e implementación de la Red Pluviométrica de los Llanos, como estrategia para fortalecer la disponibilidad de datos de campo y mejorar el análisis hídrico territorial.</p>
+    </div>
+
+    <div class="proyecto">
+        <strong>Prevención y Evaluación de la Emergencia y Desastre Agropecuario</strong>
+        <div class="fecha">ene. 2019 – dic. 2022</div>
+        <p>Implementación de herramientas de Teledetección para la detección, delimitación y cuantificación de áreas quemadas. Análisis espacial de incendios de vegetación como insumo para la evaluación de emergencias agropecuarias y el apoyo a procesos de diagnóstico y toma de decisiones.</p>
+    </div>
+
+    <div class="proyecto">
+        <strong>Sistemas de Información Territorial para la Toma de Decisiones</strong>
+        <div class="fecha">ene. 2015 – dic. 2018</div>
+        <p>Inicio del uso de herramientas SIG de escritorio (QGIS) y plataformas de visualización para el análisis territorial. Desarrollo de cartografía temática y análisis espaciales aplicados a recursos naturales, ambiente y gestión del territorio, sentando las bases del enfoque SIG adoptado en trabajos posteriores.</p>
+    </div>
+
 </div>
 
-<!-- Locales -->
+<!-- LOCALES -->
 <div id="locales" class="contenido-seccion">
     <h2>De cobertura local</h2>
     <div class="mensaje-recuadro">
-        <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
     </div>
 </div>
 
-<!-- Personales -->
+<!-- PERSONALES -->
 <div id="personales" class="contenido-seccion">
     <h2>De índole personal</h2>
     <div class="mensaje-recuadro">
-        <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
     </div>
 </div>
 
 </section>
 
-<!-- BOTÓN ÚNICO DINÁMICO -->
 <div class="boton-principal-wrapper">
     <div class="boton-principal-inner">
         <button id="botonPrincipal" class="boton-principal" onclick="accionBoton()">← Inicio</button>
@@ -242,50 +250,27 @@ function mostrarSeccion(id) {
 
     document.getElementById("directorio").style.display = "none";
 
-    document.getElementById('nacionales').classList.remove('activo');
-    document.getElementById('locales').classList.remove('activo');
-    document.getElementById('personales').classList.remove('activo');
+    document.querySelectorAll('.contenido-seccion').forEach(s => s.classList.remove('activo'));
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('activo'));
 
-    document.getElementById('card-nacionales').classList.remove('activo');
-    document.getElementById('card-locales').classList.remove('activo');
-    document.getElementById('card-personales').classList.remove('activo');
-
-    const seccion = document.getElementById(id);
-    seccion.classList.add('activo');
-
+    document.getElementById(id).classList.add('activo');
     document.getElementById('card-' + id).classList.add('activo');
 
     seccionActiva = id;
 
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Volver";
-    btn.style.display = "block";
-
-    setTimeout(function() {
-        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    document.getElementById("botonPrincipal").innerText = "← Volver";
 }
 
 function volver() {
 
-    document.getElementById('nacionales').classList.remove('activo');
-    document.getElementById('locales').classList.remove('activo');
-    document.getElementById('personales').classList.remove('activo');
-
-    document.getElementById('card-nacionales').classList.remove('activo');
-    document.getElementById('card-locales').classList.remove('activo');
-    document.getElementById('card-personales').classList.remove('activo');
+    document.querySelectorAll('.contenido-seccion').forEach(s => s.classList.remove('activo'));
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('activo'));
 
     document.getElementById("directorio").style.display = "grid";
 
     seccionActiva = null;
 
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Inicio";
-    btn.style.display = "block";
-
-    document.querySelector('.card-container')
-        .scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById("botonPrincipal").innerText = "← Inicio";
 }
 
 function accionBoton() {
@@ -295,12 +280,6 @@ function accionBoton() {
         window.location.assign("https://dodoga80.github.io/");
     }
 }
-
-window.onload = function() {
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Inicio";
-    btn.style.display = "block";
-};
 
 </script>
 
