@@ -45,12 +45,6 @@ section {
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .card.activo {
@@ -58,8 +52,7 @@ section {
     color: white;
 }
 
-.card.activo h3,
-.card.activo p {
+.card.activo h3 {
     color: white;
 }
 
@@ -75,11 +68,6 @@ section {
     font-weight: bold;
 }
 
-.card p {
-    font-size: 14px;
-    color: #666;
-}
-
 /* SECCIONES */
 .contenido-seccion {
     background: white;
@@ -88,7 +76,6 @@ section {
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     margin-top: 20px;
     display: none;
-    scroll-margin-top: 20px;
     text-align: justify;
 }
 
@@ -99,44 +86,48 @@ section {
 .contenido-seccion h2 {
     color: #1f3a56;
     font-size: 1.5em;
-    margin-top: 0;
     margin-bottom: 20px;
     border-bottom: 2px solid #1f3a56;
     padding-bottom: 10px;
 }
 
-/* RECUADRO EN CONSTRUCCIÓN */
-.mensaje-recuadro {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: white;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    border: 2px dashed #1f3a56;
-}
-
-.mensaje-recuadro .emoji-grande {
-    font-size: 80px;
+/* ITEM CONGRESO */
+.congreso {
     margin-bottom: 25px;
 }
 
-.mensaje-recuadro h3 {
+.congreso strong {
+    display: block;
     color: #1f3a56;
-    font-size: 24px;
-    margin: 0;
-    font-weight: bold;
+    font-size: 16px;
 }
 
-/* BOTÓN FIJO GLOBAL */
+.congreso .lugar {
+    font-size: 14px;
+    color: #666;
+}
+
+.congreso .fecha {
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+/* RECUADRO */
+.mensaje-recuadro {
+    text-align: center;
+    padding: 50px 20px;
+    border: 2px dashed #1f3a56;
+    border-radius: 10px;
+}
+
+/* BOTÓN */
 .boton-principal-wrapper {
     position: fixed;
     bottom: 20px;
     left: 0;
     right: 0;
-    z-index: 1000;
     display: flex;
     justify-content: center;
-    pointer-events: none;
 }
 
 .boton-principal-inner {
@@ -145,34 +136,15 @@ section {
     padding: 0 20px;
     display: flex;
     justify-content: flex-start;
-    pointer-events: none;
 }
 
 .boton-principal {
-    pointer-events: all;
     padding: 10px 22px;
     background-color: #1f3a56;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: background-color 0.2s;
-    min-width: 120px;
-    width: 120px;
-    text-align: center;
-    white-space: nowrap;
-    position: relative;
-    z-index: 1001;
-}
-
-.boton-principal:hover {
-    background-color: #2a4a6e;
-}
-
-html {
-    scroll-behavior: smooth;
 }
 </style>
 </head>
@@ -204,36 +176,54 @@ html {
 
 </div>
 
-<!-- Informes técnicos -->
+<!-- Informes -->
 <div id="informes" class="contenido-seccion">
     <h2>Informes técnicos</h2>
     <div class="mensaje-recuadro">
-        <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
     </div>
 </div>
 
-<!-- Revistas de divulgación -->
+<!-- Revistas -->
 <div id="revistas" class="contenido-seccion">
     <h2>Revistas de divulgación</h2>
     <div class="mensaje-recuadro">
-        <div class="emoji-grande">🚧</div>
         <h3>Esta sección se encuentra en construcción</h3>
     </div>
 </div>
 
-<!-- Congresos y ponencias -->
+<!-- CONGRESOS -->
 <div id="congresos" class="contenido-seccion">
     <h2>Congresos y ponencias</h2>
-    <div class="mensaje-recuadro">
-        <div class="emoji-grande">🚧</div>
-        <h3>Esta sección se encuentra en construcción</h3>
+
+    <div class="congreso">
+        <strong>Congreso de Prevención de Incendios de Interfase</strong>
+        <div class="lugar">Universidad Nacional de Los Comechingones, Merlo, San Luis</div>
+        <div class="fecha">3 y 4 de octubre de 2024</div>
     </div>
+
+    <div class="congreso">
+        <strong>I Encuentro Nacional de Gestión de incendios de vegetación</strong>
+        <div class="lugar">INTA, Capital Federal</div>
+        <div class="fecha">15 y 16 de junio de 2022</div>
+    </div>
+
+    <div class="congreso">
+        <strong>I Encuentro Nacional sobre Periurbanos e Interfases Críticas</strong>
+        <div class="lugar">Ciudad de Córdoba</div>
+        <div class="fecha">00 y 00 de ………. de 2015</div>
+    </div>
+
+    <div class="congreso">
+        <strong>Congreso Nacional de Pastizales Naturales</strong>
+        <div class="lugar">Ciudad de Chamical, La Rioja</div>
+        <div class="fecha">00 y 00 de ………. de 2018</div>
+    </div>
+
 </div>
 
 </section>
 
-<!-- BOTÓN ÚNICO DINÁMICO -->
 <div class="boton-principal-wrapper">
     <div class="boton-principal-inner">
         <button id="botonPrincipal" class="boton-principal" onclick="accionBoton()">← Inicio</button>
@@ -248,50 +238,26 @@ function mostrarSeccion(id) {
 
     document.getElementById("directorio").style.display = "none";
 
-    document.getElementById('informes').classList.remove('activo');
-    document.getElementById('revistas').classList.remove('activo');
-    document.getElementById('congresos').classList.remove('activo');
+    document.querySelectorAll('.contenido-seccion').forEach(s => s.classList.remove('activo'));
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('activo'));
 
-    document.getElementById('card-informes').classList.remove('activo');
-    document.getElementById('card-revistas').classList.remove('activo');
-    document.getElementById('card-congresos').classList.remove('activo');
-
-    const seccion = document.getElementById(id);
-    seccion.classList.add('activo');
-
+    document.getElementById(id).classList.add('activo');
     document.getElementById('card-' + id).classList.add('activo');
 
     seccionActiva = id;
 
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Volver";
-    btn.style.display = "block";
-
-    setTimeout(function() {
-        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    document.getElementById("botonPrincipal").innerText = "← Volver";
 }
 
 function volver() {
-
-    document.getElementById('informes').classList.remove('activo');
-    document.getElementById('revistas').classList.remove('activo');
-    document.getElementById('congresos').classList.remove('activo');
-
-    document.getElementById('card-informes').classList.remove('activo');
-    document.getElementById('card-revistas').classList.remove('activo');
-    document.getElementById('card-congresos').classList.remove('activo');
+    document.querySelectorAll('.contenido-seccion').forEach(s => s.classList.remove('activo'));
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('activo'));
 
     document.getElementById("directorio").style.display = "grid";
 
     seccionActiva = null;
 
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Inicio";
-    btn.style.display = "block";
-
-    document.querySelector('.card-container')
-        .scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById("botonPrincipal").innerText = "← Inicio";
 }
 
 function accionBoton() {
@@ -301,12 +267,6 @@ function accionBoton() {
         window.location.assign("https://dodoga80.github.io/");
     }
 }
-
-window.onload = function() {
-    const btn = document.getElementById("botonPrincipal");
-    btn.innerText = "← Inicio";
-    btn.style.display = "block";
-};
 
 </script>
 
